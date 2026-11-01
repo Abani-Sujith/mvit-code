@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_standard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Space+Grotesk:wght@400;500;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"outline-variant":"#e5beb2","outline":"#907065","surface":"#fff8f6","on-secondary-container":"#646464","primary-fixed-dim":"#ffb59c","primary-container":"#d14300","secondary-container":"#e2e2e2","on-tertiary-fixed-variant":"#004881","on-secondary":"#ffffff","inverse-on-surface":"#fbeeea","surface-tint":"#F9E2E1","inverse-surface":"#362f2d","secondary-fixed":"#e2e2e2","secondary-fixed-dim":"#c6c6c6","on-surface-variant":"#5c4037","primary":"#a73400","on-error":"#ffffff","surface-bright":"#fff8f6","on-tertiary-fixed":"#001c38","surface-variant":"#ece0dc","surface-container":"#f8ebe7","tertiary-container":"#0077ce","secondary":"#5e5e5e","ink-black":"#000000","on-primary-fixed-variant":"#832700","pure-white":"#FFFFFF","on-surface":"#201a18","on-primary-fixed":"#390c00","on-tertiary":"#ffffff","on-secondary-fixed-variant":"#474747","tertiary-fixed":"#d3e4ff","surface-container-highest":"#ece0dc","primary-fixed":"#ffdbcf","error-container":"#ffdad6","error":"#ba1a1a","on-tertiary-container":"#fdfcff","tertiary-fixed-dim":"#a2c9ff","surface-container-low":"#fef1ed","on-primary-container":"#fffbff","tertiary":"#005ea4","background":"#fff8f6","on-background":"#201a18","on-error-container":"#93000a","surface-container-lowest":"#ffffff","inverse-primary":"#ffb59c","on-primary":"#ffffff","surface-container-high":"#f2e6e2","surface-dim":"#e4d7d4","on-secondary-fixed":"#1b1b1b"},"borderRadius":{"DEFAULT":"1rem","lg":"2rem","xl":"3rem","full":"9999px"},"spacing":{"margin":"3rem","gutter":"1.5rem","space-md":"1rem","space-sm":"0.5rem","space-xl":"2.5rem","space-lg":"1.5rem","gutter-mobile":"1rem","space-xs":"0.25rem","margin-mobile":"1.25rem"},"fontFamily":{"label-sm":["Space Grotesk"],"body-lg":["Space Grotesk"],"headline-md-mobile":["Anton"],"headline-md":["Anton"],"headline-lg-mobile":["Anton"],"label-lg":["Space Grotesk"],"display-xl-mobile":["Anton"],"headline-sm":["Anton"],"display-xl":["Anton"],"headline-lg":["Anton"],"title-md":["Space Grotesk"],"body-md":["Space Grotesk"]},"fontSize":{"label-sm":["11px",{"lineHeight":"14px","letterSpacing":"0.06em","fontWeight":"700"}],"body-lg":["18px",{"lineHeight":"28px","fontWeight":"400"}],"headline-md-mobile":["28px",{"lineHeight":"32px","letterSpacing":"0.01em","fontWeight":"400"}],"headline-md":["40px",{"lineHeight":"44px","letterSpacing":"0.02em","fontWeight":"400"}],"headline-lg-mobile":["40px",{"lineHeight":"42px","letterSpacing":"0.01em","fontWeight":"400"}],"label-lg":["14px",{"lineHeight":"18px","letterSpacing":"0.04em","fontWeight":"700"}],"display-xl-mobile":["56px",{"lineHeight":"56px","letterSpacing":"0.01em","fontWeight":"400"}],"headline-sm":["24px",{"lineHeight":"28px","letterSpacing":"0.03em","fontWeight":"400"}],"display-xl":["96px",{"lineHeight":"96px","letterSpacing":"0.02em","fontWeight":"400"}],"headline-lg":["64px",{"lineHeight":"64px","letterSpacing":"0.02em","fontWeight":"400"}],"title-md":["20px",{"lineHeight":"26px","letterSpacing":"-0.01em","fontWeight":"700"}],"body-md":["15px",{"lineHeight":"22px","fontWeight":"400"}]}}}};</script></head><body class="bg-surface font-body-md text-on-surface antialiased"><header class="fixed top-0 left-0 w-full z-50 bg-surface border-b border-ink-black"><div class="h-20 w-full px-margin flex items-center justify-between"><div class="flex items-center gap-space-sm"><nav class="flex items-center gap-space-xs bg-pure-white p-1 border border-ink-black rounded-full" data-active-classes="bg-ink-black text-pure-white border-ink-black"><a aria-current="page" class="px-4 py-2 rounded-full font-label-lg uppercase tracking-wider transition-none bg-ink-black text-pure-white border-ink-black" data-path="dashboard" href="#">Dashboard</a><a class="px-4 py-2 rounded-full font-label-lg text-label-lg uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-none border border-transparent" data-path="departments" href="#">Departments</a><a class="px-4 py-2 rounded-full font-label-lg text-label-lg uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-none border border-transparent" data-path="leaderboard" href="#">Leaderboard</a><a class="px-4 py-2 rounded-full font-label-lg text-label-lg uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-none border border-transparent" data-path="students" href="#">Students</a><a class="px-4 py-2 rounded-full font-label-lg text-label-lg uppercase tracking-wider text-on-surface-variant hover:text-on-surface hover:bg-surface-container transition-none border border-transparent" data-path="settings" href="#">Settings</a></nav></div><div class="flex items-center justify-center"><a class="font-headline-md text-headline-md uppercase tracking-tight text-primary-container leading-none hover:text-primary transition-none" data-path="dashboard" href="#">CODE 26</a></div><div class="flex items-center gap-space-md"><button class="rounded-full bg-ink-black text-pure-white pl-5 pr-2 py-2 font-label-lg text-label-lg uppercase tracking-wider border border-ink-black flex items-center gap-space-sm hover:bg-primary-container hover:text-pure-white transition-none" type="button"><span class="leading-none">Add student</span><span class="w-6 h-6 rounded-full bg-primary-container text-pure-white flex items-center justify-center border border-ink-black font-bold text-xs leading-none"><span class="material-symbols-outlined text-[14px]">arrow_forward</span></span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center border border-ink-black"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="w-full pt-20 bg-surface min-h-[calc(100vh-5rem)]"><div class="flex flex-col w-full text-ink-black select-none">
+<!-- ================= TOP TICKER / STATUS STRIP ================= -->
+<section class="w-full border-b border-ink-black bg-surface-tint py-2 px-margin">
+<div class="max-w-7xl mx-auto flex items-center justify-between font-label-sm text-label-sm uppercase tracking-widest text-ink-black">
+<div class="flex items-center gap-space-md">
+<span class="inline-flex items-center gap-1.5 font-bold">
+<span class="w-2.5 h-2.5 rounded-full bg-primary-container inline-block"></span>
+          REAL-TIME TELEMETRY
+        </span>
+<span class="text-secondary">•</span>
+<span>ACADEMIC CYCLE 2024-25</span>
+<span class="text-secondary">•</span>
+<span>CAMPUS REPO SYNC: 14 MIN AGO</span>
+</div>
+<div class="flex items-center gap-space-md">
+<span class="inline-block transform -rotate-1 bg-ink-black text-pure-white px-2.5 py-0.5 rounded-full text-[10px] tracking-wider font-label-sm">AUTONOMIC NUDGE ENGINE ACTIVE</span>
+</div>
+</div>
+</section>
+<!-- ================= HERO SECTION ================= -->
+<section class="w-full border-b border-ink-black bg-surface px-margin py-space-xl overflow-hidden relative">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-lg relative">
+<!-- Top meta overline -->
+<div class="flex items-center justify-between flex-wrap gap-space-sm">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 bg-ink-black rounded-full"></span>
+<span class="font-label-lg text-label-lg uppercase tracking-wider text-ink-black">DAILY DEPARTMENT SPRINT #118</span>
+</div>
+<div class="flex items-center gap-space-sm text-secondary font-label-sm text-label-sm uppercase">
+<span>PORTAL: CAMPUS-NORTH-TERMINAL</span>
+<span>//</span>
+<span>CYCLE: MORNING AUDIT</span>
+</div>
+</div>
+<!-- Massive Headline with Interlocking Tilted Sticker Tags -->
+<div class="relative py-space-sm">
+<div class="inline-block relative">
+<!-- Sticker 1 -->
+<div class="absolute -top-5 left-4 z-20 transform -rotate-3 transition-none">
+<span class="rounded-full bg-ink-black text-pure-white px-4 py-1.5 font-label-sm text-label-sm uppercase tracking-wider inline-flex items-center gap-1.5 border border-ink-black">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+              AIML dept
+            </span>
+</div>
+<!-- Giant Headline -->
+<h1 class="font-display-xl text-display-xl uppercase text-primary-container leading-none tracking-tight m-0 select-none">
+            WHO NEEDS A NUDGE TODAY
+          </h1>
+<!-- Sticker 2 -->
+<div class="absolute -bottom-4 right-16 z-20 transform rotate-4 transition-none">
+<span class="rounded-full bg-ink-black text-pure-white px-5 py-2 font-label-sm text-label-sm uppercase tracking-wider inline-flex items-center gap-2 border border-ink-black">
+<span class="material-symbols-outlined text-primary-container text-[14px]">bolt</span>
+              Updated today
+            </span>
+</div>
+</div>
+</div>
+<!-- Cheeky sub-bar banner -->
+<div class="flex items-center justify-between flex-wrap gap-space-md pt-space-xs border-t border-ink-black">
+<div class="flex items-center gap-3">
+<span class="font-title-md text-title-md text-ink-black uppercase font-bold tracking-tight">Mentors on duty:</span>
+<span class="font-body-lg text-body-lg text-ink-black">Prof. Aris &amp; Dr. Raman</span>
+<span class="text-ink-black font-bold">•</span>
+<span class="font-body-lg text-body-lg text-primary-container font-bold">14 students pending today's check-in.</span>
+</div>
+<div class="flex items-center gap-space-sm">
+<button class="rounded-full bg-pure-white text-ink-black border border-ink-black px-4 py-1.5 font-label-lg text-label-lg uppercase tracking-wider hover:bg-ink-black hover:text-pure-white transition-none" type="button">
+            Export Roster .CSV
+          </button>
+<button class="rounded-full bg-primary-container text-pure-white border border-ink-black px-5 py-1.5 font-label-lg text-label-lg uppercase tracking-wider hover:bg-ink-black transition-none flex items-center gap-1.5" type="button">
+<span>Broadcast Nudge</span>
+<span class="material-symbols-outlined text-[16px]">campaign</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= 4 BIG STAT CARDS ================= -->
+<section class="w-full border-b border-ink-black bg-surface px-margin py-space-xl">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-space-lg">
+<!-- Stat Card 1 -->
+<div class="border border-ink-black p-6 bg-pure-white rounded-3xl relative flex flex-col justify-between min-h-[220px]">
+<!-- Overlapping sticker badge -->
+<div class="absolute top-4 right-4 transform -rotate-2">
+<span class="rounded-full bg-ink-black text-pure-white px-3 py-1 font-label-sm text-label-sm uppercase tracking-wider inline-flex items-center border border-ink-black">
+              +18 vs yesterday
+            </span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg uppercase tracking-wider text-ink-black font-bold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-ink-black"></span>
+              Active today
+            </div>
+<div class="font-headline-lg text-headline-lg text-primary-container leading-none tracking-tight mt-4">
+              142
+            </div>
+</div>
+<div class="pt-4 border-t border-ink-black/20 flex items-center justify-between font-label-sm text-label-sm uppercase text-secondary">
+<span>Target: 160 students</span>
+<span class="text-ink-black font-bold">88.7%</span>
+</div>
+</div>
+<!-- Stat Card 2 -->
+<div class="border border-ink-black p-6 bg-pure-white rounded-3xl relative flex flex-col justify-between min-h-[220px]">
+<!-- Overlapping sticker badge -->
+<div class="absolute top-4 right-4 transform rotate-3">
+<span class="rounded-full bg-ink-black text-pure-white px-3 py-1 font-label-sm text-label-sm uppercase tracking-wider inline-flex items-center border border-ink-black">
+              -4 vs yesterday
+            </span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg uppercase tracking-wider text-ink-black font-bold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-ink-black"></span>
+              Inactive 3+ days
+            </div>
+<div class="font-headline-lg text-headline-lg text-primary-container leading-none tracking-tight mt-4">
+              29
+            </div>
+</div>
+<div class="pt-4 border-t border-ink-black/20 flex items-center justify-between font-label-sm text-label-sm uppercase text-secondary">
+<span>Critical follow-up</span>
+<span class="text-error font-bold">ATTN REQ.</span>
+</div>
+</div>
+<!-- Stat Card 3 -->
+<div class="border border-ink-black p-6 bg-pure-white rounded-3xl relative flex flex-col justify-between min-h-[220px]">
+<!-- Overlapping sticker badge -->
+<div class="absolute top-4 right-4 transform -rotate-3">
+<span class="rounded-full bg-ink-black text-pure-white px-3 py-1 font-label-sm text-label-sm uppercase tracking-wider inline-flex items-center border border-ink-black">
+              ★ High velocity
+            </span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg uppercase tracking-wider text-ink-black font-bold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-ink-black"></span>
+              Rapid improvers
+            </div>
+<div class="font-headline-lg text-headline-lg text-primary-container leading-none tracking-tight mt-4">
+              16
+            </div>
+</div>
+<div class="pt-4 border-t border-ink-black/20 flex items-center justify-between font-label-sm text-label-sm uppercase text-secondary">
+<span>Weekly delta &gt; 35</span>
+<span class="text-ink-black font-bold">PEAK SURGE</span>
+</div>
+</div>
+<!-- Stat Card 4 -->
+<div class="border border-ink-black p-6 bg-pure-white rounded-3xl relative flex flex-col justify-between min-h-[220px]">
+<!-- Overlapping sticker badge -->
+<div class="absolute top-4 right-4 transform rotate-2">
+<span class="rounded-full bg-ink-black text-pure-white px-3 py-1 font-label-sm text-label-sm uppercase tracking-wider inline-flex items-center border border-ink-black">
+              +0.6 vs yesterday
+            </span>
+</div>
+<div>
+<div class="font-label-lg text-label-lg uppercase tracking-wider text-ink-black font-bold flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-ink-black"></span>
+              Average problems solved
+            </div>
+<div class="font-headline-lg text-headline-lg text-primary-container leading-none tracking-tight mt-4">
+              4.8
+            </div>
+</div>
+<div class="pt-4 border-t border-ink-black/20 flex items-center justify-between font-label-sm text-label-sm uppercase text-secondary">
+<span>Department mean / student</span>
+<span class="text-ink-black font-bold">NORMALIZED</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ================= NEEDS ATTENTION SECTION ================= -->
+<section class="w-full border-b border-ink-black bg-surface px-margin py-space-xl">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-lg">
+<!-- Header with brutalist typography -->
+<div class="flex items-end justify-between flex-wrap gap-space-sm border-b border-ink-black pb-space-md">
+<div>
+<div class="font-label-sm text-label-sm uppercase tracking-widest text-secondary mb-1">AUDIT EXCEPTION QUEUE</div>
+<h2 class="font-headline-lg text-headline-lg uppercase text-ink-black leading-none m-0">NEEDS ATTENTION</h2>
+</div>
+<p class="font-title-md text-title-md uppercase text-on-surface-variant font-bold max-w-md text-right">
+          Students slipping through the cracks or on an absurd hot streak.
+        </p>
+</div>
+<!-- Quick List of Student Rows -->
+<div class="flex flex-col gap-space-sm">
+<!-- Row 1: Kavya S. -->
+<div class="bg-pure-white border border-ink-black rounded-2xl p-4 flex items-center justify-between flex-wrap gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-tint border border-ink-black flex items-center justify-center font-headline-sm text-headline-sm text-ink-black">
+              KS
+            </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-ink-black uppercase font-bold">Kavya S.</span>
+<span class="rounded-full bg-surface-container border border-ink-black px-2.5 py-0.5 font-label-sm text-label-sm uppercase text-ink-black font-bold">AIML-B</span>
+</div>
+<div class="font-body-md text-body-md text-secondary mt-0.5">
+                Last active: <strong class="text-ink-black">5 days ago</strong> • Problems this week: <strong class="text-error">0 solved</strong>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="transform -rotate-2">
+<span class="rounded-full bg-ink-black text-pure-white px-3.5 py-1.5 font-label-sm text-label-sm uppercase tracking-wider inline-flex items-center border border-ink-black">
+                Inactive 5 days
+              </span>
+</div>
+<button class="rounded-full bg-ink-black text-pure-white pl-4 pr-1.5 py-1.5 font-label-sm text-label-sm uppercase tracking-wider border border-ink-black flex items-center gap-2 hover:bg-primary-container transition-none" type="button">
+<span>View</span>
+<span class="w-6 h-6 rounded-full bg-primary-container text-pure-white flex items-center justify-center border border-ink-black font-bold">
+<span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</span>
+</button>
+</div>
+</div>
+<!-- Row 2: Rohan Verma -->
+<div class="bg-pure-white border border-ink-black rounded-2xl p-4 flex items-center justify-between flex-wrap gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-tint border border-ink-black flex items-center justify-center font-headline-sm text-headline-sm text-ink-black">
+              RV
+            </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-ink-black uppercase font-bold">Rohan Verma</span>
+<span class="rounded-full bg-surface-container border border-ink-black px-2.5 py-0.5 font-label-sm text-label-sm uppercase text-ink-black font-bold">AIML-A</span>
+</div>
+<div class="font-body-md text-body-md text-secondary mt-0.5">
+                Last active: <strong class="text-ink-black">Yesterday</strong> • Problems this week: <strong class="text-ink-black">4 solved (18 submissions)</strong>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="transform rotate-3">
+<span class="rounded-full bg-ink-black text-pure-white px-3.5 py-1.5 font-label-sm text-label-sm uppercase tracking-wider inline-flex items-center border border-ink-black">
+                Trial and error
+              </span>
+</div>
+<button class="rounded-full bg-ink-black text-pure-white pl-4 pr-1.5 py-1.5 font-label-sm text-label-sm uppercase tracking-wider border border-ink-black flex items-center gap-2 hover:bg-primary-container transition-none" type="button">
+<span>View</span>
+<span class="w-6 h-6 rounded-full bg-primary-container text-pure-white flex items-center justify-center border border-ink-black font-bold">
+<span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</span>
+</button>
+</div>
+</div>
+<!-- Row 3: Ananya Pillai -->
+<div class="bg-pure-white border border-ink-black rounded-2xl p-4 flex items-center justify-between flex-wrap gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-tint border border-ink-black flex items-center justify-center font-headline-sm text-headline-sm text-ink-black">
+              AP
+            </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-ink-black uppercase font-bold">Ananya Pillai</span>
+<span class="rounded-full bg-surface-container border border-ink-black px-2.5 py-0.5 font-label-sm text-label-sm uppercase text-ink-black font-bold">AIML-B</span>
+</div>
+<div class="font-body-md text-body-md text-secondary mt-0.5">
+                Last active: <strong class="text-ink-black">2 hours ago</strong> • Problems this week: <strong class="text-primary-container">38 solved</strong>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="transform -rotate-3">
+<span class="rounded-full bg-ink-black text-pure-white px-3.5 py-1.5 font-label-sm text-label-sm uppercase tracking-wider inline-flex items-center border border-ink-black">
+                Rapid improver
+              </span>
+</div>
+<button class="rounded-full bg-ink-black text-pure-white pl-4 pr-1.5 py-1.5 font-label-sm text-label-sm uppercase tracking-wider border border-ink-black flex items-center gap-2 hover:bg-primary-container transition-none" type="button">
+<span>View</span>
+<span class="w-6 h-6 rounded-full bg-primary-container text-pure-white flex items-center justify-center border border-ink-black font-bold">
+<span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</span>
+</button>
+</div>
+</div>
+<!-- Row 4: Dev Karthik -->
+<div class="bg-pure-white border border-ink-black rounded-2xl p-4 flex items-center justify-between flex-wrap gap-space-md">
+<div class="flex items-center gap-space-md">
+<div class="w-12 h-12 rounded-full bg-surface-tint border border-ink-black flex items-center justify-center font-headline-sm text-headline-sm text-ink-black">
+              DK
+            </div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-title-md text-title-md text-ink-black uppercase font-bold">Dev Karthik</span>
+<span class="rounded-full bg-surface-container border border-ink-black px-2.5 py-0.5 font-label-sm text-label-sm uppercase text-ink-black font-bold">AIML-C</span>
+</div>
+<div class="font-body-md text-body-md text-secondary mt-0.5">
+                Last active: <strong class="text-ink-black">4 days ago</strong> • Problems this week: <strong class="text-error">1 solved</strong>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-space-md">
+<div class="transform rotate-2">
+<span class="rounded-full bg-ink-black text-pure-white px-3.5 py-1.5 font-label-sm text-label-sm uppercase tracking-wider inline-flex items-center border border-ink-black">
+                Inactive 4 days
+              </span>
+</div>
+<button class="rounded-full bg-ink-black text-pure-white pl-4 pr-1.5 py-1.5 font-label-sm text-label-sm uppercase tracking-wider border border-ink-black flex items-center gap-2 hover:bg-primary-container transition-none" type="button">
+<span>View</span>
+<span class="w-6 h-6 rounded-full bg-primary-container text-pure-white flex items-center justify-center border border-ink-black font-bold">
+<span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Cheeky Callout Block -->
+<div class="border border-ink-black bg-surface-tint rounded-2xl p-5 flex items-center justify-between flex-wrap gap-space-sm">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-ink-black text-2xl">visibility</span>
+<span class="font-headline-sm text-headline-sm uppercase text-ink-black">ALL CAUGHT UP? DON'T LET THEM FOOL YOU.</span>
+</div>
+<div class="font-label-sm text-label-sm uppercase tracking-wider text-on-surface-variant font-bold">
+          CODE RUNTIMES UPDATE AUTOMATICALLY EVERY 60 MINUTES
+        </div>
+</div>
+</div>
+</section>
+<!-- ================= FULL STUDENT TABLE ================= -->
+<section class="w-full bg-surface px-margin py-space-xl">
+<div class="max-w-7xl mx-auto flex flex-col gap-space-lg">
+<!-- Section Header -->
+<div class="flex items-end justify-between flex-wrap gap-space-sm border-b border-ink-black pb-space-sm">
+<div class="flex items-center gap-space-md flex-wrap">
+<h2 class="font-headline-lg text-headline-lg uppercase text-ink-black leading-none m-0">STUDENT CODING MATRIX</h2>
+<span class="rounded-full bg-ink-black text-pure-white px-4 py-1.5 font-label-sm text-label-sm uppercase tracking-wider border border-ink-black">
+            Showing 64 Students
+          </span>
+</div>
+<div class="font-label-sm text-label-sm uppercase tracking-widest text-secondary">
+          PLATFORMS: LEETCODE / SKILLRACK / CODECHEF / HACKERRANK
+        </div>
+</div>
+<!-- Controls Bar -->
+<div class="flex items-center justify-between flex-wrap gap-space-md bg-pure-white border border-ink-black p-4 rounded-3xl">
+<!-- Filter chips -->
+<div class="flex items-center gap-2">
+<button class="rounded-full bg-ink-black text-pure-white border border-ink-black px-5 py-2 font-label-sm text-label-sm uppercase tracking-wider" type="button">
+            All
+          </button>
+<button class="rounded-full bg-pure-white text-ink-black border border-ink-black px-5 py-2 font-label-sm text-label-sm uppercase tracking-wider hover:bg-surface-container transition-none" type="button">
+            AIML
+          </button>
+<button class="rounded-full bg-pure-white text-ink-black border border-ink-black px-5 py-2 font-label-sm text-label-sm uppercase tracking-wider hover:bg-surface-container transition-none" type="button">
+            CSE
+          </button>
+<button class="rounded-full bg-pure-white text-ink-black border border-ink-black px-5 py-2 font-label-sm text-label-sm uppercase tracking-wider hover:bg-surface-container transition-none" type="button">
+            ECE
+          </button>
+</div>
+<!-- Search and Sort -->
+<div class="flex items-center gap-space-sm flex-wrap">
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-ink-black text-[18px]">search</span>
+<input class="rounded-full border border-ink-black pl-10 pr-4 py-2 font-body-md text-body-md bg-pure-white text-ink-black placeholder:text-secondary focus:outline-none focus:border-primary-container w-72" placeholder="Search student or roll no..." type="text"/>
+</div>
+<div class="rounded-full border border-ink-black bg-pure-white px-4 py-2 font-label-sm text-label-sm uppercase tracking-wider text-ink-black flex items-center gap-2 cursor-pointer">
+<span>Sort by: Total Solved ↓</span>
+<span class="material-symbols-outlined text-[16px]">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Table Container -->
+<div class="w-full border border-ink-black rounded-3xl overflow-hidden bg-pure-white">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-ink-black bg-surface-tint font-label-sm text-label-sm uppercase tracking-wider text-ink-black">
+<th class="py-4 px-6 font-bold">Rank</th>
+<th class="py-4 px-6 font-bold">Name</th>
+<th class="py-4 px-6 font-bold">Section</th>
+<th class="py-4 px-6 font-bold text-right">LeetCode</th>
+<th class="py-4 px-6 font-bold text-right">SkillRack</th>
+<th class="py-4 px-6 font-bold text-right">CodeChef</th>
+<th class="py-4 px-6 font-bold text-right">HackerRank</th>
+<th class="py-4 px-6 font-bold text-right">Total</th>
+<th class="py-4 px-6 font-bold text-center">Today</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-ink-black/15 font-body-md text-body-md text-ink-black">
+<!-- Row 1 -->
+<tr class="bg-pure-white hover:bg-surface-tint transition-none">
+<td class="py-4 px-6 font-headline-sm text-headline-sm text-primary-container">#01</td>
+<td class="py-4 px-6">
+<div class="font-title-md text-title-md font-bold uppercase">Kavya Narayanan</div>
+<div class="text-[12px] text-secondary uppercase font-label-sm">21AML042 • 44 STREAK DAYS</div>
+</td>
+<td class="py-4 px-6">
+<span class="rounded-full bg-surface border border-ink-black px-3 py-1 font-label-sm text-label-sm font-bold uppercase">AIML-A</span>
+</td>
+<td class="py-4 px-6 text-right font-bold">240</td>
+<td class="py-4 px-6 text-right font-bold">185</td>
+<td class="py-4 px-6 text-right font-bold">110</td>
+<td class="py-4 px-6 text-right font-bold">95</td>
+<td class="py-4 px-6 text-right font-headline-sm text-headline-sm text-ink-black">630</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-block rounded-full bg-primary-container text-pure-white px-3 py-1 font-label-sm text-label-sm font-bold uppercase border border-ink-black">
+                    +6 today
+                  </span>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-tint transition-none">
+<td class="py-4 px-6 font-headline-sm text-headline-sm text-primary-container">#02</td>
+<td class="py-4 px-6">
+<div class="font-title-md text-title-md font-bold uppercase">Siddharth M.</div>
+<div class="text-[12px] text-secondary uppercase font-label-sm">21AML088 • 31 STREAK DAYS</div>
+</td>
+<td class="py-4 px-6">
+<span class="rounded-full bg-surface border border-ink-black px-3 py-1 font-label-sm text-label-sm font-bold uppercase">AIML-B</span>
+</td>
+<td class="py-4 px-6 text-right font-bold">215</td>
+<td class="py-4 px-6 text-right font-bold">190</td>
+<td class="py-4 px-6 text-right font-bold">94</td>
+<td class="py-4 px-6 text-right font-bold">88</td>
+<td class="py-4 px-6 text-right font-headline-sm text-headline-sm text-ink-black">587</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-block rounded-full bg-primary-container text-pure-white px-3 py-1 font-label-sm text-label-sm font-bold uppercase border border-ink-black">
+                    +4 today
+                  </span>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="bg-pure-white hover:bg-surface-tint transition-none">
+<td class="py-4 px-6 font-headline-sm text-headline-sm text-primary-container">#03</td>
+<td class="py-4 px-6">
+<div class="font-title-md text-title-md font-bold uppercase">Ananya Pillai</div>
+<div class="text-[12px] text-secondary uppercase font-label-sm">21AML012 • 19 STREAK DAYS</div>
+</td>
+<td class="py-4 px-6">
+<span class="rounded-full bg-surface border border-ink-black px-3 py-1 font-label-sm text-label-sm font-bold uppercase">AIML-B</span>
+</td>
+<td class="py-4 px-6 text-right font-bold">198</td>
+<td class="py-4 px-6 text-right font-bold">165</td>
+<td class="py-4 px-6 text-right font-bold">102</td>
+<td class="py-4 px-6 text-right font-bold">80</td>
+<td class="py-4 px-6 text-right font-headline-sm text-headline-sm text-ink-black">545</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-block rounded-full bg-primary-container text-pure-white px-3 py-1 font-label-sm text-label-sm font-bold uppercase border border-ink-black">
+                    +8 today
+                  </span>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-tint transition-none">
+<td class="py-4 px-6 font-headline-sm text-headline-sm text-ink-black">#04</td>
+<td class="py-4 px-6">
+<div class="font-title-md text-title-md font-bold uppercase">Rohan Verma</div>
+<div class="text-[12px] text-secondary uppercase font-label-sm">21AML071 • 12 STREAK DAYS</div>
+</td>
+<td class="py-4 px-6">
+<span class="rounded-full bg-surface border border-ink-black px-3 py-1 font-label-sm text-label-sm font-bold uppercase">AIML-A</span>
+</td>
+<td class="py-4 px-6 text-right font-bold">145</td>
+<td class="py-4 px-6 text-right font-bold">120</td>
+<td class="py-4 px-6 text-right font-bold">60</td>
+<td class="py-4 px-6 text-right font-bold">45</td>
+<td class="py-4 px-6 text-right font-headline-sm text-headline-sm text-ink-black">370</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-block rounded-full bg-ink-black text-pure-white px-3 py-1 font-label-sm text-label-sm font-bold uppercase border border-ink-black">
+                    +1 today
+                  </span>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="bg-pure-white hover:bg-surface-tint transition-none">
+<td class="py-4 px-6 font-headline-sm text-headline-sm text-ink-black">#05</td>
+<td class="py-4 px-6">
+<div class="font-title-md text-title-md font-bold uppercase">Tharun Kumar</div>
+<div class="text-[12px] text-secondary uppercase font-label-sm">21AML099 • 0 STREAK DAYS</div>
+</td>
+<td class="py-4 px-6">
+<span class="rounded-full bg-surface border border-ink-black px-3 py-1 font-label-sm text-label-sm font-bold uppercase">AIML-C</span>
+</td>
+<td class="py-4 px-6 text-right font-bold">110</td>
+<td class="py-4 px-6 text-right font-bold">95</td>
+<td class="py-4 px-6 text-right font-bold">40</td>
+<td class="py-4 px-6 text-right font-bold">35</td>
+<td class="py-4 px-6 text-right font-headline-sm text-headline-sm text-ink-black">280</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-block rounded-full bg-surface-container text-secondary px-3 py-1 font-label-sm text-label-sm font-bold uppercase border border-ink-black">
+                    0 today
+                  </span>
+</td>
+</tr>
+<!-- Row 6 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-tint transition-none">
+<td class="py-4 px-6 font-headline-sm text-headline-sm text-ink-black">#06</td>
+<td class="py-4 px-6">
+<div class="font-title-md text-title-md font-bold uppercase">Meera Nair</div>
+<div class="text-[12px] text-secondary uppercase font-label-sm">21AML038 • 3 STREAK DAYS</div>
+</td>
+<td class="py-4 px-6">
+<span class="rounded-full bg-surface border border-ink-black px-3 py-1 font-label-sm text-label-sm font-bold uppercase">AIML-A</span>
+</td>
+<td class="py-4 px-6 text-right font-bold">95</td>
+<td class="py-4 px-6 text-right font-bold">80</td>
+<td class="py-4 px-6 text-right font-bold">30</td>
+<td class="py-4 px-6 text-right font-bold">25</td>
+<td class="py-4 px-6 text-right font-headline-sm text-headline-sm text-ink-black">230</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-block rounded-full bg-surface-container text-secondary px-3 py-1 font-label-sm text-label-sm font-bold uppercase border border-ink-black">
+                    0 today
+                  </span>
+</td>
+</tr>
+<!-- Row 7 -->
+<tr class="bg-pure-white hover:bg-surface-tint transition-none">
+<td class="py-4 px-6 font-headline-sm text-headline-sm text-ink-black">#07</td>
+<td class="py-4 px-6">
+<div class="font-title-md text-title-md font-bold uppercase">Dev Karthik</div>
+<div class="text-[12px] text-secondary uppercase font-label-sm">21AML022 • 0 STREAK DAYS</div>
+</td>
+<td class="py-4 px-6">
+<span class="rounded-full bg-surface border border-ink-black px-3 py-1 font-label-sm text-label-sm font-bold uppercase">AIML-C</span>
+</td>
+<td class="py-4 px-6 text-right font-bold">80</td>
+<td class="py-4 px-6 text-right font-bold">70</td>
+<td class="py-4 px-6 text-right font-bold">20</td>
+<td class="py-4 px-6 text-right font-bold">15</td>
+<td class="py-4 px-6 text-right font-headline-sm text-headline-sm text-ink-black">185</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-block rounded-full bg-surface-container text-secondary px-3 py-1 font-label-sm text-label-sm font-bold uppercase border border-ink-black">
+                    0 today
+                  </span>
+</td>
+</tr>
+<!-- Row 8 -->
+<tr class="bg-surface-container-lowest hover:bg-surface-tint transition-none">
+<td class="py-4 px-6 font-headline-sm text-headline-sm text-ink-black">#08</td>
+<td class="py-4 px-6">
+<div class="font-title-md text-title-md font-bold uppercase">Vignesh S.</div>
+<div class="text-[12px] text-secondary uppercase font-label-sm">21AML114 • 0 STREAK DAYS</div>
+</td>
+<td class="py-4 px-6">
+<span class="rounded-full bg-surface border border-ink-black px-3 py-1 font-label-sm text-label-sm font-bold uppercase">AIML-B</span>
+</td>
+<td class="py-4 px-6 text-right font-bold">45</td>
+<td class="py-4 px-6 text-right font-bold">30</td>
+<td class="py-4 px-6 text-right font-bold">10</td>
+<td class="py-4 px-6 text-right font-bold">12</td>
+<td class="py-4 px-6 text-right font-headline-sm text-headline-sm text-ink-black">97</td>
+<td class="py-4 px-6 text-center">
+<span class="inline-block rounded-full bg-surface-container text-secondary px-3 py-1 font-label-sm text-label-sm font-bold uppercase border border-ink-black">
+                    0 today
+                  </span>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination Footer -->
+<div class="border-t border-ink-black p-4 bg-pure-white flex items-center justify-between flex-wrap gap-space-sm font-label-sm text-label-sm uppercase">
+<span class="text-secondary">Rows 1 - 8 of 64 students tracked</span>
+<div class="flex items-center gap-2">
+<button class="rounded-full border border-ink-black px-4 py-1.5 bg-pure-white text-ink-black hover:bg-surface-container transition-none" type="button">
+              ← Prev
+            </button>
+<span class="px-2 font-bold text-ink-black">Page 1 / 8</span>
+<button class="rounded-full border border-ink-black px-4 py-1.5 bg-ink-black text-pure-white hover:bg-primary-container transition-none" type="button">
+              Next →
+            </button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div></main><footer class="w-full bg-surface border-t border-ink-black py-space-xl"><div class="w-full px-margin flex flex-col items-center justify-center gap-space-xs"><p class="font-headline-sm text-headline-sm uppercase tracking-wider text-on-surface">That's enough dashboard.</p><div class="flex items-center gap-space-md text-on-surface-variant font-label-sm text-label-sm uppercase tracking-widest mt-space-xs"><span>CODE 26</span><span>•</span><span>TRACKER RUNTIME V2.4</span><span>•</span><span>TERMINAL VERIFIED</span></div></div></footer></body></html>
