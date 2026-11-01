@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-background: 10, 15, 28;
+    --color-surface: 18, 27, 46;
+    --color-border: 255, 255, 255, 0.08;
+    /* Fallback syntax supported by tailwind rgba wrapper via plugin/setup */
+    --color-subtle: 255, 255, 255, 0.05;
+    --color-text-main: 255, 255, 255;
+    --color-text-muted: 148, 163, 184;
+    --color-adaptive-white: 255, 255, 255;
+    --color-brand-400: 56, 189, 248;
+    --color-brand-500: 14, 165, 233;
+    --color-brand-600: 2, 132, 199;
+    --color-bg-grad-1: #1a2340;
+    --color-bg-grad-2: #0a0f1c;
+
+    /* Normalize rgba values to work without <alpha-value> if needed in border overrides */
+    --color-border: 255, 255, 255;
+    --color-subtle: 255, 255, 255;
+  }
+
+  .light {
+    --color-background: 248, 250, 252;
+    --color-surface: 255, 255, 255;
+    --color-border: 0, 0, 0;
+    /* Tailwind applies 0.08 alpha to this */
+    --color-subtle: 0, 0, 0;
+    --color-text-main: 15, 23, 42;
+    --color-text-muted: 100, 116, 139;
+    --color-adaptive-white: 15, 23, 42;
+    --color-brand-400: 14, 165, 233;
+    /* Darker blue better for white bg */
+    --color-brand-500: 2, 132, 199;
+    --color-brand-600: 3, 105, 161;
+    --color-bg-grad-1: #f1f5f9;
+    --color-bg-grad-2: #f8fafc;
+  }
+
+  /* Make borders visible on light mode */
+  .light * {
+    border-color: rgba(var(--color-text-main), 0.1);
+  }
+
+  body {
+    @apply bg-background text-textMain antialiased selection:bg-brand-500/30 selection:text-brand-400 font-sans overflow-x-hidden;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+    /* Normalize mobile text scaling */
+    -webkit-text-size-adjust: 100%;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display tracking-tight text-textMain overflow-hidden text-ellipsis;
+  }
+
+  /* Global mobile font-size normalization */
+  @media (max-width: 640px) {
+    html {
+      font-size: 14px;
+    }
+  }
+
+  p, span, div, a {
+    @apply font-sans;
+  }
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-surface rounded-full border border-border;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-700;
+}
+
+/* Utility to hide scrollbar but keep functionality */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* High-end design system extensions */
+@layer utilities {
+  .glass-card {
+    @apply bg-surface/80 backdrop-blur-md border border-border shadow-xl;
+  }
+  
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Fluid layout container for mobile */
+  .mobile-fluid {
+    @apply px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Text balance for titles */
+  .text-balance {
+    text-wrap: balance;
+  }
+}
