@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Space+Grotesk:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,70 +7,88 @@
 
 @layer base {
   :root {
-    --color-background: 10, 15, 28;
-    --color-surface: 18, 27, 46;
-    --color-border: 255, 255, 255, 0.08;
-    /* Fallback syntax supported by tailwind rgba wrapper via plugin/setup */
-    --color-subtle: 255, 255, 255, 0.05;
-    --color-text-main: 255, 255, 255;
-    --color-text-muted: 148, 163, 184;
-    --color-adaptive-white: 255, 255, 255;
-    --color-brand-400: 56, 189, 248;
-    --color-brand-500: 14, 165, 233;
-    --color-brand-600: 2, 132, 199;
-    --color-bg-grad-1: #1a2340;
-    --color-bg-grad-2: #0a0f1c;
+    --color-primary: #a73400;
+    --color-primary-container: #d14300;
+    --color-primary-fixed: #ffdbcf;
+    --color-primary-fixed-dim: #ffb59c;
+    --color-on-primary: #ffffff;
+    --color-on-primary-container: #fffbff;
+    --color-on-primary-fixed: #390c00;
+    --color-on-primary-fixed-variant: #832700;
+    --color-inverse-primary: #ffb59c;
 
-    /* Normalize rgba values to work without <alpha-value> if needed in border overrides */
-    --color-border: 255, 255, 255;
-    --color-subtle: 255, 255, 255;
+    --color-secondary: #5e5e5e;
+    --color-secondary-container: #e2e2e2;
+    --color-secondary-fixed: #e2e2e2;
+    --color-secondary-fixed-dim: #c6c6c6;
+    --color-on-secondary: #ffffff;
+    --color-on-secondary-container: #646464;
+    --color-on-secondary-fixed: #1b1b1b;
+    --color-on-secondary-fixed-variant: #474747;
+
+    --color-tertiary: #005ea4;
+    --color-tertiary-container: #0077ce;
+    --color-tertiary-fixed: #d3e4ff;
+    --color-tertiary-fixed-dim: #a2c9ff;
+    --color-on-tertiary: #ffffff;
+    --color-on-tertiary-container: #fdfcff;
+    --color-on-tertiary-fixed: #001c38;
+    --color-on-tertiary-fixed-variant: #004881;
+
+    --color-surface: #fff8f6;
+    --color-surface-bright: #fff8f6;
+    --color-surface-dim: #e4d7d4;
+    --color-surface-variant: #ece0dc;
+    --color-surface-tint: #F9E2E1;
+    --color-surface-container: #f8ebe7;
+    --color-surface-container-low: #fef1ed;
+    --color-surface-container-high: #f2e6e2;
+    --color-surface-container-highest: #ece0dc;
+    --color-surface-container-lowest: #ffffff;
+    --color-inverse-surface: #362f2d;
+    --color-inverse-on-surface: #fbeeea;
+    --color-on-surface: #201a18;
+    --color-on-surface-variant: #5c4037;
+
+    --color-background: #fff8f6;
+    --color-on-background: #201a18;
+
+    --color-ink-black: #000000;
+    --color-pure-white: #ffffff;
+
+    --color-outline: #907065;
+    --color-outline-variant: #e5beb2;
+
+    --color-error: #ba1a1a;
+    --color-error-container: #ffdad6;
+    --color-on-error: #ffffff;
+    --color-on-error-container: #93000a;
   }
 
-  .light {
-    --color-background: 248, 250, 252;
-    --color-surface: 255, 255, 255;
-    --color-border: 0, 0, 0;
-    /* Tailwind applies 0.08 alpha to this */
-    --color-subtle: 0, 0, 0;
-    --color-text-main: 15, 23, 42;
-    --color-text-muted: 100, 116, 139;
-    --color-adaptive-white: 15, 23, 42;
-    --color-brand-400: 14, 165, 233;
-    /* Darker blue better for white bg */
-    --color-brand-500: 2, 132, 199;
-    --color-brand-600: 3, 105, 161;
-    --color-bg-grad-1: #f1f5f9;
-    --color-bg-grad-2: #f8fafc;
-  }
-
-  /* Make borders visible on light mode */
-  .light * {
-    border-color: rgba(var(--color-text-main), 0.1);
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
   }
 
   body {
-    @apply bg-background text-textMain antialiased selection:bg-brand-500/30 selection:text-brand-400 font-sans overflow-x-hidden;
-    margin: 0;
-    padding: 0;
+    @apply bg-surface text-on-surface antialiased font-sans;
     min-height: 100vh;
     width: 100%;
-    /* Normalize mobile text scaling */
     -webkit-text-size-adjust: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    @apply font-display tracking-tight text-textMain overflow-hidden text-ellipsis;
+    @apply font-display tracking-tight text-on-surface;
   }
 
-  /* Global mobile font-size normalization */
-  @media (max-width: 640px) {
-    html {
-      font-size: 14px;
-    }
-  }
-
-  p, span, div, a {
-    @apply font-sans;
+  /* Material Symbols standard sizing */
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
   }
 }
 
@@ -77,58 +96,35 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  overflow-x: hidden;
 }
 
-/* Custom modern scrollbar */
+/* Custom minimal scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  @apply bg-transparent;
+  background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  @apply bg-surface rounded-full border border-border;
+  background: var(--color-surface-container-high);
+  border: 1px solid var(--color-ink-black);
+  border-radius: 9999px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-700;
-}
-
-/* Utility to hide scrollbar but keep functionality */
-.scrollbar-hide::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hide {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}
-
-/* High-end design system extensions */
+/* Utilities */
 @layer utilities {
-  .glass-card {
-    @apply bg-surface/80 backdrop-blur-md border border-border shadow-xl;
-  }
-  
-  .hide-scrollbar {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+  .tabular-numbers {
+    font-variant-numeric: tabular-nums;
   }
 
-  /* Fluid layout container for mobile */
-  .mobile-fluid {
-    @apply px-4 sm:px-6 lg:px-8;
+  .border-brutal {
+    border: 1px solid var(--color-ink-black);
   }
 
-  /* Text balance for titles */
-  .text-balance {
-    text-wrap: balance;
+  .pill-badge {
+    @apply inline-flex items-center gap-1.5 rounded-full border border-ink-black px-3 py-1 font-label-sm text-label-sm uppercase tracking-wider;
   }
-}
+}
