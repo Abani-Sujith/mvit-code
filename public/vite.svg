@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
   <rect width="32" height="32" rx="7" fill="#000000"/>
-  <circle cx="8" cy="8" r="2.5" fill="#d14300"/>
-  <text x="17" y="23" font-family="'Anton', sans-serif" font-size="16" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">26</text>
+  <circle cx="7" cy="7" r="2.5" fill="#d14300"/>
+  <text x="16" y="22" font-family="'Anton', 'Space Grotesk', sans-serif" font-size="13" font-weight="900" fill="#FFFFFF" text-anchor="middle" letter-spacing="0.5">MVIT</text>
 </svg>

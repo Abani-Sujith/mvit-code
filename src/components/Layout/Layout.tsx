@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Sidebar from './Sidebar';
 import Header from './Header';
+import Sidebar from './Sidebar';
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -10,40 +10,44 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-gradient-main">
-      {/* Mobile sidebar backdrop */}
+    <div className="min-h-screen bg-surface text-on-surface flex flex-col w-full overflow-x-hidden font-sans">
+      {/* Mobile drawer backdrop */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black bg-opacity-50 lg:hidden"
+          className="fixed inset-0 z-40 bg-ink-black/40 xl:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
-      {/* Sidebar */}
+      {/* Mobile Sidebar Drawer */}
       <Sidebar
         isOpen={sidebarOpen}
         onClose={() => setSidebarOpen(false)}
       />
 
-      {/* Main content */}
-      <div className="lg:ml-64 flex flex-col min-h-screen relative z-10 w-full lg:w-[calc(100%-16rem)] max-w-full overflow-x-hidden">
-        {/* Header */}
-        <Header onMenuClick={() => setSidebarOpen(true)} />
+      {/* Stitch Top-Nav Header */}
+      <Header onMenuClick={() => setSidebarOpen(true)} />
 
-        {/* Page content */}
-        <main className="flex-1 p-6 sm:p-8 animate-fade-in w-full overflow-x-hidden">
-          {children}
-        </main>
+      {/* Main Content Area */}
+      <main className="flex-1 w-full overflow-x-hidden">
+        {children}
+      </main>
 
-        {/* Footer */}
-        <footer className="glass-card border-none border-t border-border mt-auto p-4 flex justify-between items-center text-sm text-textMuted">
-          <div>Multi-Team Coding Tracker</div>
-          <div className="flex items-center gap-2">
-            <span className="h-2 w-2 rounded-full bg-brand-500 animate-pulse-slow"></span>
-            Live Updates
+      {/* Stitch Neo-Brutalist Footer */}
+      <footer className="w-full bg-surface border-t border-ink-black py-space-xl mt-auto">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-margin flex flex-col items-center justify-center gap-space-xs text-center">
+          <p className="font-headline-sm text-headline-sm uppercase tracking-wider text-on-surface">
+            That's enough dashboard.
+          </p>
+          <div className="flex items-center gap-space-md text-on-surface-variant font-label-sm text-label-sm uppercase tracking-widest mt-space-xs flex-wrap justify-center">
+            <span>MVIT CODE</span>
+            <span>•</span>
+            <span>TRACKER RUNTIME</span>
+            <span>•</span>
+            <span>TERMINAL VERIFIED</span>
           </div>
-        </footer>
-      </div>
+        </div>
+      </footer>
     </div>
   );
 };

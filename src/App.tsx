@@ -5,7 +5,7 @@ import Layout from './components/Layout/Layout';
 import { ToastProvider } from './components/ui/Toaster';
 
 // Lazy load pages
-const Dashboard = React.lazy(() => import('./pages/Dashboard'));
+const Dashboard = React.lazy(() => import('./pages/Dashboard/index'));
 const TeamView = React.lazy(() => import('./pages/TeamView'));
 const SectionView = React.lazy(() => import('./pages/SectionView'));
 const DepartmentView = React.lazy(() => import('./pages/DepartmentView'));
@@ -40,7 +40,7 @@ function App() {
         <FirebaseProvider>
           <DataProvider>
             <Router>
-              <div className="min-h-screen bg-gradient-main text-textMain transition-colors duration-300">
+              <div className="min-h-screen bg-surface text-on-surface">
                 <Layout>
                   <ErrorBoundary>
                     <Suspense fallback={<LoadingSpinner />}>
