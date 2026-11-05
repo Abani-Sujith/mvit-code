@@ -37,15 +37,13 @@ const Dashboard: React.FC = () => {
     return (
       <div className="flex items-center justify-center h-64">
         <LoadingSpinner size="lg" />
-        <span className="ml-3 text-textMuted text-lg font-medium">Booting intelligence core...</span>
+        <span className="ml-3 font-label-lg uppercase tracking-wider text-secondary">Loading dashboard...</span>
       </div>
     );
   }
 
   return (
-    <div className="mx-auto space-y-6 sm:space-y-8 animate-fade-in relative px-2 sm:px-0">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-brand-500/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
-      
+    <div className="w-full space-y-6 sm:space-y-8 select-none">
       {/* Search/Filter Controls Overhaul */}
       <TabSwitcherSection
         viewMode={viewMode}
@@ -57,7 +55,7 @@ const Dashboard: React.FC = () => {
         hierarchy={hierarchy}
       />
 
-      {/* 🎯 TOP SUMMARY STRIP */}
+      {/* TOP SUMMARY STRIP */}
       <StatsRowSection
         activeCount={activeCount}
         baseLatestLength={baseLatest.length}
@@ -69,10 +67,10 @@ const Dashboard: React.FC = () => {
 
       {viewMode === 'intelligence' ? (
         <div className="space-y-6 sm:space-y-8">
-           {/* New Design Hero */}
-           <HeroBannerSection />
+           {/* Stitch Hero Banner */}
+           <HeroBannerSection selectedDept={selectedDept} />
 
-           {/* Mobile Insights Grid */}
+           {/* Insights Risk Cards */}
            <RiskCardsSection
              inactiveCount={inactiveCount}
              trialCount={trialCount}
@@ -83,6 +81,7 @@ const Dashboard: React.FC = () => {
              }}
            />
 
+           {/* Activity & Quick Insights */}
            <ActivityFeedSection
              topPerformers={topPerformers}
              dynamicInterventions={dynamicInterventions}

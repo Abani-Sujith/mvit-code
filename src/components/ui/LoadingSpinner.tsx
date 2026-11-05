@@ -18,15 +18,12 @@ export const LoadingSpinner: React.FC<LoadingSpinnerProps> = ({
 
   return (
     <div className={cn('flex items-center justify-center p-4', className)}>
-      <div className="relative">
-        <div
-          className={cn(
-            'animate-spin rounded-full border-2 border-surface border-t-brand-400',
-            sizeClasses[size]
-          )}
-        />
-        <div className="absolute inset-0 rounded-full border-2 border-brand-500/30 animate-pulse-slow"></div>
-      </div>
+      <div
+        className={cn(
+          'animate-spin rounded-full border-2 border-surface-container border-t-primary-container',
+          sizeClasses[size]
+        )}
+      />
     </div>
   );
 };

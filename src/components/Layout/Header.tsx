@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, Search, User, X, ArrowRight } from 'lucide-react';
+import { Menu, Search, User, X, ArrowRight, ChevronDown } from 'lucide-react';
 import { useSearch } from '../../hooks/useSearch';
 import { cn } from '../../utils/cn';
 
@@ -16,27 +16,46 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
 
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMoreOpen, setIsMoreOpen] = useState(false);
+  const moreRef = useRef<HTMLDivElement>(null);
 
   // Sync search queries
   useEffect(() => {
     setTeamQuery(query);
   }, [query, setTeamQuery]);
 
+  // Click outside to close "More" dropdown
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setIsMoreOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   const handleNavigate = (path: string) => {
     navigate(path);
     setQuery('');
     setIsSearchOpen(false);
     setIsMobileMenuOpen(false);
+    setIsMoreOpen(false);
   };
 
-  const navLinks = [
+  const mainLinks = [
     { name: 'Dashboard', path: '/' },
     { name: 'Departments', path: '/all-departments' },
     { name: 'Leaderboard', path: '/leaderboard' },
-    { name: 'Teams', path: '/teams' },
     { name: 'Students', path: '/student-data' },
-    { name: 'Analytics', path: '/analytics' },
     { name: 'Settings', path: '/settings' },
+  ];
+
+  const moreLinks = [
+    { name: 'Teams', path: '/teams' },
+    { name: 'Analytics', path: '/analytics' },
+    { name: 'Repositories', path: '/repositories' },
+    { name: 'Agent Admin', path: '/agent-admin' },
   ];
 
   const isLinkActive = (path: string) => {
@@ -44,11 +63,13 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
     return location.pathname.startsWith(path);
   };
 
+  const isMoreActive = moreLinks.some(l => location.pathname.startsWith(l.path));
+
   return (
     <header className="sticky top-0 left-0 w-full z-50 bg-surface border-b border-ink-black select-none">
-      <div className="h-20 w-full px-4 sm:px-6 lg:px- margin flex items-center justify-between gap-2 sm:gap-4 max-w-7xl mx-auto">
-        {/* Left: Mobile hamburger & Desktop Navigation Pills */}
-        <div className="flex items-center gap-2 sm:gap-4">
+      <div className="relative h-20 w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between max-w-7xl mx-auto">
+        {/* Left: Mobile toggle & 5 Main Nav Pills + More dropdown */}
+        <div className="flex items-center gap-2 z-10">
           <button
             type="button"
             onClick={() => {
@@ -63,14 +84,14 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
 
           {/* Desktop Navigation Pills */}
           <nav className="hidden xl:flex items-center gap-1 bg-pure-white p-1 border border-ink-black rounded-full shadow-sm">
-            {navLinks.map((link) => {
+            {mainLinks.map((link) => {
               const active = isLinkActive(link.path);
               return (
                 <Link
                   key={link.path}
                   to={link.path}
                   className={cn(
-                    'px-3.5 py-1.5 rounded-full font-label-lg text-label-lg uppercase tracking-wider transition-none',
+                    'px-3.5 py-1.5 rounded-full font-label-lg text-xs tracking-wider transition-none',
                     active
                       ? 'bg-ink-black text-pure-white border border-ink-black'
                       : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container border border-transparent'
@@ -80,21 +101,61 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 </Link>
               );
             })}
+
+            {/* More Pill Dropdown */}
+            <div className="relative" ref={moreRef}>
+              <button
+                type="button"
+                onClick={() => setIsMoreOpen(!isMoreOpen)}
+                className={cn(
+                  'px-3.5 py-1.5 rounded-full font-label-lg text-xs tracking-wider transition-none flex items-center gap-1',
+                  isMoreActive || isMoreOpen
+                    ? 'bg-ink-black text-pure-white border border-ink-black'
+                    : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container border border-transparent'
+                )}
+              >
+                <span>More</span>
+                <ChevronDown className={cn('h-3 w-3 transition-transform', isMoreOpen && 'rotate-180')} />
+              </button>
+
+              {isMoreOpen && (
+                <div className="absolute left-0 mt-2 w-44 bg-pure-white border border-ink-black rounded-2xl shadow-xl py-2 z-50">
+                  {moreLinks.map((link) => {
+                    const active = isLinkActive(link.path);
+                    return (
+                      <Link
+                        key={link.path}
+                        to={link.path}
+                        onClick={() => setIsMoreOpen(false)}
+                        className={cn(
+                          'block px-4 py-2 text-xs font-label-lg tracking-wider transition-none',
+                          active
+                            ? 'bg-surface-tint text-primary-container font-bold'
+                            : 'text-ink-black hover:bg-surface-container'
+                        )}
+                      >
+                        {link.name}
+                      </Link>
+                    );
+                  })}
+                </div>
+              )}
+            </div>
           </nav>
         </div>
 
-        {/* Center: Brand Wordmark */}
-        <div className="flex items-center justify-center">
+        {/* Center: Brand Wordmark (Single line, absolute centered, never clipped) */}
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
           <Link
             to="/"
-            className="font-headline-md text-headline-md uppercase tracking-tight text-primary-container leading-none hover:text-primary transition-none"
+            className="font-headline-md text-3xl sm:text-4xl text-primary-container tracking-tight whitespace-nowrap hover:text-primary transition-none select-none inline-block leading-none"
           >
             MVIT CODE
           </Link>
         </div>
 
         {/* Right: Search, Add Student Action, and Profile */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 z-10">
           {/* Search Trigger Button */}
           <div className="relative">
             <button
@@ -173,9 +234,9 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
           {/* Add Student Pill Button */}
           <Link
             to="/onboard"
-            className="hidden md:inline-flex rounded-full bg-ink-black text-pure-white pl-4 pr-1.5 py-1.5 font-label-lg text-label-lg uppercase tracking-wider border border-ink-black items-center gap-2 hover:bg-primary-container hover:text-pure-white transition-none"
+            className="hidden md:inline-flex rounded-full bg-ink-black text-pure-white pl-4 pr-1.5 py-1.5 font-label-lg text-xs tracking-wider border border-ink-black items-center gap-2 hover:bg-primary-container hover:text-pure-white transition-none"
           >
-            <span className="leading-none text-xs">Add student</span>
+            <span className="leading-none">Add student</span>
             <span className="w-6 h-6 rounded-full bg-primary-container text-pure-white flex items-center justify-center border border-ink-black font-bold text-xs leading-none">
               <ArrowRight className="h-3 w-3" />
             </span>
@@ -196,7 +257,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
       {isMobileMenuOpen && (
         <div className="xl:hidden bg-surface border-t border-ink-black px-4 py-4 animate-fade-in">
           <nav className="flex flex-col gap-2 bg-pure-white p-3 border border-ink-black rounded-3xl">
-            {navLinks.map((link) => {
+            {[...mainLinks, ...moreLinks].map((link) => {
               const active = isLinkActive(link.path);
               return (
                 <Link
@@ -204,7 +265,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                   to={link.path}
                   onClick={() => setIsMobileMenuOpen(false)}
                   className={cn(
-                    'px-4 py-2 rounded-full font-label-lg text-label-lg uppercase tracking-wider transition-none flex items-center justify-between',
+                    'px-4 py-2 rounded-full font-label-lg text-xs tracking-wider transition-none flex items-center justify-between',
                     active
                       ? 'bg-ink-black text-pure-white border border-ink-black'
                       : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container border border-transparent'
@@ -219,9 +280,9 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
               <Link
                 to="/onboard"
                 onClick={() => setIsMobileMenuOpen(false)}
-                className="w-full text-center rounded-full bg-primary-container text-pure-white py-2 font-label-lg text-label-lg uppercase tracking-wider border border-ink-black"
+                className="w-full text-center rounded-full bg-primary-container text-pure-white py-2 font-label-lg text-xs tracking-wider border border-ink-black"
               >
-                + Add Student
+                + Add student
               </Link>
             </div>
           </nav>

@@ -1,4 +1,5 @@
 import React from 'react';
+import { cn } from '../../utils/cn';
 
 export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
   hover?: boolean;
@@ -6,22 +7,35 @@ export interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const CardRoot: React.FC<CardProps> = ({ hover = false, className = '', children, ...props }) => {
   return (
-    <div className={`${hover ? 'transition-all duration-300 hover:shadow-2xl hover:-translate-y-1' : ''} glass-card rounded-2xl overflow-hidden ${className}`} {...props}>
+    <div
+      className={cn(
+        'bg-pure-white border-2 border-ink-black rounded-3xl overflow-hidden',
+        hover && 'transition-none',
+        className
+      )}
+      {...props}
+    >
       {children}
     </div>
   );
 };
 
 export const CardHeader: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
-  <div className={`px-6 pt-6 border-b border-border pb-4 ${className}`} {...props}>{children}</div>
+  <div className={cn('px-6 pt-6 pb-4 border-b border-ink-black', className)} {...props}>
+    {children}
+  </div>
 );
 
 export const CardTitle: React.FC<React.HTMLAttributes<HTMLHeadingElement>> = ({ className = '', children, ...props }) => (
-  <h3 className={`text-lg font-semibold text-textMain ${className}`} {...props}>{children}</h3>
+  <h3 className={cn('font-title-md text-title-md text-ink-black font-bold tracking-tight', className)} {...props}>
+    {children}
+  </h3>
 );
 
 export const CardContent: React.FC<React.HTMLAttributes<HTMLDivElement>> = ({ className = '', children, ...props }) => (
-  <div className={`px-6 py-6 ${className}`} {...props}>{children}</div>
+  <div className={cn('px-6 py-6', className)} {...props}>
+    {children}
+  </div>
 );
 
 const Card = Object.assign(CardRoot, { Header: CardHeader, Title: CardTitle, Content: CardContent });

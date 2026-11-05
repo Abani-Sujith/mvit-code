@@ -22,19 +22,19 @@ export const Button: React.FC<ButtonProps> = ({
   to,
   ...props
 }) => {
-  const baseClasses = 'inline-flex items-center justify-center rounded-lg font-medium transition-all focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed';
+  const baseClasses = 'inline-flex items-center justify-center rounded-full font-label-lg tracking-wider border border-ink-black transition-none focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed select-none';
 
   const variantClasses = {
-    primary: 'bg-gradient-hero text-[#ffffff] hover:opacity-90 focus:ring-brand-500 shadow-lg shadow-brand-500/20 shadow-[-4px_0_15px_-3px_rgba(139,92,246,0.3)]',
-    secondary: 'bg-surface text-textMain border border-border hover:bg-white/5 focus:ring-brand-500',
-    ghost: 'text-textMuted hover:text-white hover:bg-white/5 focus:ring-gray-500',
-    danger: 'bg-red-500/10 text-red-500 hover:bg-red-500/20 border border-red-500/20 focus:ring-red-500'
+    primary: 'bg-ink-black text-pure-white hover:bg-primary-container hover:text-pure-white',
+    secondary: 'bg-pure-white text-ink-black hover:bg-surface-container',
+    ghost: 'bg-transparent text-ink-black border-transparent hover:bg-surface-container',
+    danger: 'bg-error text-pure-white hover:bg-primary-container',
   };
 
   const sizeClasses = {
-    sm: 'px-3 py-1.5 text-sm',
-    md: 'px-4 py-2 text-sm',
-    lg: 'px-6 py-3 text-base'
+    sm: 'px-3.5 py-1 text-xs',
+    md: 'px-5 py-2 text-sm',
+    lg: 'px-6 py-2.5 text-base',
   };
 
   const combinedClasses = cn(
@@ -45,7 +45,6 @@ export const Button: React.FC<ButtonProps> = ({
     className
   );
 
-  // If component is Link, render as Link
   if (Component && to) {
     return (
       <Component
@@ -64,7 +63,6 @@ export const Button: React.FC<ButtonProps> = ({
     );
   }
 
-  // Otherwise render as button
   return (
     <button
       className={combinedClasses}

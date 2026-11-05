@@ -28,14 +28,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
       {/* Stitch Top-Nav Header */}
       <Header onMenuClick={() => setSidebarOpen(true)} />
 
-      {/* Main Content Area */}
-      <main className="flex-1 w-full overflow-x-hidden">
+      {/* Main Content Area with proper margin padding so content never touches edges */}
+      <main className="flex-1 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 overflow-x-hidden">
         {children}
       </main>
 
       {/* Stitch Neo-Brutalist Footer */}
       <footer className="w-full bg-surface border-t border-ink-black py-space-xl mt-auto">
-        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-margin flex flex-col items-center justify-center gap-space-xs text-center">
+        <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center gap-space-xs text-center">
           <p className="font-headline-sm text-headline-sm uppercase tracking-wider text-on-surface">
             That's enough dashboard.
           </p>

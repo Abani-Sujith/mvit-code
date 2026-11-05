@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldAlert, Activity, TrendingUp, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 interface RiskCardsSectionProps {
   inactiveCount: number;
@@ -15,46 +15,70 @@ export const RiskCardsSection: React.FC<RiskCardsSectionProps> = ({
   onSelectFilter,
 }) => {
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 select-none">
+       {/* Card 1: Inactive */}
        <button 
+         type="button"
          onClick={() => onSelectFilter('inactive')}
-         className="bg-surface border border-border rounded-3xl p-6 hover:border-red-500/50 hover:shadow-2xl transition-all group relative text-left"
+         className="bg-pure-white border-2 border-ink-black rounded-3xl p-6 hover:bg-surface-tint transition-none text-left flex flex-col justify-between min-h-[170px]"
        >
-          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-             <ShieldAlert className="w-12 h-12 text-red-500" />
+          <div>
+            <div className="font-label-lg text-xs text-ink-black font-bold uppercase tracking-wider flex items-center gap-1.5 mb-2">
+              <span className="w-2 h-2 rounded-full bg-error"></span>
+              Inactive Students
+            </div>
+            <div className="font-headline-lg text-4xl sm:text-5xl font-black text-error leading-none tracking-tight">
+              {inactiveCount}
+            </div>
           </div>
-          <h3 className="text-3xl sm:text-4xl font-black text-red-500 mb-1">{inactiveCount}</h3>
-          <p className="text-[11px] text-textMuted uppercase font-extrabold tracking-widest">Inactive Students</p>
-          <div className="mt-4 flex items-center gap-1.5 text-[10px] font-bold text-red-500/80 group-hover:translate-x-1 transition-transform">
-             VIEW AT-RISK <ArrowRight className="w-3 h-3" />
+          <div className="mt-4">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-ink-black text-pure-white px-3.5 py-1 font-label-sm text-[11px] uppercase tracking-wider border border-ink-black">
+              View at-risk <ArrowRight className="w-3 h-3 text-primary-container" />
+            </span>
           </div>
        </button>
        
+       {/* Card 2: Performance Risk */}
        <button 
+         type="button"
          onClick={() => onSelectFilter('trial')}
-         className="bg-surface border border-border rounded-3xl p-6 hover:border-yellow-500/50 hover:shadow-2xl transition-all group relative text-left"
+         className="bg-pure-white border-2 border-ink-black rounded-3xl p-6 hover:bg-surface-tint transition-none text-left flex flex-col justify-between min-h-[170px]"
        >
-          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-             <Activity className="w-12 h-12 text-yellow-500" />
+          <div>
+            <div className="font-label-lg text-xs text-ink-black font-bold uppercase tracking-wider flex items-center gap-1.5 mb-2">
+              <span className="w-2 h-2 rounded-full bg-primary-container"></span>
+              Performance Risk
+            </div>
+            <div className="font-headline-lg text-4xl sm:text-5xl font-black text-primary-container leading-none tracking-tight">
+              {trialCount}
+            </div>
           </div>
-          <h3 className="text-3xl sm:text-4xl font-black text-yellow-500 mb-1">{trialCount}</h3>
-          <p className="text-[11px] text-textMuted uppercase font-extrabold tracking-widest">Performance Risk</p>
-          <div className="mt-4 flex items-center gap-1.5 text-[10px] font-bold text-yellow-500/80 group-hover:translate-x-1 transition-transform">
-             DIAGNOSE ISSUES <ArrowRight className="w-3 h-3" />
+          <div className="mt-4">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-ink-black text-pure-white px-3.5 py-1 font-label-sm text-[11px] uppercase tracking-wider border border-ink-black">
+              Diagnose <ArrowRight className="w-3 h-3 text-primary-container" />
+            </span>
           </div>
        </button>
 
+       {/* Card 3: Growth Stars */}
        <button 
+         type="button"
          onClick={() => onSelectFilter('rapid')}
-         className="bg-surface border border-border rounded-3xl p-6 hover:border-green-500/50 hover:shadow-2xl transition-all group relative text-left"
+         className="bg-pure-white border-2 border-ink-black rounded-3xl p-6 hover:bg-surface-tint transition-none text-left flex flex-col justify-between min-h-[170px]"
        >
-          <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
-             <TrendingUp className="w-12 h-12 text-green-500" />
+          <div>
+            <div className="font-label-lg text-xs text-ink-black font-bold uppercase tracking-wider flex items-center gap-1.5 mb-2">
+              <span className="w-2 h-2 rounded-full bg-ink-black"></span>
+              Growth Stars
+            </div>
+            <div className="font-headline-lg text-4xl sm:text-5xl font-black text-ink-black leading-none tracking-tight">
+              {rapidCount}
+            </div>
           </div>
-          <h3 className="text-3xl sm:text-4xl font-black text-green-500 mb-1">{rapidCount}</h3>
-          <p className="text-[11px] text-textMuted uppercase font-extrabold tracking-widest">Growth Stars</p>
-          <div className="mt-4 flex items-center gap-1.5 text-[10px] font-bold text-green-500/80 group-hover:translate-x-1 transition-transform">
-             VIEW HIGH PERFORMERS <ArrowRight className="w-3 h-3" />
+          <div className="mt-4">
+            <span className="inline-flex items-center gap-1.5 rounded-full bg-ink-black text-pure-white px-3.5 py-1 font-label-sm text-[11px] uppercase tracking-wider border border-ink-black">
+              View performers <ArrowRight className="w-3 h-3 text-primary-container" />
+            </span>
           </div>
        </button>
     </div>

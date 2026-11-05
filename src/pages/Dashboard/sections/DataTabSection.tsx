@@ -1,5 +1,5 @@
 import React from 'react';
-import { Activity } from 'lucide-react';
+import { Activity, X } from 'lucide-react';
 import MemberTable from '../../../components/MemberTable';
 import { DailyTotal } from '../../../types';
 
@@ -15,17 +15,23 @@ export const DataTabSection: React.FC<DataTabSectionProps> = ({
   onResetFilter,
 }) => {
   return (
-    <div className="space-y-4 animate-fade-in px-minus-2">
+    <div className="space-y-4 select-none">
        {intelligenceFilter && (
-          <div className="flex items-center justify-between bg-brand-500/10 border border-brand-500/30 p-4 rounded-2xl mx-2 sm:mx-0">
-             <div className="flex items-center gap-3 text-brand-500 text-sm font-black uppercase tracking-widest">
-                <Activity className="w-4 h-4" /> 
-                {intelligenceFilter} filtered
+          <div className="flex items-center justify-between bg-surface-tint border-2 border-ink-black p-4 rounded-2xl">
+             <div className="flex items-center gap-2 text-ink-black text-xs font-label-lg uppercase tracking-wider font-bold">
+                <Activity className="w-4 h-4 text-primary-container" /> 
+                <span>Filtered by: <strong>{intelligenceFilter}</strong></span>
              </div>
-             <button onClick={onResetFilter} className="px-3 py-1 rounded-full bg-brand-500 text-white text-[10px] font-black uppercase tracking-widest shadow-lg">Reset</button>
+             <button 
+               onClick={onResetFilter} 
+               className="rounded-full bg-ink-black text-pure-white px-3.5 py-1 text-xs font-label-lg uppercase tracking-wider border border-ink-black hover:bg-primary-container transition-none inline-flex items-center gap-1"
+             >
+               <span>Reset</span>
+               <X className="w-3 h-3" />
+             </button>
           </div>
        )}
-       <div className="bg-surface sm:rounded-3xl border sm:border border-border shadow-2xl overflow-hidden">
+       <div className="border-2 border-ink-black rounded-3xl overflow-hidden bg-pure-white shadow-sm">
           <MemberTable data={filtered} />
        </div>
     </div>
