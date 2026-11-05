@@ -3,11 +3,10 @@ import { Link } from 'react-router-dom';
 import { useData } from '../contexts/DataContext';
 import { DailyTotal } from '../types';
 import { createLeaderboard } from '../utils/dataProcessing';
-import Card, { CardHeader, CardTitle, CardContent } from '../components/ui/Card';
 import LoadingSpinner from '../components/ui/LoadingSpinner';
 import LeaderboardTable from '../components/Tables/LeaderboardTable';
 import HierarchySelector from '../components/Navigation/HierarchySelector';
-import { Trophy, Medal, Award, Crown, ChevronRight, Users, TrendingUp } from 'lucide-react';
+import { Trophy, Crown, TrendingUp } from 'lucide-react';
 
 const Leaderboard: React.FC = () => {
   const { data: globalData, hierarchy, loading: globalLoading } = useData();
@@ -81,217 +80,267 @@ const Leaderboard: React.FC = () => {
   };
 
   return (
-    <div className="max-w-7xl mx-auto space-y-8 animate-fade-in relative">
-      {/* Background decorative elements */}
-      <div className="absolute top-0 right-0 -m-8 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-accent-purple/10 rounded-full blur-3xl pointer-events-none -z-10"></div>
+    <div className="w-full space-y-6 sm:space-y-8 select-none">
+      {/* Neo-brutalist Hero Section */}
+      <div className="border-2 border-ink-black rounded-3xl bg-pure-white p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+        <div className="text-left max-w-2xl">
+          <div className="inline-flex items-center gap-2 bg-ink-black text-pure-white px-3.5 py-1 rounded-full border border-ink-black font-label-sm text-[11px] tracking-wider uppercase mb-3">
+            <Trophy className="w-3.5 h-3.5 text-primary-fixed" />
+            <span>Campus Leaderboard</span>
+          </div>
+          <h1 className="font-headline-md text-3xl sm:text-5xl uppercase tracking-tight text-ink-black m-0 leading-tight">
+            Coding Leaderboard
+          </h1>
+          <p className="font-body-md text-on-surface-variant text-sm sm:text-base mt-2 max-w-xl">
+            Celebrating excellence across competitive programming platforms. Real-time standings, verified submissions, and fast risers.
+          </p>
+        </div>
 
-      <nav className="flex items-center space-x-2 text-sm text-textMuted bg-surface/50 w-fit px-4 py-2 rounded-full border border-border">
-        <Link to="/" className="hover:text-brand-400 transition-colors">Dashboard</Link>
-        <ChevronRight className="h-4 w-4" />
-        <span className="font-semibold text-textMain flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-accent-purple"></div> Leaderboard
-        </span>
-      </nav>
-
-      {/* Hero Section */}
-      <div className="glass-card rounded-2xl p-5 md:p-8 relative overflow-hidden group border border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-r from-accent-purple/10 to-brand-500/10 opacity-50"></div>
-        <div className="relative z-10 text-center md:text-left">
-          <h1 className="text-2xl md:text-4xl font-bold bg-gradient-hero bg-clip-text text-transparent mb-2 tracking-tight">Global Leaderboard 🏆</h1>
-          <p className="text-textMuted max-w-xl mx-auto md:mx-0">Celebrating excellence in coding across all levels. Challenge yourself and climb the ranks.</p>
+        <div className="flex flex-wrap items-center gap-3">
+          <div className="border border-ink-black bg-surface rounded-2xl px-5 py-3 flex flex-col items-center min-w-[120px]">
+            <span className="font-headline-sm text-3xl text-primary-container leading-none tabular-nums">
+              {leaderboard.length}
+            </span>
+            <span className="font-label-sm text-[10px] text-secondary uppercase tracking-wider mt-1">
+              Participants
+            </span>
+          </div>
+          <div className="border border-ink-black bg-surface rounded-2xl px-5 py-3 flex flex-col items-center min-w-[120px]">
+            <span className="font-headline-sm text-3xl text-ink-black leading-none tabular-nums">
+              {leaderboard.filter(e => e.isTeamLead).length}
+            </span>
+            <span className="font-label-sm text-[10px] text-secondary uppercase tracking-wider mt-1">
+              Team Leads
+            </span>
+          </div>
         </div>
       </div>
 
-      <Card hover className="bg-gradient-to-br from-surface to-surface/90 border-t-accent-purple/30">
-        <CardHeader className="border-b border-border/50">
-          <CardTitle className="text-xl font-display flex items-center">
-            <div className="p-2 rounded-lg bg-accent-purple/10 mr-3">
-              <svg className="w-5 h-5 text-accent-purple" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" />
-              </svg>
-            </div>
-            Leaderboard Scope
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="p-4 md:p-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8">
-            <div className="space-y-6">
-              <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-3">View Level</label>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-2 border border-border/50 p-1 rounded-xl bg-surface/30">
-                  {(['global', 'department', 'section', 'team'] as const).map((level) => (
-                    <button key={level} onClick={() => setViewLevel(level)} className={`px-3 py-2 text-sm rounded-lg transition-all capitalize font-medium ${viewLevel === level ? 'bg-gradient-hero text-white shadow-lg shadow-brand-500/20' : 'text-textMuted hover:text-white hover:bg-white/5'}`}>{level === 'global' ? 'All' : level}</button>
-                  ))}
-                </div>
-              </div>
-              <div className="glass-card rounded-xl p-4 flex items-center justify-between border-brand-500/20 bg-brand-500/5">
-                <div className="flex items-center">
-                  <div className="p-2 bg-brand-500/20 rounded-lg mr-3">
-                    <Crown className="h-5 w-5 text-brand-400" />
-                  </div>
-                  <div>
-                    <span className="text-sm font-semibold text-white block">Leaders Only</span>
-                    <span className="text-xs text-textMuted hidden sm:block">Filter to show only team leads</span>
-                  </div>
-                </div>
-                <label className="relative inline-flex items-center cursor-pointer">
-                  <input type="checkbox" checked={showOnlyLeaders} onChange={(e) => setShowOnlyLeaders(e.target.checked)} className="sr-only peer" />
-                  <div className="w-11 h-6 bg-surface border border-border peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-textMuted peer-checked:after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gradient-hero shadow-inner"></div>
-                </label>
-              </div>
-            </div>
+      {/* Leaderboard Scope / Filter Bar */}
+      <div className="border-2 border-ink-black rounded-3xl bg-pure-white p-5 sm:p-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center">
+          <div className="space-y-4">
             <div>
-              <HierarchySelector hierarchy={hierarchy} selectedDept={selectedDept} selectedSection={selectedSection} selectedTeam={selectedTeam} onDepartmentChange={(deptId) => { setSelectedDept(deptId); setSelectedSection(''); setSelectedTeam(''); setViewLevel('department'); }} onSectionChange={(sectionId) => { setSelectedSection(sectionId); setSelectedTeam(''); setViewLevel('section'); }} onTeamChange={(teamId) => { setSelectedTeam(teamId); setViewLevel('team'); }} />
+              <label className="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-2">
+                Scope Filter
+              </label>
+              <div className="flex flex-wrap gap-2">
+                {(['global', 'department', 'section', 'team'] as const).map((level) => (
+                  <button 
+                    key={level} 
+                    onClick={() => setViewLevel(level)} 
+                    className={`px-4 py-1.5 rounded-full font-label-sm text-xs uppercase tracking-wider border border-ink-black transition-none ${
+                      viewLevel === level 
+                        ? 'bg-ink-black text-pure-white' 
+                        : 'bg-pure-white text-ink-black hover:bg-surface-container'
+                    }`}
+                  >
+                    {level === 'global' ? 'All System' : level}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-3 pt-2">
+              <label className="inline-flex items-center gap-2 cursor-pointer font-label-sm text-xs uppercase tracking-wider text-ink-black">
+                <input 
+                  type="checkbox" 
+                  checked={showOnlyLeaders} 
+                  onChange={(e) => setShowOnlyLeaders(e.target.checked)} 
+                  className="rounded border-ink-black text-primary-container focus:ring-0 w-4 h-4 cursor-pointer" 
+                />
+                <Crown className="w-3.5 h-3.5 text-primary-container" />
+                <span>Show Team Leads Only</span>
+              </label>
             </div>
           </div>
-        </CardContent>
-      </Card>
 
-      <div className="text-center p-6 glass-card rounded-xl border-border/50">
-        <h2 className="text-xl md:text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70">{getLevelTitle()}</h2>
-        <div className="flex items-center justify-center gap-2 mt-2">
-          <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
-          <p className="text-textMuted font-medium">{leaderboard.length} participants competing</p>
+          <div className="bg-surface p-4 rounded-2xl border border-ink-black">
+            <HierarchySelector 
+              hierarchy={hierarchy} 
+              selectedDept={selectedDept} 
+              selectedSection={selectedSection} 
+              selectedTeam={selectedTeam} 
+              onDepartmentChange={(deptId) => { setSelectedDept(deptId); setSelectedSection(''); setSelectedTeam(''); setViewLevel('department'); }} 
+              onSectionChange={(sectionId) => { setSelectedSection(sectionId); setSelectedTeam(''); setViewLevel('section'); }} 
+              onTeamChange={(teamId) => { setSelectedTeam(teamId); setViewLevel('team'); }} 
+            />
+          </div>
         </div>
       </div>
 
+      {/* Podium for Top 3 */}
       {topPerformers.length >= 3 && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-end">
            {/* Rank 2 - Silver */}
-           <div className="order-2 md:order-1 bg-surface border border-border rounded-[2rem] p-8 text-center relative overflow-hidden group hover:-translate-y-2 transition-all duration-500 shadow-xl border-t-slate-400">
-              <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                 <Medal className="w-24 h-24 text-slate-400" />
+           <div className="order-2 md:order-1 border-2 border-ink-black rounded-3xl bg-pure-white p-6 text-center relative overflow-hidden flex flex-col justify-between">
+              <div className="absolute top-4 right-4 transform rotate-2">
+                <span className="rounded-full bg-surface-container text-ink-black px-3 py-1 font-label-sm text-[10px] tracking-wider uppercase border border-ink-black">
+                  Rank 02
+                </span>
               </div>
-              <div className="w-20 h-20 bg-slate-400/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg rotate-3 group-hover:rotate-0 transition-transform">
-                 <span className="text-3xl font-black text-slate-400">🥈</span>
+              <div className="w-16 h-16 rounded-full bg-surface-tint border border-ink-black flex items-center justify-center mx-auto mb-4 font-headline-sm text-2xl text-ink-black">
+                 🥈
               </div>
-              <div className="text-4xl font-black text-slate-400 mb-2 opacity-50">#2</div>
-              <Link to={`/individual/${topPerformers[1].memberId}`} className="text-xl font-bold text-textMain hover:text-brand-500 mb-1 block transition-colors">{topPerformers[1].memberName}</Link>
-              <div className="text-xs text-textMuted uppercase font-black tracking-widest mb-4">{topPerformers[1].teamId}</div>
-              <div className="text-3xl font-black text-textMain mb-1">{topPerformers[1].totalSolved}</div>
-              <div className="text-[10px] text-textMuted uppercase font-bold tracking-widest">Total Problems</div>
+              <div>
+                <Link to={`/individual/${topPerformers[1].memberId}`} className="font-title-md text-lg font-bold text-ink-black hover:text-primary-container block uppercase tracking-tight">
+                  {topPerformers[1].memberName}
+                </Link>
+                <div className="font-label-sm text-xs text-secondary uppercase tracking-wider mt-1">
+                  {topPerformers[1].teamId} • {topPerformers[1].deptId}
+                </div>
+              </div>
+              <div className="mt-6 pt-4 border-t border-ink-black/15">
+                <div className="font-headline-lg text-4xl text-ink-black tabular-nums">
+                  {topPerformers[1].totalSolved.toLocaleString()}
+                </div>
+                <div className="font-label-sm text-[10px] text-secondary uppercase tracking-wider mt-1">
+                  Problems Solved
+                </div>
+              </div>
            </div>
 
-           {/* Rank 1 - Gold */}
-           <div className="order-1 md:order-2 bg-gradient-to-br from-brand-600/20 via-surface to-background border-2 border-yellow-500/50 rounded-[2.5rem] p-10 text-center relative overflow-hidden group hover:-translate-y-3 transition-all duration-500 shadow-2xl scale-105 z-10">
-              <div className="absolute inset-0 bg-gradient-to-t from-yellow-500/5 to-transparent"></div>
-              <div className="absolute top-0 right-0 p-6 opacity-10 group-hover:opacity-20 transition-opacity">
-                 <Crown className="w-32 h-32 text-yellow-500" />
+           {/* Rank 1 - Champion Flame */}
+           <div className="order-1 md:order-2 border-2 border-ink-black rounded-3xl bg-surface-tint p-8 text-center relative overflow-hidden shadow-md flex flex-col justify-between">
+              <div className="absolute top-4 right-4 transform -rotate-3">
+                <span className="rounded-full bg-ink-black text-pure-white px-3.5 py-1 font-label-sm text-[11px] tracking-wider uppercase border border-ink-black">
+                  Champion 01
+                </span>
               </div>
-              <div className="w-24 h-24 bg-yellow-500/20 rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-[0_0_30px_rgba(234,179,8,0.3)] -rotate-3 group-hover:rotate-0 transition-transform">
-                 <span className="text-4xl font-black text-yellow-500">🥇</span>
+              <div className="w-20 h-20 rounded-full bg-primary-container text-pure-white border-2 border-ink-black flex items-center justify-center mx-auto mb-4 font-headline-sm text-3xl">
+                 👑
               </div>
-              <div className="text-5xl font-black text-yellow-500 mb-3 drop-shadow-sm">#1</div>
-              <Link to={`/individual/${topPerformers[0].memberId}`} className="text-2xl font-black text-textMain hover:text-brand-500 mb-1 block transition-colors uppercase tracking-tight">{topPerformers[0].memberName}</Link>
-              <div className="text-sm text-yellow-500/80 uppercase font-black tracking-widest mb-6">{topPerformers[0].teamId}</div>
-              <div className="text-4xl font-black text-textMain mb-1">{topPerformers[0].totalSolved}</div>
-              <div className="text-[11px] text-textMuted uppercase font-black tracking-widest">Master Score</div>
+              <div>
+                <Link to={`/individual/${topPerformers[0].memberId}`} className="font-headline-sm text-2xl text-ink-black hover:text-primary-container block uppercase tracking-tight">
+                  {topPerformers[0].memberName}
+                </Link>
+                <div className="font-label-sm text-xs text-on-surface-variant uppercase tracking-wider mt-1">
+                  {topPerformers[0].teamId} • {topPerformers[0].deptId}
+                </div>
+              </div>
+              <div className="mt-6 pt-4 border-t border-ink-black/20">
+                <div className="font-headline-lg text-5xl sm:text-6xl text-primary-container tabular-nums">
+                  {topPerformers[0].totalSolved.toLocaleString()}
+                </div>
+                <div className="font-label-sm text-xs text-ink-black font-bold uppercase tracking-wider mt-1">
+                  Master Score
+                </div>
+              </div>
            </div>
 
            {/* Rank 3 - Bronze */}
-           <div className="order-3 bg-surface border border-border rounded-[2rem] p-8 text-center relative overflow-hidden group hover:-translate-y-2 transition-all duration-500 shadow-xl border-t-amber-600">
-              <div className="absolute top-0 right-0 p-4 opacity-5 group-hover:opacity-10 transition-opacity">
-                 <Award className="w-24 h-24 text-amber-600" />
+           <div className="order-3 border-2 border-ink-black rounded-3xl bg-pure-white p-6 text-center relative overflow-hidden flex flex-col justify-between">
+              <div className="absolute top-4 right-4 transform -rotate-2">
+                <span className="rounded-full bg-primary-fixed text-ink-black px-3 py-1 font-label-sm text-[10px] tracking-wider uppercase border border-ink-black">
+                  Rank 03
+                </span>
               </div>
-              <div className="w-20 h-20 bg-amber-600/20 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg -rotate-3 group-hover:rotate-0 transition-transform">
-                 <span className="text-3xl font-black text-amber-600">🥉</span>
+              <div className="w-16 h-16 rounded-full bg-surface-container border border-ink-black flex items-center justify-center mx-auto mb-4 font-headline-sm text-2xl text-ink-black">
+                 🥉
               </div>
-              <div className="text-4xl font-black text-amber-600 mb-2 opacity-50">#3</div>
-              <Link to={`/individual/${topPerformers[2].memberId}`} className="text-xl font-bold text-textMain hover:text-brand-500 mb-1 block transition-colors">{topPerformers[2].memberName}</Link>
-              <div className="text-xs text-textMuted uppercase font-black tracking-widest mb-4">{topPerformers[2].teamId}</div>
-              <div className="text-3xl font-black text-textMain mb-1">{topPerformers[2].totalSolved}</div>
-              <div className="text-[10px] text-textMuted uppercase font-bold tracking-widest">Total Problems</div>
+              <div>
+                <Link to={`/individual/${topPerformers[2].memberId}`} className="font-title-md text-lg font-bold text-ink-black hover:text-primary-container block uppercase tracking-tight">
+                  {topPerformers[2].memberName}
+                </Link>
+                <div className="font-label-sm text-xs text-secondary uppercase tracking-wider mt-1">
+                  {topPerformers[2].teamId} • {topPerformers[2].deptId}
+                </div>
+              </div>
+              <div className="mt-6 pt-4 border-t border-ink-black/15">
+                <div className="font-headline-lg text-4xl text-ink-black tabular-nums">
+                  {topPerformers[2].totalSolved.toLocaleString()}
+                </div>
+                <div className="font-label-sm text-[10px] text-secondary uppercase tracking-wider mt-1">
+                  Problems Solved
+                </div>
+              </div>
            </div>
         </div>
       )}
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      {/* Main Standings Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8">
         <div className="lg:col-span-2">
-          <Card className="h-full">
-            <CardHeader className="flex flex-row items-center justify-between">
-              <CardTitle className="flex items-center"><Trophy className="mr-2 h-5 w-5 text-yellow-500" /> Performance Standings</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <LeaderboardTable data={leaderboard} showTeamColumn={viewLevel !== 'team'} />
-            </CardContent>
-          </Card>
+          <div className="border-2 border-ink-black rounded-3xl bg-pure-white p-5 sm:p-6">
+            <div className="flex items-center gap-2 mb-4 pb-3 border-b border-ink-black/15">
+              <Trophy className="w-5 h-5 text-primary-container" />
+              <h3 className="font-headline-sm text-xl uppercase tracking-tight text-ink-black m-0">
+                {getLevelTitle()}
+              </h3>
+            </div>
+            <LeaderboardTable data={leaderboard} showTeamColumn={viewLevel !== 'team'} />
+          </div>
         </div>
 
-        {/* Movers Section */}
+        {/* Fastest Risers Column */}
         <div className="space-y-6">
-           <div className="bg-surface border border-border rounded-[2rem] p-8 shadow-soft relative overflow-hidden">
-              <div className="absolute top-0 right-0 p-4 opacity-5">
-                 <TrendingUp className="w-24 h-24 text-green-500" />
+           <div className="border-2 border-ink-black rounded-3xl bg-pure-white p-6">
+              <div className="flex items-center justify-between mb-4 pb-3 border-b border-ink-black/15">
+                <div className="flex items-center gap-2">
+                  <TrendingUp className="w-5 h-5 text-primary-container" />
+                  <h3 className="font-headline-sm text-xl uppercase tracking-tight text-ink-black m-0">
+                    Fastest Risers
+                  </h3>
+                </div>
+                <span className="rounded-full bg-ink-black text-pure-white px-2.5 py-0.5 font-label-sm text-[9px] uppercase tracking-wider">
+                  24h Velocity
+                </span>
               </div>
-              <h3 className="text-lg font-black text-textMain uppercase tracking-widest flex items-center gap-2 mb-6">
-                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-                 Fastest Risers
-              </h3>
-              <div className="space-y-4">
+
+              <div className="space-y-2.5">
                  {leaderboard.filter(m => (m.totalDailyIncrease || 0) > 10).slice(0, 5).map((m) => (
-                    <div key={m.memberId} className="flex items-center justify-between p-4 bg-background/50 rounded-2xl border border-border/50 group hover:border-green-500/30 transition-all">
-                       <div className="flex items-center gap-3">
-                          <div className="text-xs font-black text-green-500">+{m.totalDailyIncrease}</div>
-                          <div>
-                             <Link to={`/individual/${m.memberId}`} className="text-sm font-bold text-textMain hover:text-brand-500 transition-colors">{m.memberName}</Link>
-                             <div className="text-[10px] text-textMuted uppercase font-bold">{m.deptId}</div>
+                    <div key={m.memberId} className="flex items-center justify-between p-3 bg-surface rounded-2xl border border-ink-black">
+                       <div className="flex items-center gap-3 min-w-0">
+                          <div className="font-headline-sm text-sm text-primary-container tabular-nums shrink-0">
+                            +{m.totalDailyIncrease}
+                          </div>
+                          <div className="min-w-0 truncate">
+                             <Link to={`/individual/${m.memberId}`} className="font-title-md text-xs uppercase font-bold text-ink-black hover:text-primary-container truncate block">
+                               {m.memberName}
+                             </Link>
+                             <div className="font-label-sm text-[9px] text-secondary uppercase truncate">
+                               {m.teamId} • {m.deptId}
+                             </div>
                           </div>
                        </div>
-                       <div className="text-green-500 text-sm font-black">↑</div>
+                       <div className="w-6 h-6 rounded-full bg-primary-fixed border border-ink-black flex items-center justify-center shrink-0">
+                         <span className="text-[10px] font-bold text-ink-black">↑</span>
+                       </div>
                     </div>
                  ))}
                  {leaderboard.filter(m => (m.totalDailyIncrease || 0) > 10).length === 0 && (
-                    <div className="text-center py-8 text-textMuted text-xs font-bold uppercase tracking-widest">Awaiting daily updates...</div>
+                    <div className="text-center py-8 text-secondary font-label-sm text-xs uppercase tracking-wider">
+                      Awaiting daily delta sync...
+                    </div>
                  )}
-              </div>
-           </div>
-
-           {/* Quick Stats Summary */}
-           <div className="grid grid-cols-1 gap-4">
-              <div className="bg-surface border border-border rounded-[2rem] p-6 flex items-center gap-4 group hover:border-brand-500/30 transition-all">
-                 <div className="w-12 h-12 bg-brand-500/10 rounded-2xl flex items-center justify-center">
-                    <Users className="w-6 h-6 text-brand-500" />
-                 </div>
-                 <div>
-                    <div className="text-2xl font-black text-textMain">{leaderboard.length}</div>
-                    <div className="text-[10px] text-textMuted uppercase font-bold">Total Competing</div>
-                 </div>
-              </div>
-              <div className="bg-surface border border-border rounded-[2rem] p-6 flex items-center gap-4 group hover:border-amber-500/30 transition-all">
-                 <div className="w-12 h-12 bg-amber-500/10 rounded-2xl flex items-center justify-center">
-                    <Crown className="w-6 h-6 text-amber-500" />
-                 </div>
-                 <div>
-                    <div className="text-2xl font-black text-textMain">{leaderboard.filter(e => e.isTeamLead).length}</div>
-                    <div className="text-[10px] text-textMuted uppercase font-bold">Team Leaders</div>
-                 </div>
               </div>
            </div>
         </div>
       </div>
 
       {leaderboard.length === 0 && (
-        <Card className="border-dashed border-2 border-border/50">
-          <CardContent className="text-center py-16">
-            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Trophy className="h-10 w-10 text-textMuted opacity-20" />
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">No data found for this scope</h3>
-            <p className="text-textMuted max-w-sm mx-auto mb-8">We couldn't find any performance records matching your current filters. Try selecting a different department or view level.</p>
-            <button 
-              onClick={() => {
-                setViewLevel('global');
-                setSelectedDept('');
-                setSelectedSection('');
-                setSelectedTeam('');
-              }}
-              className="px-6 py-2.5 bg-gradient-hero text-white rounded-xl font-bold shadow-lg shadow-brand-500/20 hover:scale-105 transition-transform"
-            >
-              Reset to Global View
-            </button>
-          </CardContent>
-        </Card>
+        <div className="border-2 border-dashed border-ink-black rounded-3xl p-12 text-center bg-pure-white">
+          <div className="w-16 h-16 bg-surface-container rounded-full border border-ink-black flex items-center justify-center mx-auto mb-4">
+            <Trophy className="h-8 w-8 text-secondary" />
+          </div>
+          <h3 className="font-headline-sm text-2xl uppercase tracking-tight text-ink-black mb-2">
+            No records for this scope
+          </h3>
+          <p className="font-body-md text-secondary max-w-sm mx-auto mb-6 text-sm">
+            No student performance records matched the selected filters.
+          </p>
+          <button 
+            onClick={() => {
+              setViewLevel('global');
+              setSelectedDept('');
+              setSelectedSection('');
+              setSelectedTeam('');
+            }}
+            className="rounded-full bg-ink-black text-pure-white px-6 py-2 font-label-lg text-xs uppercase tracking-wider border border-ink-black hover:bg-primary-container transition-none"
+          >
+            Reset to Global View
+          </button>
+        </div>
       )}
     </div>
   );

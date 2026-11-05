@@ -9,23 +9,35 @@ interface DepartmentCardProps {
 }
 
 const DepartmentCard: React.FC<DepartmentCardProps> = ({ department, onClick }) => {
-  let StatusBadge = <span className="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-border text-textMuted">N/A</span>;
-  let shadowGlow = 'hover:border-border/50';
+  let StatusBadge = (
+    <span className="rounded-full bg-surface-container text-ink-black border border-ink-black px-3 py-0.5 font-label-sm text-[10px] uppercase">
+      N/A
+    </span>
+  );
 
   if (department.status === 'Elite') {
-    StatusBadge = <span className="text-[10px] uppercase tracking-widest font-black px-3 py-1 rounded-full bg-green-500/10 text-green-400 border border-green-500/30 shadow-[0_0_10px_rgba(34,197,94,0.1)]">🔥 Elite Readiness</span>;
-    shadowGlow = 'hover:border-green-500/40 hover:shadow-[0_0_30px_rgba(34,197,94,0.15)]';
+    StatusBadge = (
+      <span className="rounded-full bg-ink-black text-pure-white border border-ink-black px-3 py-0.5 font-label-sm text-[10px] uppercase tracking-wider">
+        Elite
+      </span>
+    );
   } else if (department.status === 'Good') {
-    StatusBadge = <span className="text-[10px] uppercase tracking-widest font-black px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/30 shadow-[0_0_10px_rgba(14,165,233,0.1)]">⚡ Growth Track</span>;
-    shadowGlow = 'hover:border-brand-500/40 hover:shadow-[0_0_30px_rgba(14,165,233,0.15)]';
+    StatusBadge = (
+      <span className="rounded-full bg-primary-fixed text-ink-black border border-ink-black px-3 py-0.5 font-label-sm text-[10px] uppercase tracking-wider">
+        Growth Track
+      </span>
+    );
   } else if (department.status === 'Risk') {
-    StatusBadge = <span className="text-[10px] uppercase tracking-widest font-black px-3 py-1 rounded-full bg-red-500/10 text-red-400 border border-red-500/30 shadow-[0_0_10px_rgba(239,68,68,0.1)]">⚠️ Attention</span>;
-    shadowGlow = 'hover:border-red-500/40 hover:shadow-[0_0_30px_rgba(239,68,68,0.15)]';
+    StatusBadge = (
+      <span className="rounded-full bg-error text-pure-white border border-ink-black px-3 py-0.5 font-label-sm text-[10px] uppercase tracking-wider">
+        Attention
+      </span>
+    );
   }
 
   return (
     <div 
-       className={`bg-surface border border-border rounded-2xl p-4 sm:p-5 transition-all group flex flex-col justify-between overflow-hidden relative ${shadowGlow}`}
+       className="border-2 border-ink-black rounded-3xl bg-pure-white p-5 flex flex-col justify-between select-none"
     >
       {/* Header: Identity */}
       <div 
@@ -33,67 +45,67 @@ const DepartmentCard: React.FC<DepartmentCardProps> = ({ department, onClick }) 
         className="flex justify-between items-start mb-4 cursor-pointer"
       >
         <div className="min-w-0 pr-2">
-           <h3 className="text-lg sm:text-xl font-black text-textMain tracking-tight group-hover:text-brand-500 transition-colors truncate">
+           <h3 className="font-headline-sm text-xl uppercase tracking-tight text-ink-black hover:text-primary-container truncate m-0">
               {department.deptName}
            </h3>
-           <div className="flex items-center gap-2 mt-1 text-[9px] sm:text-[10px] font-bold text-textMuted uppercase tracking-wider">
-              <span className="flex items-center gap-1 shrink-0"><Building2 className="w-3 h-3"/> {department.totalTeams}</span>
-              <span className="w-1 h-1 rounded-full bg-border shrink-0"></span>
-              <span className="flex items-center gap-1 shrink-0"><Users className="w-3 h-3"/> {department.totalMembers}</span>
+           <div className="flex items-center gap-2 mt-1 font-label-sm text-[10px] text-secondary uppercase tracking-wider">
+              <span className="flex items-center gap-1 shrink-0"><Building2 className="w-3 h-3"/> {department.totalTeams} Teams</span>
+              <span className="w-1 h-1 rounded-full bg-ink-black shrink-0"></span>
+              <span className="flex items-center gap-1 shrink-0"><Users className="w-3 h-3"/> {department.totalMembers} Students</span>
            </div>
         </div>
         <div className="flex flex-col items-end gap-1 shrink-0">
           {StatusBadge}
           {department.isImbalanced && (
-            <span className="text-[8px] uppercase font-black px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-500 border border-amber-500/20 flex items-center gap-1">
-              <AlertTriangle className="w-2.5 h-2.5" /> Gap
+            <span className="font-label-sm text-[9px] uppercase px-2 py-0.5 rounded-full bg-surface-tint text-ink-black border border-ink-black flex items-center gap-1">
+              <AlertTriangle className="w-2.5 h-2.5 text-primary-container" /> Gap
             </span>
           )}
         </div>
       </div>
 
       {/* Core Metrics Grid */}
-      <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 relative z-10">
-         <div className="bg-background border border-border rounded-xl p-3 shadow-inner text-center sm:text-left">
-            <p className="text-[9px] sm:text-[10px] text-textMuted uppercase font-bold tracking-widest mb-1">Total Solved</p>
-            <p className="text-lg sm:text-xl font-mono font-black text-brand-500">{department.totalSolved.toLocaleString()}</p>
+      <div className="grid grid-cols-2 gap-3 mb-5">
+         <div className="bg-surface border border-ink-black rounded-2xl p-3">
+            <p className="font-label-sm text-[10px] text-secondary uppercase tracking-wider mb-1">Total Solved</p>
+            <p className="font-headline-sm text-2xl text-primary-container leading-none tabular-nums">{department.totalSolved.toLocaleString()}</p>
          </div>
-         <div className="bg-background border border-border rounded-xl p-3 shadow-inner text-center sm:text-left">
-            <p className="text-[9px] sm:text-[10px] text-textMuted uppercase font-bold tracking-widest mb-1 flex items-center justify-between">
-               Avg
-               {department.trend > 0 && <span className="text-green-500 text-[9px] flex items-center shrink-0">+{department.trend}</span>}
+         <div className="bg-surface border border-ink-black rounded-2xl p-3">
+            <p className="font-label-sm text-[10px] text-secondary uppercase tracking-wider mb-1 flex items-center justify-between">
+               <span>Avg Score</span>
+               {department.trend > 0 && <span className="text-ink-black font-bold text-[9px] shrink-0">+{department.trend}</span>}
             </p>
-            <p className="text-lg sm:text-xl font-mono font-black text-textMain">{department.avgPerMember.toLocaleString()}</p>
+            <p className="font-headline-sm text-2xl text-ink-black leading-none tabular-nums">{department.avgPerMember.toLocaleString()}</p>
          </div>
       </div>
 
       {/* Visual Indicator */}
-      <div className="mb-6 bg-background/50 rounded-xl p-3 border border-border/50">
-         <p className="text-[9px] text-textMuted uppercase font-black tracking-widest mb-2 flex items-center gap-1.5"><Activity className="w-3 h-3 text-brand-500"/> Performance Velocity</p>
+      <div className="mb-5 bg-surface rounded-2xl p-3 border border-ink-black">
+         <p className="font-label-sm text-[10px] text-secondary uppercase tracking-wider mb-2 flex items-center gap-1.5">
+           <Activity className="w-3 h-3 text-primary-container"/> Performance Velocity
+         </p>
          <PerformanceBar value={department.avgPerMember} maxValue={800} />
       </div>
 
       {/* Intelligence Callouts */}
-      <div className="space-y-2 pt-4 border-t border-border">
-         <p className="text-[9px] text-brand-500 uppercase font-black tracking-widest mb-1">Department Insights</p>
-         
+      <div className="space-y-2 pt-3 border-t border-ink-black/15">
          {department.topTeam ? (
-            <Link to={`/team/${department.deptId}/${department.topTeam.sectionId}/${department.topTeam.id}`} className="flex justify-between items-center bg-green-500/5 px-3 py-2 rounded-lg border border-green-500/10 hover:bg-green-500/10 transition-colors group/callout">
-               <div className="flex items-center gap-2 min-w-0">
-                  <Crown className="w-3 h-3 text-green-500" />
-                  <span className="text-[11px] font-bold text-textMain truncate">Top: {department.topTeam.name}</span>
+            <Link to={`/team/${department.deptId}/${department.topTeam.sectionId}/${department.topTeam.id}`} className="flex justify-between items-center bg-surface px-3 py-1.5 rounded-full border border-ink-black hover:bg-surface-tint transition-none">
+               <div className="flex items-center gap-1.5 min-w-0">
+                  <Crown className="w-3 h-3 text-primary-container" />
+                  <span className="font-label-sm text-[11px] text-ink-black truncate uppercase">Top: {department.topTeam.name}</span>
                </div>
-               <span className="text-[9px] font-mono font-bold text-green-600 dark:text-green-400 shrink-0 group-hover/callout:translate-x-0.5 transition-transform">→</span>
+               <span className="font-bold text-ink-black text-xs">→</span>
             </Link>
          ) : null}
 
          {department.weakestTeam ? (
-            <Link to={`/team/${department.deptId}/${department.weakestTeam.sectionId}/${department.weakestTeam.id}`} className="flex justify-between items-center bg-red-500/5 px-3 py-2 rounded-lg border border-red-500/10 hover:bg-red-500/10 transition-colors group/callout">
-               <div className="flex items-center gap-2 min-w-0">
-                  <AlertTriangle className="w-3 h-3 text-red-500" />
-                  <span className="text-[11px] font-bold text-textMain truncate">Risk: {department.weakestTeam.name}</span>
+            <Link to={`/team/${department.deptId}/${department.weakestTeam.sectionId}/${department.weakestTeam.id}`} className="flex justify-between items-center bg-surface px-3 py-1.5 rounded-full border border-ink-black hover:bg-surface-container transition-none">
+               <div className="flex items-center gap-1.5 min-w-0">
+                  <AlertTriangle className="w-3 h-3 text-primary" />
+                  <span className="font-label-sm text-[11px] text-secondary truncate uppercase">Risk: {department.weakestTeam.name}</span>
                </div>
-               <span className="text-[9px] font-mono font-bold text-red-600 dark:text-red-400 shrink-0 group-hover/callout:translate-x-0.5 transition-transform">→</span>
+               <span className="font-bold text-secondary text-xs">→</span>
             </Link>
          ) : null}
       </div>
@@ -102,4 +114,5 @@ const DepartmentCard: React.FC<DepartmentCardProps> = ({ department, onClick }) 
 };
 
 export default DepartmentCard;
+
 

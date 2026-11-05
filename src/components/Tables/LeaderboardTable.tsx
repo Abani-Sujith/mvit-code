@@ -12,110 +12,131 @@ const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ data, showTeamColum
   const [expandedId, setExpandedId] = useState<string | null>(null);
 
   const getRankIcon = (rank: number, isTeamLead: boolean) => {
-    if (rank === 1) return <Trophy className="h-5 w-5 text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.5)]" />;
-    if (rank === 2) return <Medal className="h-5 w-5 text-slate-300 drop-shadow-[0_0_8px_rgba(203,213,225,0.5)]" />;
-    if (rank === 3) return <Award className="h-5 w-5 text-amber-500 drop-shadow-[0_0_8px_rgba(245,158,11,0.5)]" />;
-    if (isTeamLead) return <Crown className="h-4 w-4 text-yellow-500" />;
+    if (rank === 1) return <Trophy className="h-4 w-4 text-primary-container" />;
+    if (rank === 2) return <Medal className="h-4 w-4 text-secondary" />;
+    if (rank === 3) return <Award className="h-4 w-4 text-primary" />;
+    if (isTeamLead) return <Crown className="h-3.5 w-3.5 text-primary-container" />;
     return null;
   };
 
   const getRankBadge = (rank: number) => {
-    if (rank === 1) return 'bg-yellow-500/20 text-yellow-500 border-yellow-500/50 shadow-[0_0_10px_rgba(253,224,71,0.2)]';
-    if (rank === 2) return 'bg-slate-300/20 text-slate-300 border-slate-300/50 shadow-[0_0_10px_rgba(203,213,225,0.2)]';
-    if (rank === 3) return 'bg-amber-500/20 text-amber-500 border-amber-500/50 shadow-[0_0_10px_rgba(245,158,11,0.2)]';
-    return 'bg-white/5 text-textMuted border-border/50';
+    if (rank === 1) return 'bg-ink-black text-pure-white border-ink-black';
+    if (rank === 2) return 'bg-surface-container text-ink-black border-ink-black';
+    if (rank === 3) return 'bg-primary-fixed text-ink-black border-ink-black';
+    return 'bg-pure-white text-secondary border-ink-black/30';
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full select-none">
       {/* Desktop View */}
-      <div className="hidden lg:block overflow-x-auto rounded-2xl border border-border/50 bg-surface/30">
+      <div className="hidden lg:block overflow-x-auto rounded-2xl border border-ink-black bg-pure-white">
         <table className="min-w-full text-sm">
-          <thead className="bg-surface/80 backdrop-blur-md border-b border-border/50">
+          <thead className="bg-surface-tint border-b border-ink-black">
             <tr>
-              <th className="px-6 py-5 text-center font-black text-textMuted uppercase tracking-widest text-[10px] w-20">Rank</th>
-              <th className="px-6 py-5 text-left font-black text-textMuted uppercase tracking-widest text-[10px]">Member</th>
+              <th className="px-6 py-4 text-center font-label-sm uppercase tracking-wider text-xs text-ink-black w-20">Rank</th>
+              <th className="px-6 py-4 text-left font-label-sm uppercase tracking-wider text-xs text-ink-black">Student</th>
               {showTeamColumn && (
-                <th className="px-6 py-5 text-left font-black text-textMuted uppercase tracking-widest text-[10px]">Department</th>
+                <th className="px-6 py-4 text-left font-label-sm uppercase tracking-wider text-xs text-ink-black">Squad / Dept</th>
               )}
-              <th className="px-6 py-5 text-center font-black text-textMuted uppercase tracking-widest text-[10px]">Readiness</th>
-              <th className="px-6 py-5 text-right font-black text-textMuted uppercase tracking-widest text-[10px]">Score</th>
+              <th className="px-6 py-4 text-center font-label-sm uppercase tracking-wider text-xs text-ink-black">Level</th>
+              <th className="px-6 py-4 text-right font-label-sm uppercase tracking-wider text-xs text-ink-black">Problems Solved</th>
               <th className="w-10"></th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-border/50">
-            {data.map((entry) => (
+          <tbody className="divide-y divide-ink-black/10">
+            {data.map((entry, idx) => (
               <React.Fragment key={`${entry.memberId}-${entry.rank}`}>
                 <tr 
-                  className={`group transition-all hover:bg-white/[0.03] cursor-pointer ${expandedId === entry.memberId ? 'bg-white/[0.05]' : ''}`}
+                  className={`group transition-none hover:bg-surface-container cursor-pointer ${idx % 2 === 1 ? 'bg-surface/50' : 'bg-pure-white'} ${expandedId === entry.memberId ? 'bg-surface-tint/40' : ''}`}
                   onClick={() => setExpandedId(expandedId === entry.memberId ? null : entry.memberId)}
                 >
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-3.5 whitespace-nowrap">
                     <div className="flex items-center justify-center">
-                      <span className={`inline-flex items-center justify-center w-8 h-8 rounded-full text-xs font-black border ${getRankBadge(entry.rank)}`}>
+                      <span className={`inline-flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold border ${getRankBadge(entry.rank)}`}>
                         {entry.rank}
                       </span>
                     </div>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td className="px-6 py-3.5 whitespace-nowrap">
                     <div className="flex items-center space-x-3">
-                      <div className="h-8 w-8 rounded-full bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center text-[10px] font-black text-white shadow-lg">
+                      <div className="h-8 w-8 rounded-full bg-ink-black text-pure-white flex items-center justify-center text-xs font-bold border border-ink-black shrink-0">
                         {entry.memberName.substring(0, 2).toUpperCase()}
                       </div>
                       <div>
-                        <div className="flex items-center gap-2">
-                           <Link to={`/individual/${entry.memberId}`} className="text-sm font-bold text-textMain hover:text-brand-500 transition-colors" onClick={(e) => e.stopPropagation()}>{entry.memberName}</Link>
+                        <div className="flex items-center gap-1.5">
+                           <Link to={`/individual/${entry.memberId}`} className="font-title-md text-sm font-bold text-ink-black hover:text-primary-container" onClick={(e) => e.stopPropagation()}>
+                             {entry.memberName}
+                           </Link>
                            {getRankIcon(entry.rank, Boolean(entry.isTeamLead))}
                         </div>
-                        {entry.isTeamLead && <span className="text-[9px] font-black text-brand-500 uppercase tracking-tighter">Team Lead</span>}
+                        {entry.isTeamLead && (
+                          <span className="font-label-sm text-[9px] uppercase tracking-wider text-primary-container">
+                            Team Lead
+                          </span>
+                        )}
                       </div>
                     </div>
                   </td>
                   {showTeamColumn && (
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="font-bold text-textMain text-xs">{entry.teamId}</div>
-                      <div className="text-[10px] text-textMuted uppercase font-black">{entry.deptId}</div>
+                    <td className="px-6 py-3.5 whitespace-nowrap">
+                      <div className="font-bold text-ink-black text-xs uppercase">{entry.teamId}</div>
+                      <div className="font-label-sm text-[10px] text-secondary uppercase">{entry.deptId}</div>
                     </td>
                   )}
-                  <td className="px-6 py-4 whitespace-nowrap text-center">
-                    <span className={`text-[9px] font-black uppercase px-2.5 py-1 rounded-full border ${
-                      entry.benchmarkLevel === 'Advanced' ? 'bg-green-500/10 text-green-400 border-green-500/30' : 
-                      entry.benchmarkLevel === 'Intermediate' ? 'bg-blue-500/10 text-blue-400 border-blue-500/30' : 
-                      'bg-gray-500/10 text-textMuted border-border/50'
-                    }`}>
+                  <td className="px-6 py-3.5 whitespace-nowrap text-center">
+                    <span className="font-label-sm text-[10px] uppercase px-2.5 py-0.5 rounded-full border border-ink-black bg-pure-white text-ink-black">
                       {entry.benchmarkLevel}
                     </span>
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-right font-black text-white text-lg tabular-nums">
+                  <td className="px-6 py-3.5 whitespace-nowrap text-right font-headline-sm text-lg text-primary-container tabular-nums">
                     {entry.totalSolved.toLocaleString()}
                   </td>
-                  <td className="px-4 py-4 text-center">
-                    {expandedId === entry.memberId ? <ChevronUp className="w-4 h-4 text-brand-500" /> : <ChevronDown className="w-4 h-4 text-textMuted group-hover:text-white" />}
+                  <td className="px-4 py-3.5 text-center">
+                    {expandedId === entry.memberId ? <ChevronUp className="w-4 h-4 text-ink-black" /> : <ChevronDown className="w-4 h-4 text-secondary group-hover:text-ink-black" />}
                   </td>
                 </tr>
                 {expandedId === entry.memberId && (
-                  <tr className="bg-white/[0.02]">
-                    <td colSpan={showTeamColumn ? 6 : 5} className="px-12 py-6 border-l-2 border-brand-500/50">
-                      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-slide-down">
-                        <div className="bg-surface/50 p-4 rounded-2xl border border-border">
-                          <div className="text-[10px] text-textMuted uppercase font-black mb-2 flex justify-between">LeetCode <ExternalLink className="w-2.5 h-2.5 opacity-30" /></div>
-                          <div className="text-xl font-black text-white">{entry.leetcodeTotal}</div>
+                  <tr className="bg-surface">
+                    <td colSpan={showTeamColumn ? 6 : 5} className="px-8 py-5 border-l-4 border-primary-container border-b border-ink-black/20">
+                      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 animate-fade-in">
+                        <div className="bg-pure-white p-3 rounded-2xl border border-ink-black">
+                          <div className="font-label-sm text-[10px] text-secondary uppercase mb-1 flex justify-between items-center">
+                            <span>LeetCode</span>
+                            <ExternalLink className="w-2.5 h-2.5 opacity-50" />
+                          </div>
+                          <div className="font-headline-sm text-lg text-ink-black">{entry.leetcodeTotal}</div>
                         </div>
-                        <div className="bg-surface/50 p-4 rounded-2xl border border-border">
-                          <div className="text-[10px] text-textMuted uppercase font-black mb-2 flex justify-between">SkillRack <ExternalLink className="w-2.5 h-2.5 opacity-30" /></div>
-                          <div className="text-xl font-black text-white">{entry.skillrackTotal}</div>
+                        <div className="bg-pure-white p-3 rounded-2xl border border-ink-black">
+                          <div className="font-label-sm text-[10px] text-secondary uppercase mb-1 flex justify-between items-center">
+                            <span>SkillRack</span>
+                            <ExternalLink className="w-2.5 h-2.5 opacity-50" />
+                          </div>
+                          <div className="font-headline-sm text-lg text-ink-black">{entry.skillrackTotal}</div>
                         </div>
-                        <div className="bg-surface/50 p-4 rounded-2xl border border-border">
-                          <div className="text-[10px] text-textMuted uppercase font-black mb-2 flex justify-between">CodeChef <ExternalLink className="w-2.5 h-2.5 opacity-30" /></div>
-                          <div className="text-xl font-black text-white">{entry.codechefTotal}</div>
+                        <div className="bg-pure-white p-3 rounded-2xl border border-ink-black">
+                          <div className="font-label-sm text-[10px] text-secondary uppercase mb-1 flex justify-between items-center">
+                            <span>CodeChef</span>
+                            <ExternalLink className="w-2.5 h-2.5 opacity-50" />
+                          </div>
+                          <div className="font-headline-sm text-lg text-ink-black">{entry.codechefTotal}</div>
                         </div>
-                        <div className="bg-surface/50 p-4 rounded-2xl border border-border">
-                          <div className="text-[10px] text-textMuted uppercase font-black mb-2 flex justify-between">Others <ExternalLink className="w-2.5 h-2.5 opacity-30" /></div>
-                          <div className="text-xl font-black text-white">{entry.hackerrankTotal}</div>
+                        <div className="bg-pure-white p-3 rounded-2xl border border-ink-black">
+                          <div className="font-label-sm text-[10px] text-secondary uppercase mb-1 flex justify-between items-center">
+                            <span>Others</span>
+                            <ExternalLink className="w-2.5 h-2.5 opacity-50" />
+                          </div>
+                          <div className="font-headline-sm text-lg text-ink-black">{entry.hackerrankTotal}</div>
                         </div>
                       </div>
-                      <div className="mt-4 flex justify-end">
-                         <Link to={`/individual/${entry.memberId}`} className="text-[10px] font-black text-brand-500 uppercase tracking-widest hover:underline flex items-center gap-1" onClick={(e) => e.stopPropagation()}>Complete Profile Analysis <ChevronRight className="w-3 h-3" /></Link>
+                      <div className="mt-3 flex justify-end">
+                         <Link 
+                           to={`/individual/${entry.memberId}`} 
+                           className="rounded-full bg-ink-black text-pure-white px-3 py-1 font-label-sm text-[10px] uppercase tracking-wider border border-ink-black hover:bg-primary-container inline-flex items-center gap-1" 
+                           onClick={(e) => e.stopPropagation()}
+                         >
+                           <span>Full Profile</span>
+                           <ChevronRight className="w-3 h-3" />
+                         </Link>
                       </div>
                     </td>
                   </tr>
@@ -127,45 +148,51 @@ const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ data, showTeamColum
       </div>
 
       {/* Mobile View */}
-      <div className="lg:hidden space-y-4">
+      <div className="lg:hidden space-y-3">
         {data.map((entry) => (
-          <div key={`${entry.memberId}-${entry.rank}`} className="bg-surface border border-border rounded-3xl p-6 shadow-soft relative overflow-hidden group">
-            <div className={`absolute left-0 top-0 bottom-0 w-1 ${entry.rank === 1 ? 'bg-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.5)]' : entry.rank === 2 ? 'bg-slate-400' : entry.rank === 3 ? 'bg-amber-600' : 'bg-transparent'}`} />
-            
-            <div className="flex items-center justify-between mb-4">
-               <div className="flex items-center gap-4">
-                  <span className={`w-10 h-10 rounded-2xl flex items-center justify-center text-sm font-black border ${getRankBadge(entry.rank)}`}>
+          <div key={`${entry.memberId}-${entry.rank}`} className="bg-pure-white border border-ink-black rounded-2xl p-4 relative overflow-hidden">
+            <div className="flex items-center justify-between mb-3">
+               <div className="flex items-center gap-3">
+                  <span className={`w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold border ${getRankBadge(entry.rank)}`}>
                     {entry.rank}
                   </span>
                   <div>
-                    <div className="flex items-center gap-2">
-                       <Link to={`/individual/${entry.memberId}`} className="font-black text-textMain text-base">{entry.memberName}</Link>
+                    <div className="flex items-center gap-1.5">
+                       <Link to={`/individual/${entry.memberId}`} className="font-title-md font-bold text-ink-black text-sm">
+                         {entry.memberName}
+                       </Link>
                        {getRankIcon(entry.rank, Boolean(entry.isTeamLead))}
                     </div>
-                    {showTeamColumn && <div className="text-[10px] text-textMuted font-black uppercase tracking-widest mt-0.5">{entry.teamId} • {entry.deptId}</div>}
+                    {showTeamColumn && (
+                      <div className="font-label-sm text-[9px] text-secondary uppercase mt-0.5">
+                        {entry.teamId} • {entry.deptId}
+                      </div>
+                    )}
                   </div>
                </div>
                <div className="text-right">
-                  <div className="text-2xl font-black text-white leading-none tabular-nums">{entry.totalSolved.toLocaleString()}</div>
+                  <div className="font-headline-sm text-xl text-primary-container leading-none tabular-nums">
+                    {entry.totalSolved.toLocaleString()}
+                  </div>
                </div>
             </div>
             
-            <div className="grid grid-cols-4 gap-2 pt-4 border-t border-white/5">
-                <div className="text-center">
-                   <div className="text-[8px] uppercase font-black text-textMuted mb-0.5">LC</div>
-                   <div className="text-xs font-bold text-white">{entry.leetcodeTotal}</div>
+            <div className="grid grid-cols-4 gap-1.5 pt-3 border-t border-ink-black/10">
+                <div className="text-center bg-surface p-1.5 rounded-lg border border-ink-black/10">
+                   <div className="font-label-sm text-[8px] uppercase text-secondary">LC</div>
+                   <div className="font-bold text-xs text-ink-black">{entry.leetcodeTotal}</div>
                 </div>
-                <div className="text-center">
-                   <div className="text-[8px] uppercase font-black text-textMuted mb-0.5">SR</div>
-                   <div className="text-xs font-bold text-white">{entry.skillrackTotal}</div>
+                <div className="text-center bg-surface p-1.5 rounded-lg border border-ink-black/10">
+                   <div className="font-label-sm text-[8px] uppercase text-secondary">SR</div>
+                   <div className="font-bold text-xs text-ink-black">{entry.skillrackTotal}</div>
                 </div>
-                <div className="text-center">
-                   <div className="text-[8px] uppercase font-black text-textMuted mb-0.5">CC</div>
-                   <div className="text-xs font-bold text-white">{entry.codechefTotal}</div>
+                <div className="text-center bg-surface p-1.5 rounded-lg border border-ink-black/10">
+                   <div className="font-label-sm text-[8px] uppercase text-secondary">CC</div>
+                   <div className="font-bold text-xs text-ink-black">{entry.codechefTotal}</div>
                 </div>
-                <div className="text-center">
-                   <div className="text-[8px] uppercase font-black text-textMuted mb-0.5">HR</div>
-                   <div className="text-xs font-bold text-white">{entry.hackerrankTotal}</div>
+                <div className="text-center bg-surface p-1.5 rounded-lg border border-ink-black/10">
+                   <div className="font-label-sm text-[8px] uppercase text-secondary">HR</div>
+                   <div className="font-bold text-xs text-ink-black">{entry.hackerrankTotal}</div>
                 </div>
             </div>
           </div>
@@ -176,3 +203,4 @@ const LeaderboardTable: React.FC<LeaderboardTableProps> = ({ data, showTeamColum
 };
 
 export default LeaderboardTable;
+
