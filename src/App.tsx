@@ -9,7 +9,7 @@ const Dashboard = React.lazy(() => import('./pages/Dashboard/index'));
 const TeamView = React.lazy(() => import('./pages/TeamView'));
 const SectionView = React.lazy(() => import('./pages/SectionView'));
 const DepartmentView = React.lazy(() => import('./pages/DepartmentView'));
-const AllDepartments = React.lazy(() => import('./pages/AllDepartments'));
+const AllDepartments = React.lazy(() => import('./pages/AllDepartments/index'));
 const Analytics = React.lazy(() => import('./pages/Analytics'));
 const Teams = React.lazy(() => import('./pages/Teams'));
 const Leaderboard = React.lazy(() => import('./pages/Leaderboard'));
