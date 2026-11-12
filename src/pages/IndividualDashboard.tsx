@@ -123,14 +123,14 @@ const IndividualDashboard: React.FC = () => {
         <div className="absolute inset-0 bg-gradient-to-r gap-6 from-brand-500/10 to-accent-purple/10 opacity-50"></div>
         <div className="relative z-10 w-full flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">
+            <h1 className="text-3xl md:text-5xl font-display font-bold text-ink-black mb-2 tracking-tight">
               👤 {memberInfo.memberName}
             </h1>
             <p className="text-textMuted text-lg max-w-xl">Individual Performance Dashboard</p>
             <div className="flex flex-wrap gap-2 mt-4">
-              <span className="px-3 py-1 bg-surface border border-border rounded-lg text-sm font-semibold text-white">{memberInfo.teamId}</span>
-              <span className="px-3 py-1 bg-surface border border-border rounded-lg text-sm font-semibold text-white">{memberInfo.sectionId}</span>
-              <span className="px-3 py-1 bg-surface border border-border rounded-lg text-sm font-semibold text-white">{memberInfo.deptId}</span>
+              <span className="px-3 py-1 bg-surface border border-border rounded-lg text-sm font-semibold text-ink-black">{memberInfo.teamId}</span>
+              <span className="px-3 py-1 bg-surface border border-border rounded-lg text-sm font-semibold text-ink-black">{memberInfo.sectionId}</span>
+              <span className="px-3 py-1 bg-surface border border-border rounded-lg text-sm font-semibold text-ink-black">{memberInfo.deptId}</span>
             </div>
             
             <div className="flex flex-wrap gap-3 mt-4">
@@ -179,7 +179,7 @@ const IndividualDashboard: React.FC = () => {
           <div className="relative z-10 flex flex-col md:flex-row gap-6 items-start">
              <div className="bg-surface/80 border border-border/50 p-6 rounded-xl shrink-0 text-center min-w-[150px]">
                 <div className="text-xs text-indigo-300 font-semibold uppercase tracking-wider mb-2">Performance Score</div>
-                <div className="text-5xl font-black text-white">{analysis.performance_score || 0}</div>
+                <div className="text-5xl font-black text-ink-black">{analysis.performance_score || 0}</div>
                 <div className="text-xs text-textMuted mt-2 font-mono bg-black/30 p-1 rounded">Score v1</div>
                 {analysis.weekly_delta_msg && (
                   <div className={`text-xs font-bold mt-2 px-2 py-1 rounded inline-block whitespace-nowrap ${analysis.weekly_delta_msg.startsWith('+') ? 'bg-green-500/20 text-green-400' : analysis.weekly_delta_msg.startsWith('-') ? 'bg-red-500/20 text-red-400' : 'bg-gray-500/20 text-gray-400'}`}>
@@ -194,7 +194,7 @@ const IndividualDashboard: React.FC = () => {
                       <TrendingUp className="w-5 h-5" /> {analysis.level_change_msg}
                    </div>
                 )}
-                <h3 className="text-xl font-bold flex items-center gap-2 text-white"><Bot className="text-indigo-400 h-6 w-6"/> AI Mentor Assessment</h3>
+                <h3 className="text-xl font-bold flex items-center gap-2 text-ink-black"><Bot className="text-indigo-400 h-6 w-6"/> AI Mentor Assessment</h3>
                 <div className="space-y-3 font-mono text-sm">
                    {analysis.mentor_feedback ? (
                        analysis.mentor_feedback.split('\n').map((line: string, i: number) => {
@@ -265,7 +265,7 @@ const IndividualDashboard: React.FC = () => {
             </div>
             <div className="ml-5">
               <p className="text-xs font-semibold text-textMuted uppercase tracking-wider">Current Total</p>
-              <p className="text-3xl font-display font-bold text-white mt-1">{latest.totalSolved}</p>
+              <p className="text-3xl font-display font-bold text-ink-black mt-1">{latest.totalSolved}</p>
             </div>
           </div>
         </Card>
@@ -278,7 +278,7 @@ const IndividualDashboard: React.FC = () => {
             </div>
             <div className="ml-5">
               <p className="text-xs font-semibold text-textMuted uppercase tracking-wider">Total Growth</p>
-              <p className="text-3xl font-display font-bold text-white mt-1">+{totalGrowth}</p>
+              <p className="text-3xl font-display font-bold text-ink-black mt-1">+{totalGrowth}</p>
             </div>
           </div>
         </Card>
@@ -291,7 +291,7 @@ const IndividualDashboard: React.FC = () => {
             </div>
             <div className="ml-5">
               <p className="text-xs font-semibold text-textMuted uppercase tracking-wider">7-Day Consistency</p>
-              <p className="text-xl font-display font-bold text-white mt-1">{analysis?.consistency_label || "No Data"}</p>
+              <p className="text-xl font-display font-bold text-ink-black mt-1">{analysis?.consistency_label || "No Data"}</p>
             </div>
           </div>
         </Card>
@@ -304,7 +304,7 @@ const IndividualDashboard: React.FC = () => {
             </div>
             <div className="ml-5">
               <p className="text-xs font-semibold text-textMuted uppercase tracking-wider">Behavioral Integrity</p>
-              <p className="text-3xl font-display font-bold text-white mt-1">{analysis?.integrity_score || 100}%</p>
+              <p className="text-3xl font-display font-bold text-ink-black mt-1">{analysis?.integrity_score || 100}%</p>
             </div>
           </div>
         </Card>
@@ -366,9 +366,9 @@ const IndividualDashboard: React.FC = () => {
                     <Calendar className="h-5 w-5" />
                   </div>
                   <div>
-                    <div className="font-semibold text-white">{record.date}</div>
+                    <div className="font-semibold text-ink-black">{record.date}</div>
                     <div className="text-sm font-medium text-textMuted mt-0.5 flex items-center gap-1">
-                      Total: <span className="text-white">{record.totalSolved}</span>
+                      Total: <span className="text-ink-black">{record.totalSolved}</span>
                       {record.totalDailyIncrease > 0 && <span className="text-green-400 ml-1">(+{record.totalDailyIncrease})</span>}
                     </div>
                   </div>
@@ -445,7 +445,7 @@ const IndividualDashboard: React.FC = () => {
                          {task.assigned_at?.split(' ')[0] || "Just now"}
                      </span>
                    </div>
-                   <p className="text-sm text-white font-medium mb-4 line-clamp-3 leading-relaxed" title={task.description}>
+                   <p className="text-sm text-ink-black font-medium mb-4 line-clamp-3 leading-relaxed" title={task.description}>
                      {renderDescription(task.description)}
                    </p>
                    

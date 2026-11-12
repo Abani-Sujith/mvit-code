@@ -48,7 +48,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ member, rank, showTeamInfo = tr
             </div>
             <div className="flex-1 min-w-0 pr-2">
               <div className="flex items-center gap-2 overflow-hidden">
-                <h3 className="text-base sm:text-lg font-bold text-white truncate transition-colors group-hover:text-brand-400">{member.memberName}</h3>
+                <h3 className="text-base sm:text-lg font-bold text-ink-black truncate transition-colors group-hover:text-brand-400">{member.memberName}</h3>
                 {member.isTeamLead && (
                   <span className="inline-flex items-center justify-center bg-yellow-500/10 text-yellow-500 border border-yellow-500/30 px-1.5 py-0.5 rounded text-[8px] sm:text-[10px] font-bold uppercase tracking-wider shrink-0">
                     Lead
@@ -83,7 +83,7 @@ const MemberCard: React.FC<MemberCardProps> = ({ member, rank, showTeamInfo = tr
 
         <div className="grid grid-cols-2 gap-3 mb-6">
           <div className="bg-surface/50 border border-border rounded-xl p-3 text-center transition-colors group-hover:border-brand-500/20">
-            <div className="text-xl sm:text-2xl font-display font-bold text-white">{member.totalSolved}</div>
+            <div className="text-xl sm:text-2xl font-display font-bold text-ink-black">{member.totalSolved}</div>
             <div className="text-[9px] sm:text-[10px] font-semibold text-textMuted uppercase tracking-wider mt-1">Total Solved</div>
           </div>
           <div className="bg-surface/50 border border-border rounded-xl p-3 text-center transition-colors group-hover:border-brand-500/20 relative overflow-hidden">
@@ -99,24 +99,24 @@ const MemberCard: React.FC<MemberCardProps> = ({ member, rank, showTeamInfo = tr
 
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 mb-6 bg-white/5 rounded-xl p-2.5 border border-border/50 text-center text-xs">
           <div className="flex flex-col items-center justify-center">
-            <div className="font-bold text-white">{member.leetcodeTotal}</div>
+            <div className="font-bold text-ink-black">{member.leetcodeTotal}</div>
             <div className="text-textMuted text-[9px] uppercase font-semibold">LC</div>
           </div>
           <div className="flex flex-col items-center justify-center border-l border-border/50 sm:border-l sm:border-border/50">
-            <div className="font-bold text-white">{member.skillrackTotal}</div>
+            <div className="font-bold text-ink-black">{member.skillrackTotal}</div>
             <div className="text-textMuted text-[9px] uppercase font-semibold">SR</div>
           </div>
           <div className="flex flex-col items-center justify-center border-t border-border/50 pt-1 sm:pt-0 sm:border-t-0 sm:border-l">
-            <div className="font-bold text-white">{member.codechefTotal}</div>
+            <div className="font-bold text-ink-black">{member.codechefTotal}</div>
             <div className="text-textMuted text-[9px] uppercase font-semibold">CC</div>
           </div>
           <div className="flex flex-col items-center justify-center border-l border-border/50 border-t border-border/50 pt-1 sm:pt-0 sm:border-t-0">
-            <div className="font-bold text-white">{member.hackerrankTotal}</div>
+            <div className="font-bold text-ink-black">{member.hackerrankTotal}</div>
             <div className="text-textMuted text-[9px] uppercase font-semibold">HR</div>
           </div>
         </div>
 
-        <div className="w-full flex items-center justify-center bg-white/5 border border-border hover:bg-white/10 rounded-xl py-2 text-xs font-bold text-white transition-colors">
+        <div className="w-full flex items-center justify-center bg-white/5 border border-border hover:bg-white/10 rounded-xl py-2 text-xs font-bold text-ink-black transition-colors">
           <Eye className="mr-2 h-4 w-4" />
           View Complete Profile
         </div>

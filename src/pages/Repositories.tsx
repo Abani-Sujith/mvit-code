@@ -158,7 +158,7 @@ const Repositories: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-brand-500/10 opacity-50"></div>
                 <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
                     <div>
-                        <h1 className="text-3xl font-display font-bold text-white mb-2 tracking-tight flex items-center gap-3">
+                        <h1 className="text-3xl font-display font-bold text-ink-black mb-2 tracking-tight flex items-center gap-3">
                             <div className="p-2.5 rounded-xl bg-green-500/20 shadow-inner border border-green-500/30">
                                 <FolderGit2 className="h-6 w-6 text-green-400" />
                             </div>
@@ -170,15 +170,15 @@ const Repositories: React.FC = () => {
                     {/* Summary stats */}
                     <div className="flex gap-4 bg-surface/80 p-4 rounded-xl border border-border/50 backdrop-blur-sm shrink-0">
                         <div className="text-center px-4 border-r border-border/50">
-                            <div className="text-2xl font-display font-bold text-white">{summaryStats.totalTeams}</div>
+                            <div className="text-2xl font-display font-bold text-ink-black">{summaryStats.totalTeams}</div>
                             <div className="text-xs text-green-400 font-medium uppercase tracking-wider mt-1">Teams</div>
                         </div>
                         <div className="text-center px-4 border-r border-border/50">
-                            <div className="text-2xl font-display font-bold text-white">{summaryStats.totalMembers}</div>
+                            <div className="text-2xl font-display font-bold text-ink-black">{summaryStats.totalMembers}</div>
                             <div className="text-xs text-brand-400 font-medium uppercase tracking-wider mt-1">Members</div>
                         </div>
                         <div className="text-center px-4">
-                            <div className="text-2xl font-display font-bold text-white">{summaryStats.totalProblems.toLocaleString()}</div>
+                            <div className="text-2xl font-display font-bold text-ink-black">{summaryStats.totalProblems.toLocaleString()}</div>
                             <div className="text-xs text-accent-purple font-medium uppercase tracking-wider mt-1">Problems</div>
                         </div>
                     </div>
@@ -200,7 +200,7 @@ const Repositories: React.FC = () => {
                                     placeholder="Search by team, department, leader..."
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
-                                    className="pl-10 w-full px-4 py-3 bg-white/5 border border-border rounded-xl focus:ring-2 focus:ring-green-500/50 focus:border-green-500/30 text-white placeholder-textMuted/50 transition-all font-medium"
+                                    className="pl-10 w-full px-4 py-3 bg-white/5 border border-border rounded-xl focus:ring-2 focus:ring-green-500/50 focus:border-green-500/30 text-ink-black placeholder-textMuted/50 transition-all font-medium"
                                 />
                             </div>
                         </div>
@@ -208,10 +208,10 @@ const Repositories: React.FC = () => {
                             <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-2 flex items-center transition-colors group-focus-within:text-green-400">
                                 <Target className="h-3.5 w-3.5 mr-2" />Department
                             </label>
-                            <select value={selectedDept} onChange={(e) => setSelectedDept(e.target.value)} className="w-full px-4 py-3 bg-white/5 border border-border rounded-xl focus:ring-2 focus:ring-green-500/50 focus:border-green-500/30 text-white transition-all cursor-pointer">
-                                <option value="" className="bg-surface text-white">All Departments</option>
+                            <select value={selectedDept} onChange={(e) => setSelectedDept(e.target.value)} className="w-full px-4 py-3 bg-white/5 border border-border rounded-xl focus:ring-2 focus:ring-green-500/50 focus:border-green-500/30 text-ink-black transition-all cursor-pointer">
+                                <option value="" className="bg-surface text-ink-black">All Departments</option>
                                 {departments.map(id => (
-                                    <option key={id} value={id} className="bg-surface text-white">{hierarchy?.[id]?.name || id}</option>
+                                    <option key={id} value={id} className="bg-surface text-ink-black">{hierarchy?.[id]?.name || id}</option>
                                 ))}
                             </select>
                         </div>
@@ -219,10 +219,10 @@ const Repositories: React.FC = () => {
                             <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-2 flex items-center transition-colors group-focus-within:text-green-400">
                                 <BarChart3 className="h-3.5 w-3.5 mr-2" />Sort By
                             </label>
-                            <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)} className="w-full px-4 py-3 bg-white/5 border border-border rounded-xl focus:ring-2 focus:ring-green-500/50 focus:border-green-500/30 text-white transition-all cursor-pointer">
-                                <option value="total" className="bg-surface text-white">Total Problems Solved</option>
-                                <option value="avg" className="bg-surface text-white">Avg Per Member</option>
-                                <option value="members" className="bg-surface text-white">Most Members</option>
+                            <select value={sortBy} onChange={(e) => setSortBy(e.target.value as any)} className="w-full px-4 py-3 bg-white/5 border border-border rounded-xl focus:ring-2 focus:ring-green-500/50 focus:border-green-500/30 text-ink-black transition-all cursor-pointer">
+                                <option value="total" className="bg-surface text-ink-black">Total Problems Solved</option>
+                                <option value="avg" className="bg-surface text-ink-black">Avg Per Member</option>
+                                <option value="members" className="bg-surface text-ink-black">Most Members</option>
                             </select>
                         </div>
                     </div>
@@ -238,7 +238,7 @@ const Repositories: React.FC = () => {
                             <CardHeader className="border-b border-border/50 pb-4">
                                 <div className="flex items-start justify-between">
                                     <div className="flex-1 min-w-0">
-                                        <CardTitle className="text-lg font-display flex items-center text-white mb-1">
+                                        <CardTitle className="text-lg font-display flex items-center text-ink-black mb-1">
                                             <div className="p-1.5 rounded-lg bg-green-500/10 mr-2.5 shrink-0">
                                                 <FolderGit2 className="h-4 w-4 text-green-400" />
                                             </div>
@@ -251,7 +251,7 @@ const Repositories: React.FC = () => {
                                         </div>
                                     </div>
                                     <div className="text-right shrink-0 ml-4">
-                                        <div className="text-xl font-display font-bold text-white">{ws.totalProblemsSolved.toLocaleString()}</div>
+                                        <div className="text-xl font-display font-bold text-ink-black">{ws.totalProblemsSolved.toLocaleString()}</div>
                                         <div className="text-[10px] text-green-400 font-semibold uppercase tracking-wider">Problems</div>
                                     </div>
                                 </div>
@@ -261,15 +261,15 @@ const Repositories: React.FC = () => {
                                 {/* Stats Row */}
                                 <div className="grid grid-cols-3 gap-3">
                                     <div className="bg-white/5 rounded-lg p-3 text-center border border-border/30">
-                                        <div className="text-sm font-bold text-white">{ws.memberCount}</div>
+                                        <div className="text-sm font-bold text-ink-black">{ws.memberCount}</div>
                                         <div className="text-[10px] text-textMuted uppercase tracking-wider mt-0.5">Members</div>
                                     </div>
                                     <div className="bg-white/5 rounded-lg p-3 text-center border border-border/30">
-                                        <div className="text-sm font-bold text-white">{ws.avgPerMember}</div>
+                                        <div className="text-sm font-bold text-ink-black">{ws.avgPerMember}</div>
                                         <div className="text-[10px] text-textMuted uppercase tracking-wider mt-0.5">Avg/Member</div>
                                     </div>
                                     <div className="bg-white/5 rounded-lg p-3 text-center border border-border/30">
-                                        <div className="text-sm font-bold text-white truncate" title={ws.topPerformer}>{ws.topPerformer}</div>
+                                        <div className="text-sm font-bold text-ink-black truncate" title={ws.topPerformer}>{ws.topPerformer}</div>
                                         <div className="text-[10px] text-yellow-500 uppercase tracking-wider mt-0.5 flex items-center justify-center gap-0.5"><Trophy className="h-3 w-3" /> Top</div>
                                     </div>
                                 </div>
@@ -284,10 +284,10 @@ const Repositories: React.FC = () => {
                                         {bar.hr > 0 && <div className="bg-green-400 transition-all" style={{ width: `${bar.hr}%` }} title={`HackerRank: ${ws.hackerrankTotal.toLocaleString()}`}></div>}
                                     </div>
                                     <div className="flex flex-wrap gap-x-4 gap-y-1 mt-2 text-[10px]">
-                                        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500"></span><span className="text-textMuted">SR</span> <span className="text-white font-medium">{ws.skillrackTotal.toLocaleString()}</span></span>
-                                        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-yellow-500"></span><span className="text-textMuted">LC</span> <span className="text-white font-medium">{ws.leetcodeTotal.toLocaleString()}</span></span>
-                                        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-orange-500"></span><span className="text-textMuted">CC</span> <span className="text-white font-medium">{ws.codechefTotal.toLocaleString()}</span></span>
-                                        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-400"></span><span className="text-textMuted">HR</span> <span className="text-white font-medium">{ws.hackerrankTotal.toLocaleString()}</span></span>
+                                        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-emerald-500"></span><span className="text-textMuted">SR</span> <span className="text-ink-black font-medium">{ws.skillrackTotal.toLocaleString()}</span></span>
+                                        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-yellow-500"></span><span className="text-textMuted">LC</span> <span className="text-ink-black font-medium">{ws.leetcodeTotal.toLocaleString()}</span></span>
+                                        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-orange-500"></span><span className="text-textMuted">CC</span> <span className="text-ink-black font-medium">{ws.codechefTotal.toLocaleString()}</span></span>
+                                        <span className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-green-400"></span><span className="text-textMuted">HR</span> <span className="text-ink-black font-medium">{ws.hackerrankTotal.toLocaleString()}</span></span>
                                     </div>
                                 </div>
 
@@ -300,7 +300,7 @@ const Repositories: React.FC = () => {
                                                     <Crown className="h-4 w-4 text-yellow-500" />
                                                 </div>
                                                 <div className="min-w-0">
-                                                    <div className="text-xs font-bold text-white truncate">{ws.teamLeadName}</div>
+                                                    <div className="text-xs font-bold text-ink-black truncate">{ws.teamLeadName}</div>
                                                     <div className="text-[10px] text-yellow-500 uppercase tracking-wider">Team Lead</div>
                                                 </div>
                                             </>
@@ -346,7 +346,7 @@ const Repositories: React.FC = () => {
                 {filteredWorkspaces.length === 0 && (
                     <div className="col-span-full text-center py-16 bg-surface/50 border border-border/50 border-dashed rounded-xl">
                         <FolderGit2 className="h-12 w-12 text-textMuted mx-auto mb-4" />
-                        <h3 className="text-white font-bold text-lg">No Workspaces Found</h3>
+                        <h3 className="text-ink-black font-bold text-lg">No Workspaces Found</h3>
                         <p className="text-textMuted">Try adjusting your search or filters.</p>
                     </div>
                 )}

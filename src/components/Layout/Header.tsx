@@ -67,23 +67,23 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
 
   return (
     <header className="sticky top-0 left-0 w-full z-50 bg-surface border-b border-ink-black select-none">
-      <div className="relative h-20 w-full px-4 sm:px-6 lg:px-8 flex items-center justify-between max-w-7xl mx-auto">
+      <div className="h-20 w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
         {/* Left: Mobile toggle & 5 Main Nav Pills + More dropdown */}
-        <div className="flex items-center gap-2 z-10">
+        <div className="flex items-center justify-start gap-2 min-w-0">
           <button
             type="button"
             onClick={() => {
               setIsMobileMenuOpen(!isMobileMenuOpen);
               if (onMenuClick) onMenuClick();
             }}
-            className="xl:hidden p-2 rounded-full border border-ink-black bg-pure-white text-ink-black hover:bg-surface-container transition-none"
+            className="xl:hidden p-2 rounded-full border border-ink-black bg-pure-white text-ink-black hover:bg-surface-container transition-none shrink-0"
             aria-label="Toggle navigation menu"
           >
             {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
 
           {/* Desktop Navigation Pills */}
-          <nav className="hidden xl:flex items-center gap-1 bg-pure-white p-1 border border-ink-black rounded-full shadow-sm">
+          <nav className="hidden xl:flex items-center gap-1 bg-pure-white p-1 border border-ink-black rounded-full shadow-sm shrink-0">
             {mainLinks.map((link) => {
               const active = isLinkActive(link.path);
               return (
@@ -91,7 +91,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                   key={link.path}
                   to={link.path}
                   className={cn(
-                    'px-3.5 py-1.5 rounded-full font-label-lg text-xs tracking-wider transition-none',
+                    'px-3.5 py-1.5 rounded-full font-label-lg text-xs tracking-wider transition-none whitespace-nowrap',
                     active
                       ? 'bg-ink-black text-pure-white border border-ink-black'
                       : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container border border-transparent'
@@ -108,7 +108,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
                 type="button"
                 onClick={() => setIsMoreOpen(!isMoreOpen)}
                 className={cn(
-                  'px-3.5 py-1.5 rounded-full font-label-lg text-xs tracking-wider transition-none flex items-center gap-1',
+                  'px-3.5 py-1.5 rounded-full font-label-lg text-xs tracking-wider transition-none flex items-center gap-1 whitespace-nowrap',
                   isMoreActive || isMoreOpen
                     ? 'bg-ink-black text-pure-white border border-ink-black'
                     : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container border border-transparent'
@@ -144,18 +144,18 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
           </nav>
         </div>
 
-        {/* Center: Brand Wordmark (Single line, absolute centered, never clipped) */}
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-auto">
+        {/* Center: Brand Wordmark (Grid column 2, perfectly centered and never overlaps) */}
+        <div className="flex items-center justify-center text-center px-2">
           <Link
             to="/"
-            className="font-headline-md text-3xl sm:text-4xl text-primary-container tracking-tight whitespace-nowrap hover:text-primary transition-none select-none inline-block leading-none"
+            className="font-headline-md font-normal [font-synthesis:none] text-2xl sm:text-3xl md:text-4xl text-primary-container tracking-tight whitespace-nowrap hover:text-primary transition-none select-none inline-block leading-none"
           >
             MVIT CODE
           </Link>
         </div>
 
         {/* Right: Search, Add Student Action, and Profile */}
-        <div className="flex items-center gap-2 sm:gap-3 z-10">
+        <div className="flex items-center justify-end gap-2 sm:gap-3 min-w-0">
           {/* Search Trigger Button */}
           <div className="relative">
             <button

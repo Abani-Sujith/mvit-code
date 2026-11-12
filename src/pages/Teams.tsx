@@ -109,28 +109,28 @@ const Teams: React.FC = () => {
               <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-2 flex items-center transition-colors group-focus-within:text-brand-400">Search Teams</label>
               <div className="relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-textMuted" />
-                <input type="text" placeholder="Search by team, department, leader..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 w-full px-3 py-2 bg-white/5 border border-border rounded-lg focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/30 text-white placeholder-textMuted transition-all font-medium" />
+                <input type="text" placeholder="Search by team, department, leader..." value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} className="pl-10 w-full px-3 py-2 bg-white/5 border border-border rounded-lg focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/30 text-ink-black placeholder-textMuted transition-all font-medium" />
               </div>
             </div>
             <div className="group">
               <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-2 flex items-center transition-colors group-focus-within:text-brand-400"><Filter className="h-3.5 w-3.5 mr-2" />Department</label>
-              <select value={selectedDept} onChange={(e) => { setSelectedDept(e.target.value); setSelectedSection(''); }} className="w-full px-3 py-2 bg-white/5 border border-border rounded-lg focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/30 text-white transition-all cursor-pointer">
-                <option value="" className="bg-surface text-white">All Departments</option>
-                {Object.entries(hierarchy).map(([deptId, dept]) => (<option key={deptId} value={deptId} className="bg-surface text-white">{dept.name}</option>))}
+              <select value={selectedDept} onChange={(e) => { setSelectedDept(e.target.value); setSelectedSection(''); }} className="w-full px-3 py-2 bg-white/5 border border-border rounded-lg focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/30 text-ink-black transition-all cursor-pointer">
+                <option value="" className="bg-surface text-ink-black">All Departments</option>
+                {Object.entries(hierarchy).map(([deptId, dept]) => (<option key={deptId} value={deptId} className="bg-surface text-ink-black">{dept.name}</option>))}
               </select>
             </div>
             <div className="group">
               <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-2 flex items-center transition-colors group-focus-within:text-brand-400"><Filter className="h-3.5 w-3.5 mr-2" />Section</label>
-              <select value={selectedSection} onChange={(e) => setSelectedSection(e.target.value)} className="w-full px-3 py-2 bg-white/5 border border-border rounded-lg focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/30 text-white transition-all cursor-pointer" disabled={!selectedDept}>
-                <option value="" className="bg-surface text-white">All Sections</option>
-                {selectedDept && Object.entries(hierarchy[selectedDept]?.sections || {}).map(([sectionId, section]) => (<option key={sectionId} value={sectionId} className="bg-surface text-white">{section.name}</option>))}
+              <select value={selectedSection} onChange={(e) => setSelectedSection(e.target.value)} className="w-full px-3 py-2 bg-white/5 border border-border rounded-lg focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/30 text-ink-black transition-all cursor-pointer" disabled={!selectedDept}>
+                <option value="" className="bg-surface text-ink-black">All Sections</option>
+                {selectedDept && Object.entries(hierarchy[selectedDept]?.sections || {}).map(([sectionId, section]) => (<option key={sectionId} value={sectionId} className="bg-surface text-ink-black">{section.name}</option>))}
               </select>
             </div>
             <div className="group">
               <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-2 flex items-center transition-colors group-focus-within:text-brand-400"><Crown className="h-3.5 w-3.5 mr-2" />Filter</label>
               <label className="flex items-center mt-2 cursor-pointer group-hover:text-brand-400 transition-colors">
                 <input type="checkbox" checked={showOnlyLeaderTeams} onChange={(e) => setShowOnlyLeaderTeams(e.target.checked)} className="mr-2 rounded border-border bg-white/5 text-brand-500 focus:ring-brand-500/50" />
-                <span className="text-sm font-medium text-textMuted group-hover:text-white transition-colors">Teams with Leaders only</span>
+                <span className="text-sm font-medium text-textMuted group-hover:text-ink-black transition-colors">Teams with Leaders only</span>
               </label>
             </div>
           </div>
@@ -165,7 +165,7 @@ const Teams: React.FC = () => {
                         {team.teamLeadName ? <Crown className="h-6 w-6" /> : <Users className="h-6 w-6" />}
                       </div>
                       <div className="flex-1 min-w-0 pr-4">
-                        <h3 className="text-lg font-bold text-white truncate transition-colors group-hover:text-brand-400">{team.baseTeamName || team.name}</h3>
+                        <h3 className="text-lg font-bold text-ink-black truncate transition-colors group-hover:text-brand-400">{team.baseTeamName || team.name}</h3>
                         <div className="flex items-center mt-1 w-full flex-wrap gap-2 text-xs">
                           <span className={`px-2 py-0.5 rounded border inline-block ${perf.badge} font-bold uppercase tracking-wider`}>
                             #{index + 1}
@@ -188,11 +188,11 @@ const Teams: React.FC = () => {
 
                   <div className="grid grid-cols-2 gap-3 mb-6">
                     <div className="bg-surface/50 border border-border rounded-xl p-3 text-center transition-colors group-hover:border-brand-500/20">
-                      <div className="text-xl font-display font-bold text-white">{team.stats.totalProblems.toLocaleString()}</div>
+                      <div className="text-xl font-display font-bold text-ink-black">{team.stats.totalProblems.toLocaleString()}</div>
                       <div className="text-[10px] font-semibold text-textMuted uppercase tracking-wider mt-1">Total Problems</div>
                     </div>
                     <div className="bg-surface/50 border border-border rounded-xl p-3 text-center transition-colors group-hover:border-brand-500/20">
-                      <div className="text-xl font-display font-bold text-white">{team.stats.avgPerMember}</div>
+                      <div className="text-xl font-display font-bold text-ink-black">{team.stats.avgPerMember}</div>
                       <div className="text-[10px] font-semibold text-textMuted uppercase tracking-wider mt-1">Avg / Member</div>
                     </div>
                   </div>
@@ -208,7 +208,7 @@ const Teams: React.FC = () => {
                       <div className="text-xs font-semibold text-textMuted uppercase tracking-wider mb-1 flex items-center justify-end gap-1">
                         Score <Trophy className="w-3.5 h-3.5 text-yellow-500" />
                       </div>
-                      <div className="text-sm font-bold text-white">{team.stats.topPerformerScore}</div>
+                      <div className="text-sm font-bold text-ink-black">{team.stats.topPerformerScore}</div>
                     </div>
                   </div>
 
@@ -227,7 +227,7 @@ const Teams: React.FC = () => {
           <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-4 border border-border">
             <Search className="h-10 w-10 text-textMuted" />
           </div>
-          <h3 className="text-xl font-bold text-white mb-2">No teams found</h3>
+          <h3 className="text-xl font-bold text-ink-black mb-2">No teams found</h3>
           <p className="text-textMuted max-w-md mx-auto">We couldn't find any teams matching your current search criteria or filters. Try adjusting them to see more results.</p>
           <Button variant="secondary" className="mt-6" onClick={() => { setSearchTerm(''); setSelectedDept(''); setSelectedSection(''); setShowOnlyLeaderTeams(false); }}>Clear Filters</Button>
         </div>

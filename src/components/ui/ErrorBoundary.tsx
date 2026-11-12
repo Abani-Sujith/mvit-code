@@ -33,7 +33,7 @@ class ErrorBoundary extends Component<Props, State> {
                         <div className="w-16 h-16 bg-red-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-red-500/30">
                             <AlertCircle className="h-8 w-8 text-red-500" />
                         </div>
-                        <h2 className="text-xl font-bold text-white mb-2">Something went wrong</h2>
+                        <h2 className="text-xl font-bold text-ink-black mb-2">Something went wrong</h2>
                         <p className="text-red-400 text-sm mb-6 bg-red-500/5 p-3 rounded-lg border border-red-500/10 text-left font-mono overflow-auto max-h-32">
                             {this.state.error?.message || 'An unexpected error occurred while loading this view.'}
                         </p>

@@ -109,7 +109,7 @@ const ToastComponent: React.FC<ToastComponentProps> = ({ toast, onRemove }) => {
       </div>
 
       <div className="flex-1 min-w-0 pr-6">
-        <p className="text-sm font-bold text-white mb-0.5">
+        <p className="text-sm font-bold text-ink-black mb-0.5">
           {toast.title}
         </p>
         {toast.message && (
@@ -122,7 +122,7 @@ const ToastComponent: React.FC<ToastComponentProps> = ({ toast, onRemove }) => {
       <div className="absolute top-3 right-3">
         <button
           onClick={() => onRemove(toast.id)}
-          className="rounded-lg p-1 text-textMuted hover:text-white hover:bg-white/10 transition-colors focus:outline-none focus:ring-2 focus:ring-brand-500"
+          className="rounded-lg p-1 text-textMuted hover:text-ink-black hover:bg-surface-container transition-colors focus:outline-none"
         >
           <span className="sr-only">Close</span>
           <svg className="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">

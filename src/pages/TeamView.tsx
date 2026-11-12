@@ -67,7 +67,7 @@ const TeamView: React.FC = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-brand-500/10 to-accent-purple/10 opacity-50"></div>
           <div className="relative z-10 w-full flex flex-col md:flex-row md:items-center justify-between gap-6">
             <div>
-              <h1 className="text-3xl md:text-5xl font-display font-bold text-white mb-2 tracking-tight">
+              <h1 className="text-3xl md:text-5xl font-display font-bold text-ink-black mb-2 tracking-tight">
                 {teamId} Overview
               </h1>
               <p className="text-textMuted text-lg max-w-xl">In-depth performance metrics and roster for the selected team.</p>
@@ -78,11 +78,11 @@ const TeamView: React.FC = () => {
         <div className="glass-card rounded-xl border border-border/50 p-2 md:w-64 shrink-0 h-fit bg-surface/80 backdrop-blur-sm">
           <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-2 px-2 pt-2 flex items-center"><GraduationCap className="h-3.5 w-3.5 mr-1" />Batch Filter</label>
           <div className="relative">
-            <select value={selectedBatch} onChange={(e) => setSelectedBatch(e.target.value)} className="w-full appearance-none px-4 py-2.5 bg-white/5 border border-white/5 rounded-lg focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/30 text-white transition-all cursor-pointer font-medium text-sm">
-              <option value="" className="bg-surface text-white">All Batches</option>
-              <option value="2023-2027" className="bg-surface text-white">2023 - 2027</option>
-              <option value="2024-2028" className="bg-surface text-white">2024 - 2028</option>
-              <option value="2025-2029" className="bg-surface text-white">2025 - 2029</option>
+            <select value={selectedBatch} onChange={(e) => setSelectedBatch(e.target.value)} className="w-full appearance-none px-4 py-2.5 bg-white/5 border border-white/5 rounded-lg focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/30 text-ink-black transition-all cursor-pointer font-medium text-sm">
+              <option value="" className="bg-surface text-ink-black">All Batches</option>
+              <option value="2023-2027" className="bg-surface text-ink-black">2023 - 2027</option>
+              <option value="2024-2028" className="bg-surface text-ink-black">2024 - 2028</option>
+              <option value="2025-2029" className="bg-surface text-ink-black">2025 - 2029</option>
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-textMuted">
               <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>

@@ -71,7 +71,7 @@ const TeamComparisonTable: React.FC<TeamComparisonTableProps> = ({ data }) => {
             </div>
             <div>
               <p className="text-xs font-semibold text-textMuted uppercase tracking-wider mb-1">Total Teams</p>
-              <p className="text-3xl font-display font-bold text-white leading-none">{data.length}</p>
+              <p className="text-3xl font-display font-bold text-ink-black leading-none">{data.length}</p>
             </div>
           </div>
         </div>
@@ -83,7 +83,7 @@ const TeamComparisonTable: React.FC<TeamComparisonTableProps> = ({ data }) => {
             </div>
             <div>
               <p className="text-xs font-semibold text-textMuted uppercase tracking-wider mb-1">Best Team</p>
-              <p className="text-xl font-bold text-white mb-0.5 leading-none truncate max-w-[120px]" title={sortedData[0]?.teamName}>{sortedData[0]?.teamName || 'N/A'}</p>
+              <p className="text-xl font-bold text-ink-black mb-0.5 leading-none truncate max-w-[120px]" title={sortedData[0]?.teamName}>{sortedData[0]?.teamName || 'N/A'}</p>
               <p className="text-xs font-medium text-green-400">{sortedData[0]?.totalSolved.toLocaleString()} solved</p>
             </div>
           </div>
@@ -96,7 +96,7 @@ const TeamComparisonTable: React.FC<TeamComparisonTableProps> = ({ data }) => {
             </div>
             <div>
               <p className="text-xs font-semibold text-textMuted uppercase tracking-wider mb-1">Avg Performance</p>
-              <p className="text-3xl font-display font-bold text-white leading-none">{Math.round(data.reduce((s, t) => s + t.avgPerMember, 0) / data.length)}</p>
+              <p className="text-3xl font-display font-bold text-ink-black leading-none">{Math.round(data.reduce((s, t) => s + t.avgPerMember, 0) / data.length)}</p>
             </div>
           </div>
         </div>
@@ -125,14 +125,14 @@ const TeamComparisonTable: React.FC<TeamComparisonTableProps> = ({ data }) => {
             {sortedData.map((team) => (
               <tr key={team.teamName} className="hover:bg-white/5 transition-colors group">
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <div className="font-bold text-white group-hover:text-brand-400 transition-colors mb-0.5">{team.teamName}</div>
+                  <div className="font-bold text-ink-black group-hover:text-brand-400 transition-colors mb-0.5">{team.teamName}</div>
                   <div className="text-xs font-medium text-textMuted flex items-center gap-1">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500"></span> {team.sectionName}
                     <span className="mx-1 opacity-50">•</span>
                     <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span> {team.deptName}
                   </div>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap font-medium text-white">{team.members}</td>
+                <td className="px-6 py-4 whitespace-nowrap font-medium text-ink-black">{team.members}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className={`px-2.5 py-1 rounded inline-flex items-center text-xs font-bold border ${getPerformanceColor(team.totalSolved, maxTotal)}`}>
                     {team.totalSolved.toLocaleString()}
@@ -143,7 +143,7 @@ const TeamComparisonTable: React.FC<TeamComparisonTableProps> = ({ data }) => {
                     {team.avgPerMember}
                   </span>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap font-medium text-white flex items-center h-[72px]">
+                <td className="px-6 py-4 whitespace-nowrap font-medium text-ink-black flex items-center h-[72px]">
                   {team.teamLeadName ? (
                     <span className="inline-flex items-center gap-2 bg-yellow-500/10 text-yellow-500 border border-yellow-500/20 px-3 py-1.5 rounded-lg text-xs font-semibold">
                       <Crown className="h-4 w-4" /> {team.teamLeadName}

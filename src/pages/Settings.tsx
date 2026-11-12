@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import Card, { CardHeader, CardTitle, CardContent } from '../components/ui/Card';
 import { Bell, ChevronRight, Database, Palette, Download, Upload, RefreshCw, Settings as SettingsIcon, Save, RotateCcw, FileJson, CheckCircle2, Trash2 } from 'lucide-react';
 import { useToast } from '../components/ui/Toaster';
 import { useData } from '../contexts/DataContext';
 import { useTheme } from '../contexts/ThemeContext';
+import { cn } from '../utils/cn';
 
 const SETTINGS_KEY = 'coding-tracker-settings';
 
@@ -85,7 +85,7 @@ const Settings: React.FC = () => {
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
-      a.download = `coding-tracker-export-${new Date().toISOString().slice(0, 10)}.json`;
+      a.download = `mvit-code-export-${new Date().toISOString().slice(0, 10)}.json`;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -172,213 +172,339 @@ const Settings: React.FC = () => {
   };
 
   return (
-    <div className="max-w-4xl mx-auto space-y-8 animate-fade-in relative">
-      <div className="absolute top-0 right-0 -m-8 w-64 h-64 bg-brand-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
+    <div className="w-full space-y-6 sm:space-y-8 select-none">
       {/* Hidden file input for import */}
       <input type="file" ref={fileInputRef} onChange={handleFileSelected} accept=".json" className="hidden" />
 
-      <nav className="flex items-center space-x-2 text-sm text-textMuted bg-surface/50 w-fit px-4 py-2 rounded-full border border-border">
-        <Link to="/" className="hover:text-brand-400 transition-colors">Dashboard</Link>
-        <ChevronRight className="h-4 w-4" />
-        <span className="font-semibold text-textMain flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-slate-400"></div> Settings
+      {/* Breadcrumb Navigation */}
+      <nav className="flex items-center space-x-2 text-xs font-label-sm uppercase tracking-wider text-secondary bg-pure-white w-fit px-4 py-1.5 rounded-full border border-ink-black">
+        <Link to="/" className="hover:text-primary-container transition-none">Dashboard</Link>
+        <ChevronRight className="h-3.5 w-3.5 text-secondary" />
+        <span className="font-bold text-ink-black flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-primary-container"></span>
+          Settings
         </span>
       </nav>
 
-      <div className="glass-card rounded-2xl p-8 relative overflow-hidden group border border-white/5">
-        <div className="absolute inset-0 bg-gradient-to-r from-slate-500/10 to-brand-500/10 opacity-50"></div>
-        <div className="relative z-10">
-          <h1 className="text-3xl font-display font-bold text-white mb-2 tracking-tight flex items-center gap-3">
-            <div className="p-2.5 rounded-xl bg-slate-500/20 shadow-inner border border-slate-500/30">
-              <SettingsIcon className="h-6 w-6 text-slate-400" />
-            </div>
+      {/* Header Banner */}
+      <div className="border-2 border-ink-black rounded-3xl bg-pure-white p-6 sm:p-8 flex flex-col md:flex-row md:items-center justify-between gap-6 relative overflow-hidden">
+        <div className="text-left max-w-2xl">
+          <div className="inline-flex items-center gap-2 bg-ink-black text-pure-white px-3.5 py-1 rounded-full border border-ink-black font-label-sm text-[11px] tracking-wider uppercase mb-3">
+            <SettingsIcon className="w-3.5 h-3.5 text-primary-fixed" />
+            <span>System Configuration</span>
+          </div>
+          <h1 className="font-headline-md font-normal [font-synthesis:none] text-3xl sm:text-5xl uppercase tracking-tight text-ink-black m-0 leading-tight">
             Application Settings
           </h1>
-          <p className="text-textMuted text-lg max-w-xl ml-14">Configure your Multi-Team Coding Tracker preferences, appearance, and data management options.</p>
+          <p className="font-body-md text-ink-black text-sm sm:text-base mt-2 max-w-xl">
+            Configure your MVIT Code preferences, appearance, and data management options.
+          </p>
         </div>
       </div>
 
-      {/* ── Notifications ── */}
-      <Card hover className="bg-gradient-to-br from-surface to-surface/90 border-t-amber-500/30">
-        <CardHeader className="border-b border-border/50 pb-4">
-          <CardTitle className="text-xl font-display flex items-center">
-            <div className="p-2 rounded-lg bg-amber-500/10 mr-3">
-              <Bell className="h-5 w-5 text-amber-500" />
-            </div>
+      {/* ── Notifications Card ── */}
+      <div className="border-2 border-ink-black rounded-3xl bg-pure-white p-6 sm:p-8">
+        <div className="flex items-center gap-2.5 mb-6 pb-4 border-b border-ink-black">
+          <Bell className="h-5 w-5 text-ink-black" />
+          <h2 className="font-headline-sm font-normal [font-synthesis:none] text-2xl uppercase tracking-tight text-ink-black m-0">
             Notification Preferences
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="pt-6">
-          <div className="space-y-3">
-            {Object.entries(settings.notifications).map(([key, value]) => (
-              <div key={key} className="flex items-center justify-between p-4 bg-surface/50 border border-border/50 rounded-xl hover:bg-white/5 transition-colors group cursor-pointer" onClick={() => handleNotificationChange(key as keyof AppSettings['notifications'])}>
-                <div>
-                  <h3 className="font-semibold text-white capitalize group-hover:text-amber-400 transition-colors">{key.replace(/([A-Z])/g, ' $1').toLowerCase()}</h3>
-                  <p className="text-sm text-textMuted mt-1">
-                    {key === 'dailyUpdates' && 'Receive daily performance summaries'}
-                    {key === 'weeklyReports' && 'Get weekly team performance reports'}
-                    {key === 'achievementAlerts' && 'Notifications for new achievements'}
-                    {key === 'systemNotifications' && 'System maintenance and updates'}
-                  </p>
-                </div>
-                <button
-                  onClick={(e) => { e.stopPropagation(); handleNotificationChange(key as keyof AppSettings['notifications']); }}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:ring-offset-2 focus:ring-offset-surface ${value ? 'bg-amber-500' : 'bg-white/10'}`}
-                >
-                  <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${value ? 'translate-x-6' : 'translate-x-1 shadow-sm'}`} />
-                </button>
-              </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+          </h2>
+        </div>
 
-      {/* ── Appearance ── */}
-      <Card hover className="bg-gradient-to-br from-surface to-surface/90 border-t-purple-500/30">
-        <CardHeader className="border-b border-border/50 pb-4">
-          <CardTitle className="text-xl font-display flex items-center">
-            <div className="p-2 rounded-lg bg-purple-500/10 mr-3">
-              <Palette className="h-5 w-5 text-purple-500" />
+        <div className="space-y-3">
+          {Object.entries(settings.notifications).map(([key, value]) => (
+            <div
+              key={key}
+              onClick={() => handleNotificationChange(key as keyof AppSettings['notifications'])}
+              className="flex items-center justify-between p-4 bg-surface border border-ink-black rounded-2xl hover:bg-surface-container transition-none cursor-pointer"
+            >
+              <div>
+                <h3 className="font-title-md text-base uppercase font-bold text-ink-black m-0">
+                  {key.replace(/([A-Z])/g, ' $1').toLowerCase()}
+                </h3>
+                <p className="font-body-md text-xs text-ink-black mt-1">
+                  {key === 'dailyUpdates' && 'Receive daily performance summaries'}
+                  {key === 'weeklyReports' && 'Get weekly team performance reports'}
+                  {key === 'achievementAlerts' && 'Notifications for new achievements'}
+                  {key === 'systemNotifications' && 'System maintenance and updates'}
+                </p>
+              </div>
+
+              {/* Pill Toggle with black border and accent color */}
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleNotificationChange(key as keyof AppSettings['notifications']);
+                }}
+                className={cn(
+                  'relative inline-flex h-6 w-11 items-center rounded-full border border-ink-black transition-none focus:outline-none shrink-0',
+                  value ? 'bg-primary-container' : 'bg-surface-container'
+                )}
+                aria-label={`Toggle ${key}`}
+              >
+                <span
+                  className={cn(
+                    'inline-block h-4 w-4 transform rounded-full border border-ink-black bg-pure-white transition-transform',
+                    value ? 'translate-x-6' : 'translate-x-0.5'
+                  )}
+                />
+              </button>
             </div>
+          ))}
+        </div>
+      </div>
+
+      {/* ── Appearance Card ── */}
+      <div className="border-2 border-ink-black rounded-3xl bg-pure-white p-6 sm:p-8">
+        <div className="flex items-center gap-2.5 mb-6 pb-4 border-b border-ink-black">
+          <Palette className="h-5 w-5 text-ink-black" />
+          <h2 className="font-headline-sm font-normal [font-synthesis:none] text-2xl uppercase tracking-tight text-ink-black m-0">
             Appearance
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="pt-6">
-          <div className="space-y-4">
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-3">Theme Preference</label>
-              <div className="grid grid-cols-3 gap-3">
-                {(['light', 'dark', 'auto'] as const).map((themeOption) => (
-                  <button key={themeOption} onClick={() => setAppTheme(themeOption)} className={`p-4 text-sm font-semibold rounded-xl border transition-all capitalize flex flex-col items-center justify-center gap-2 ${appTheme === themeOption ? 'bg-purple-500/20 text-purple-400 border-purple-500/50 shadow-inner' : 'bg-surface/50 text-textMuted border-border/50 hover:bg-white/5 hover:text-white'}`}>
-                    <div className={`w-4 h-4 rounded-full border-2 ${appTheme === themeOption ? 'border-purple-400 bg-purple-400' : 'border-textMuted bg-transparent'}`}></div>
-                    {themeOption}
+          </h2>
+        </div>
+
+        <div className="space-y-4">
+          <div>
+            <label className="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-3">
+              Theme Preference
+            </label>
+            <div className="grid grid-cols-3 gap-3 max-w-md">
+              {(['light', 'dark', 'auto'] as const).map((themeOption) => {
+                const active = appTheme === themeOption;
+                return (
+                  <button
+                    key={themeOption}
+                    type="button"
+                    onClick={() => setAppTheme(themeOption)}
+                    className={cn(
+                      'py-2.5 px-4 rounded-full border border-ink-black font-label-lg text-xs uppercase tracking-wider transition-none flex items-center justify-center gap-2',
+                      active
+                        ? 'bg-ink-black text-pure-white'
+                        : 'bg-surface text-ink-black hover:bg-surface-container'
+                    )}
+                  >
+                    <span
+                      className={cn(
+                        'w-2 h-2 rounded-full border border-ink-black',
+                        active ? 'bg-primary-container' : 'bg-transparent'
+                      )}
+                    />
+                    <span>{themeOption}</span>
                   </button>
-                ))}
-              </div>
-              <p className="text-sm text-textMuted mt-3 flex items-center gap-2">
-                <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div> Currently using <span className="text-white font-medium capitalize">{appTheme}</span> theme
-              </p>
+                );
+              })}
             </div>
+            <p className="font-body-md text-xs text-ink-black mt-3 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary-container"></span>
+              Currently using <span className="font-bold uppercase">{appTheme}</span> theme
+            </p>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* ── Data Management ── */}
-      <Card hover className="bg-gradient-to-br from-surface to-surface/90 border-t-blue-500/30">
-        <CardHeader className="border-b border-border/50 pb-4">
-          <CardTitle className="text-xl font-display flex items-center">
-            <div className="p-2 rounded-lg bg-blue-500/10 mr-3">
-              <Database className="h-5 w-5 text-blue-500" />
-            </div>
+      {/* ── Data Management Card ── */}
+      <div className="border-2 border-ink-black rounded-3xl bg-pure-white p-6 sm:p-8">
+        <div className="flex items-center gap-2.5 mb-6 pb-4 border-b border-ink-black">
+          <Database className="h-5 w-5 text-ink-black" />
+          <h2 className="font-headline-sm font-normal [font-synthesis:none] text-2xl uppercase tracking-tight text-ink-black m-0">
             Data Management
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="pt-6">
-          <div className="space-y-6">
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-3">Auto-Refresh Interval</label>
-              <div className="relative">
-                <select value={settings.refreshInterval} onChange={(e) => setSettings(prev => ({ ...prev, refreshInterval: e.target.value }))} className="w-full appearance-none px-4 py-3 bg-white/5 border border-border rounded-xl focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/30 text-white transition-all cursor-pointer font-medium">
-                  <option value="15" className="bg-surface text-white">15 minutes</option>
-                  <option value="30" className="bg-surface text-white">30 minutes</option>
-                  <option value="60" className="bg-surface text-white">1 hour</option>
-                  <option value="180" className="bg-surface text-white">3 hours</option>
-                  <option value="0" className="bg-surface text-white">Disabled</option>
-                </select>
-                <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-textMuted">
-                  <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-                </div>
+          </h2>
+        </div>
+
+        <div className="space-y-6">
+          <div>
+            <label className="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-2">
+              Auto-Refresh Interval
+            </label>
+            <div className="relative max-w-xs">
+              <select
+                value={settings.refreshInterval}
+                onChange={(e) => setSettings(prev => ({ ...prev, refreshInterval: e.target.value }))}
+                className="w-full appearance-none rounded-full border border-ink-black px-4 py-2 bg-surface text-ink-black font-label-sm text-xs uppercase tracking-wider focus:outline-none focus:border-primary-container cursor-pointer"
+              >
+                <option value="15">15 minutes</option>
+                <option value="30">30 minutes</option>
+                <option value="60">1 hour</option>
+                <option value="180">3 hours</option>
+                <option value="0">Disabled</option>
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-ink-black">
+                <ChevronRight className="h-3.5 w-3.5 rotate-90" />
               </div>
             </div>
+          </div>
 
-            <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-3">Data Operations</label>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3">
-                <button onClick={handleExportData} className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-green-500/10 text-green-400 border border-green-500/20 hover:bg-green-500/20 hover:text-green-300 transition-all font-semibold text-sm">
-                  <Download className="h-4 w-4" />Export Data
-                </button>
-                <button onClick={handleImportData} className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-blue-500/10 text-blue-400 border border-blue-500/20 hover:bg-blue-500/20 hover:text-blue-300 transition-all font-semibold text-sm">
-                  <Upload className="h-4 w-4" />Import Data
-                </button>
-                <button onClick={handleRefreshData} className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-brand-500/10 text-brand-400 border border-brand-500/20 hover:bg-brand-500/20 hover:text-brand-300 transition-all font-semibold text-sm">
-                  <RefreshCw className="h-4 w-4" />Refresh Data
-                </button>
-                <button onClick={handleClearCache} className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-red-500/10 text-red-400 border border-red-500/20 hover:bg-red-500/20 hover:text-red-300 transition-all font-semibold text-sm">
-                  <Trash2 className="h-4 w-4" />Clear Cache
-                </button>
-              </div>
+          <div>
+            <label className="block font-label-sm text-xs uppercase tracking-wider text-secondary mb-3">
+              Data Operations
+            </label>
+            <div className="flex flex-wrap gap-2.5">
+              <button
+                type="button"
+                onClick={handleExportData}
+                className="rounded-full border border-ink-black px-4 py-2 bg-pure-white text-ink-black hover:bg-surface-container font-label-lg text-xs uppercase tracking-wider transition-none flex items-center gap-2"
+              >
+                <Download className="h-3.5 w-3.5 text-primary-container" />
+                <span>Export Data</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleImportData}
+                className="rounded-full border border-ink-black px-4 py-2 bg-pure-white text-ink-black hover:bg-surface-container font-label-lg text-xs uppercase tracking-wider transition-none flex items-center gap-2"
+              >
+                <Upload className="h-3.5 w-3.5 text-ink-black" />
+                <span>Import Data</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleRefreshData}
+                className="rounded-full border border-ink-black px-4 py-2 bg-pure-white text-ink-black hover:bg-surface-container font-label-lg text-xs uppercase tracking-wider transition-none flex items-center gap-2"
+              >
+                <RefreshCw className="h-3.5 w-3.5 text-primary-container" />
+                <span>Refresh Data</span>
+              </button>
+              <button
+                type="button"
+                onClick={handleClearCache}
+                className="rounded-full border border-ink-black px-4 py-2 bg-pure-white text-ink-black hover:bg-surface-container font-label-lg text-xs uppercase tracking-wider transition-none flex items-center gap-2"
+              >
+                <Trash2 className="h-3.5 w-3.5 text-error" />
+                <span>Clear Cache</span>
+              </button>
             </div>
+          </div>
 
-            {/* Data Stats */}
-            <div className="bg-surface/50 border border-border/50 rounded-xl p-4">
-              <p className="text-xs font-semibold uppercase tracking-wider text-textMuted mb-3 flex items-center gap-2"><FileJson className="h-3.5 w-3.5" /> Current Data Summary</p>
-              <div className="grid grid-cols-3 gap-4">
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">{data?.length?.toLocaleString() || 0}</div>
-                  <div className="text-[10px] text-textMuted uppercase tracking-wider">Total Records</div>
+          {/* Data Stats */}
+          <div className="bg-surface border border-ink-black rounded-2xl p-4">
+            <p className="font-label-sm text-xs uppercase tracking-wider text-secondary mb-3 flex items-center gap-2">
+              <FileJson className="h-3.5 w-3.5 text-primary-container" />
+              <span>Current Data Summary</span>
+            </p>
+            <div className="grid grid-cols-3 gap-4">
+              <div className="text-center">
+                <div className="font-headline-sm text-2xl text-primary-container tabular-nums">
+                  {data?.length?.toLocaleString() || 0}
                 </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">{hierarchy ? Object.keys(hierarchy).length : 0}</div>
-                  <div className="text-[10px] text-textMuted uppercase tracking-wider">Departments</div>
+                <div className="font-label-sm text-[10px] text-secondary uppercase tracking-wider mt-1">
+                  Total Records
                 </div>
-                <div className="text-center">
-                  <div className="text-lg font-bold text-white">{new Set((data || []).map(d => d?.memberId).filter(Boolean)).size}</div>
-                  <div className="text-[10px] text-textMuted uppercase tracking-wider">Unique Members</div>
+              </div>
+              <div className="text-center">
+                <div className="font-headline-sm text-2xl text-ink-black tabular-nums">
+                  {hierarchy ? Object.keys(hierarchy).length : 0}
+                </div>
+                <div className="font-label-sm text-[10px] text-secondary uppercase tracking-wider mt-1">
+                  Departments
+                </div>
+              </div>
+              <div className="text-center">
+                <div className="font-headline-sm text-2xl text-ink-black tabular-nums">
+                  {new Set((data || []).map(d => d?.memberId).filter(Boolean)).size}
+                </div>
+                <div className="font-label-sm text-[10px] text-secondary uppercase tracking-wider mt-1">
+                  Unique Members
                 </div>
               </div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
 
-      {/* ── System Information ── */}
-      <Card hover className="bg-gradient-to-br from-surface to-surface/90 border-t-green-500/30">
-        <CardHeader className="border-b border-border/50 pb-4">
-          <CardTitle className="text-xl font-display flex items-center">
-            <div className="p-2 rounded-lg bg-green-500/10 mr-3">
-              <CheckCircle2 className="w-5 h-5 text-green-500" />
-            </div>
+      {/* ── System Information Card ── */}
+      <div className="border-2 border-ink-black rounded-3xl bg-pure-white p-6 sm:p-8">
+        <div className="flex items-center gap-2.5 mb-6 pb-4 border-b border-ink-black">
+          <CheckCircle2 className="h-5 w-5 text-ink-black" />
+          <h2 className="font-headline-sm font-normal [font-synthesis:none] text-2xl uppercase tracking-tight text-ink-black m-0">
             System Information
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="pt-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div className="bg-surface/50 border border-border/50 rounded-xl p-5 relative overflow-hidden">
-              <h3 className="font-semibold text-white mb-4 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-green-500"></div> Application</h3>
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between items-center"><span className="text-textMuted uppercase tracking-wider text-xs font-semibold">Version</span><span className="font-medium text-white bg-white/5 px-2 py-0.5 rounded border border-border/50">v1.2.0</span></div>
-                <div className="flex justify-between items-center pt-2 border-t border-border/50"><span className="text-textMuted uppercase tracking-wider text-xs font-semibold">Build</span><span className="font-medium text-white">React + TypeScript</span></div>
-                <div className="flex justify-between items-center pt-2 border-t border-border/50"><span className="text-textMuted uppercase tracking-wider text-xs font-semibold">Last Updated</span><span className="font-medium text-white">{new Date().toLocaleDateString()}</span></div>
+          </h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="bg-surface border border-ink-black rounded-2xl p-5">
+            <h3 className="font-title-md text-sm uppercase font-bold text-ink-black mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary-container"></span>
+              Application
+            </h3>
+            <div className="space-y-3 font-body-md text-xs text-ink-black">
+              <div className="flex justify-between items-center">
+                <span className="font-label-sm uppercase tracking-wider text-secondary">Version</span>
+                <span className="font-bold px-2 py-0.5 rounded-full border border-ink-black bg-pure-white">v1.2.0</span>
               </div>
-            </div>
-            <div className="bg-surface/50 border border-border/50 rounded-xl p-5 relative overflow-hidden">
-              <h3 className="font-semibold text-white mb-4 flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-brand-500"></div> Backend</h3>
-              <div className="space-y-3 text-sm">
-                <div className="flex justify-between items-center"><span className="text-textMuted uppercase tracking-wider text-xs font-semibold">Database</span><span className="font-medium text-white">Firebase Firestore</span></div>
-                <div className="flex justify-between items-center pt-2 border-t border-border/50"><span className="text-textMuted uppercase tracking-wider text-xs font-semibold">Hosting</span><span className="font-medium text-white flex items-center gap-1"><svg viewBox="0 0 76 65" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-3 h-3"><path d="M37.5274 0L75.0548 65H0L37.5274 0Z" fill="#ffffff" /></svg> Vercel</span></div>
-                <div className="flex justify-between items-center pt-2 border-t border-border/50"><span className="text-textMuted uppercase tracking-wider text-xs font-semibold">Status</span><span className="text-green-400 font-semibold flex items-center gap-1.5"><div className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse"></div> Connected</span></div>
+              <div className="flex justify-between items-center pt-2 border-t border-ink-black/15">
+                <span className="font-label-sm uppercase tracking-wider text-secondary">Build</span>
+                <span className="font-bold">React + TypeScript</span>
+              </div>
+              <div className="flex justify-between items-center pt-2 border-t border-ink-black/15">
+                <span className="font-label-sm uppercase tracking-wider text-secondary">Last Updated</span>
+                <span className="font-bold">{new Date().toLocaleDateString()}</span>
               </div>
             </div>
           </div>
-        </CardContent>
-      </Card>
+
+          <div className="bg-surface border border-ink-black rounded-2xl p-5">
+            <h3 className="font-title-md text-sm uppercase font-bold text-ink-black mb-4 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-ink-black"></span>
+              Backend
+            </h3>
+            <div className="space-y-3 font-body-md text-xs text-ink-black">
+              <div className="flex justify-between items-center">
+                <span className="font-label-sm uppercase tracking-wider text-secondary">Database</span>
+                <span className="font-bold">Firebase Firestore</span>
+              </div>
+              <div className="flex justify-between items-center pt-2 border-t border-ink-black/15">
+                <span className="font-label-sm uppercase tracking-wider text-secondary">Hosting</span>
+                <span className="font-bold">Vercel</span>
+              </div>
+              <div className="flex justify-between items-center pt-2 border-t border-ink-black/15">
+                <span className="font-label-sm uppercase tracking-wider text-secondary">Status</span>
+                <span className="font-bold flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-primary-container"></span>
+                  Connected
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
       {/* ── Save / Reset Footer ── */}
-      <div className="flex items-center justify-between pt-4 pb-8 border-t border-border/50">
+      <div className="border-t border-ink-black pt-5 pb-8 flex items-center justify-between flex-wrap gap-4">
         <div>
-          {hasChanges && (
-            <span className="text-sm text-amber-400 flex items-center gap-2 animate-pulse">
-              <div className="w-2 h-2 rounded-full bg-amber-400"></div> You have unsaved changes
+          {hasChanges ? (
+            <span className="font-label-sm text-xs uppercase tracking-wider text-primary-container font-bold flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+              You have unsaved changes
+            </span>
+          ) : (
+            <span className="font-label-sm text-xs uppercase tracking-wider text-secondary">
+              All settings are saved
             </span>
           )}
         </div>
-        <div className="flex space-x-3">
-          <button onClick={handleResetDefaults} className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-white/5 text-textMuted border border-border/50 hover:bg-white/10 hover:text-white transition-all font-semibold text-sm">
-            <RotateCcw className="h-4 w-4" />Reset Defaults
+
+        <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={handleResetDefaults}
+            className="rounded-full border border-ink-black px-5 py-2 font-label-lg text-xs uppercase tracking-wider bg-pure-white text-ink-black hover:bg-surface-container transition-none flex items-center gap-2"
+          >
+            <RotateCcw className="h-3.5 w-3.5" />
+            <span>Reset Defaults</span>
           </button>
-          <button onClick={handleSaveSettings} className={`flex items-center gap-2 px-6 py-2.5 rounded-xl font-semibold text-sm transition-all ${hasChanges ? 'bg-gradient-hero text-white shadow-lg shadow-brand-500/25 hover:shadow-brand-500/40' : 'bg-brand-500/20 text-brand-400 border border-brand-500/30'}`}>
-            <Save className="h-4 w-4" />Save Changes
+          <button
+            type="button"
+            onClick={handleSaveSettings}
+            className={cn(
+              'rounded-full border border-ink-black px-6 py-2 font-label-lg text-xs uppercase tracking-wider transition-none flex items-center gap-2',
+              hasChanges
+                ? 'bg-ink-black text-pure-white hover:bg-primary-container'
+                : 'bg-surface-container text-secondary cursor-not-allowed'
+            )}
+            disabled={!hasChanges}
+          >
+            <Save className="h-3.5 w-3.5" />
+            <span>Save Changes</span>
           </button>
         </div>
       </div>

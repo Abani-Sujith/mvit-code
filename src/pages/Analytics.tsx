@@ -168,7 +168,7 @@ const Analytics: React.FC = () => {
             </div>
             <div className="ml-5">
               <p className="text-xs font-semibold text-textMuted uppercase tracking-wider">Active Members</p>
-              <p className="text-3xl font-display font-bold text-white mt-1">{stats.totalMembers}</p>
+              <p className="text-3xl font-display font-bold text-ink-black mt-1">{stats.totalMembers}</p>
             </div>
           </div>
         </Card>
@@ -181,7 +181,7 @@ const Analytics: React.FC = () => {
             </div>
             <div className="ml-5">
               <p className="text-xs font-semibold text-textMuted uppercase tracking-wider">Total Problems</p>
-              <p className="text-3xl font-display font-bold text-white mt-1">{stats.totalProblems.toLocaleString()}</p>
+              <p className="text-3xl font-display font-bold text-ink-black mt-1">{stats.totalProblems.toLocaleString()}</p>
             </div>
           </div>
         </Card>
@@ -194,7 +194,7 @@ const Analytics: React.FC = () => {
             </div>
             <div className="ml-5">
               <p className="text-xs font-semibold text-textMuted uppercase tracking-wider">Average Score</p>
-              <p className="text-3xl font-display font-bold text-white mt-1">{stats.avgPerMember}</p>
+              <p className="text-3xl font-display font-bold text-ink-black mt-1">{stats.avgPerMember}</p>
             </div>
           </div>
         </Card>
@@ -208,7 +208,7 @@ const Analytics: React.FC = () => {
             <div className="ml-5">
               <p className="text-xs font-semibold text-textMuted uppercase tracking-wider">Top Score</p>
               <div className="flex items-end gap-2 mt-1">
-                <p className="text-3xl font-display font-bold text-white leading-none">{stats.topPerformerScore}</p>
+                <p className="text-3xl font-display font-bold text-ink-black leading-none">{stats.topPerformerScore}</p>
               </div>
               <p className="text-xs text-yellow-500/80 font-medium truncate max-w-[120px] mt-1 pr-2">{stats.topPerformer}</p>
             </div>
@@ -278,7 +278,7 @@ const Analytics: React.FC = () => {
               </ResponsiveContainer>
               {/* Center metric */}
               <div className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-                <span className="text-3xl font-display font-bold text-white">{stats.totalProblems.toLocaleString()}</span>
+                <span className="text-3xl font-display font-bold text-ink-black">{stats.totalProblems.toLocaleString()}</span>
                 <span className="text-xs text-textMuted uppercase tracking-wider font-semibold">Total</span>
               </div>
             </div>
@@ -323,7 +323,7 @@ const Analytics: React.FC = () => {
           <div className="w-12 h-12 rounded-full bg-brand-500/10 flex items-center justify-center mb-4 text-brand-400 group-hover:scale-110 group-hover:bg-brand-500/20 transition-all">
             <Target className="w-6 h-6" />
           </div>
-          <div className="text-3xl font-display font-bold text-white mb-1">
+          <div className="text-3xl font-display font-bold text-ink-black mb-1">
             {Math.round(stats.totalProblems / Math.max(stats.totalMembers, 1))}
           </div>
           <div className="text-xs font-semibold text-textMuted uppercase tracking-wider">Problems / Member</div>
@@ -333,7 +333,7 @@ const Analytics: React.FC = () => {
           <div className="w-12 h-12 rounded-full bg-green-500/10 flex items-center justify-center mb-4 text-green-400 group-hover:scale-110 group-hover:bg-green-500/20 transition-all">
             <TrendingUp className="w-6 h-6" />
           </div>
-          <div className="text-xl font-display font-bold text-white mb-1 truncate max-w-full px-2 mt-2 h-8 flex items-center">
+          <div className="text-xl font-display font-bold text-ink-black mb-1 truncate max-w-full px-2 mt-2 h-8 flex items-center">
             {platformData.reduce((max, p) => p.value > max.value ? p : max).name}
           </div>
           <div className="text-xs font-semibold text-textMuted uppercase tracking-wider">Top Platform</div>
@@ -343,7 +343,7 @@ const Analytics: React.FC = () => {
           <div className="w-12 h-12 rounded-full bg-accent-purple/10 flex items-center justify-center mb-4 text-accent-purple group-hover:scale-110 group-hover:bg-accent-purple/20 transition-all">
             <Users className="w-6 h-6" />
           </div>
-          <div className="text-3xl font-display font-bold text-white mb-1">
+          <div className="text-3xl font-display font-bold text-ink-black mb-1">
             {teamComparison.length}
           </div>
           <div className="text-xs font-semibold text-textMuted uppercase tracking-wider">Active Teams</div>
@@ -353,7 +353,7 @@ const Analytics: React.FC = () => {
           <div className="w-12 h-12 rounded-full bg-amber-500/10 flex items-center justify-center mb-4 text-amber-500 group-hover:scale-110 group-hover:bg-amber-500/20 transition-all">
             <Award className="w-6 h-6" />
           </div>
-          <div className="text-3xl font-display font-bold text-white mb-1">
+          <div className="text-3xl font-display font-bold text-ink-black mb-1">
             {latest.filter(m => m.totalSolved > 0).length}
           </div>
           <div className="text-xs font-semibold text-textMuted uppercase tracking-wider">Contributing Members</div>

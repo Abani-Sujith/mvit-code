@@ -10,7 +10,13 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="min-h-screen bg-surface text-on-surface flex flex-col w-full overflow-x-hidden font-sans">
+    <div className="min-h-screen bg-surface text-on-surface flex flex-col w-full overflow-x-hidden font-sans relative">
+      {/* Fixed thin yellow border around the whole viewport */}
+      <div
+        className="fixed inset-0 pointer-events-none border-2 border-yellow-400 z-[9999]"
+        aria-hidden="true"
+      />
+
       {/* Mobile drawer backdrop */}
       {sidebarOpen && (
         <div

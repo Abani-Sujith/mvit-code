@@ -21,10 +21,10 @@ const HierarchySelector: React.FC<Props> = ({ hierarchy, selectedDept, selectedS
       <div>
         <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-2">Department</label>
         <div className="relative">
-          <select value={selectedDept} onChange={(e) => onDepartmentChange(e.target.value)} className="w-full appearance-none px-4 py-2.5 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/30 text-white transition-all cursor-pointer font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed">
-            <option value="" className="bg-surface text-white">All Departments</option>
+          <select value={selectedDept} onChange={(e) => onDepartmentChange(e.target.value)} className="w-full appearance-none px-4 py-2.5 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-purple-500/50 focus:border-purple-500/30 text-ink-black transition-all cursor-pointer font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed">
+            <option value="" className="bg-surface text-ink-black">All Departments</option>
             {deptEntries.map(([deptId, dept]) => (
-              <option key={deptId} value={deptId} className="bg-surface text-white">{dept.name}</option>
+              <option key={deptId} value={deptId} className="bg-surface text-ink-black">{dept.name}</option>
             ))}
           </select>
           <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-textMuted">
@@ -35,10 +35,10 @@ const HierarchySelector: React.FC<Props> = ({ hierarchy, selectedDept, selectedS
       <div>
         <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-2">Section</label>
         <div className="relative">
-          <select value={selectedSection} onChange={(e) => onSectionChange(e.target.value)} className="w-full appearance-none px-4 py-2.5 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-green-500/50 focus:border-green-500/30 text-white transition-all cursor-pointer font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled={!selectedDept}>
-            <option value="" className="bg-surface text-white">All Sections</option>
+          <select value={selectedSection} onChange={(e) => onSectionChange(e.target.value)} className="w-full appearance-none px-4 py-2.5 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-green-500/50 focus:border-green-500/30 text-ink-black transition-all cursor-pointer font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled={!selectedDept}>
+            <option value="" className="bg-surface text-ink-black">All Sections</option>
             {sections.map(([sectionId, section]) => (
-              <option key={sectionId} value={sectionId} className="bg-surface text-white">{section.name}</option>
+              <option key={sectionId} value={sectionId} className="bg-surface text-ink-black">{section.name}</option>
             ))}
           </select>
           <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-textMuted">
@@ -49,10 +49,10 @@ const HierarchySelector: React.FC<Props> = ({ hierarchy, selectedDept, selectedS
       <div>
         <label className="block text-xs font-semibold uppercase tracking-wider text-textMuted mb-2">Team</label>
         <div className="relative">
-          <select value={selectedTeam} onChange={(e) => onTeamChange(e.target.value)} className="w-full appearance-none px-4 py-2.5 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/30 text-white transition-all cursor-pointer font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled={!selectedDept || !selectedSection}>
-            <option value="" className="bg-surface text-white">All Teams</option>
+          <select value={selectedTeam} onChange={(e) => onTeamChange(e.target.value)} className="w-full appearance-none px-4 py-2.5 bg-surface border border-border rounded-xl focus:ring-2 focus:ring-brand-500/50 focus:border-brand-500/30 text-ink-black transition-all cursor-pointer font-medium text-sm disabled:opacity-50 disabled:cursor-not-allowed" disabled={!selectedDept || !selectedSection}>
+            <option value="" className="bg-surface text-ink-black">All Teams</option>
             {teams.map(([teamId, team]) => (
-              <option key={teamId} value={teamId} className="bg-surface text-white">{team.name}</option>
+              <option key={teamId} value={teamId} className="bg-surface text-ink-black">{team.name}</option>
             ))}
           </select>
           <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none text-textMuted">
