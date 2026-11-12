@@ -43,13 +43,13 @@ All colors are exposed through Tailwind theme tokens and mapped via CSS variable
 | Token Name | Hex Value | Purpose / Role |
 | :--- | :--- | :--- |
 | `primary` | `#a73400` | Deep terracotta brand accent / hover state |
-| `primary-container` | `#d14300` | Vibrant primary flame accent (stat numbers, active indicators) |
+| `primary-container` | `#FF5500` | Vibrant primary flame accent (stat numbers, active indicators) |
 | `on-primary` | `#ffffff` | Text on primary containers |
 | `primary-fixed` | `#ffdbcf` | Light terracotta chip background |
 | `ink-black` | `#000000` | Brutalist solid borders, pill badges, primary CTA button |
 | `pure-white` | `#ffffff` | Card surfaces, button fills, modal backgrounds |
 | `surface` | `#fff8f6` | Application background (warm off-white) |
-| `surface-tint` | `#F9E2E1` | Header status strips, table header rows, soft highlight callouts |
+| `surface-tint` | `#FBE3E3` | Header status strips, table header rows, soft blush pink highlight callouts |
 | `surface-container` | `#f8ebe7` | Inactive chip fills, neutral badges |
 | `surface-container-high`| `#f2e6e2` | Card accents, hover fills |
 | `surface-container-highest` | `#ece0dc` | Alternating table row background |
@@ -60,6 +60,7 @@ All colors are exposed through Tailwind theme tokens and mapped via CSS variable
 | `secondary-container` | `#e2e2e2` | Secondary action fills |
 | `tertiary` | `#005ea4` | Tech telemetry / link accent |
 | `tertiary-container` | `#0077ce` | Platform highlight |
+| `yellow` | `#FFE600` | High-visibility viewport border and accent highlight |
 | `error` | `#ba1a1a` | Alert / critical status indicator |
 | `error-container` | `#ffdad6` | Critical alert background |
 | `outline` | `#907065` | Muted borders |

@@ -11,7 +11,7 @@ import DataTabSection from './sections/DataTabSection';
 
 const Dashboard: React.FC = () => {
   const { data, hierarchy, loading } = useData();
-  const [selectedDept, setSelectedDept] = useState<string>('AIML');
+  const [selectedDept, setSelectedDept] = useState<string>('');
   const [viewMode, setViewMode] = useState<'intelligence' | 'data'>('intelligence');
   const [intelligenceFilter, setIntelligenceFilter] = useState<string | null>(null);
 
@@ -32,6 +32,14 @@ const Dashboard: React.FC = () => {
     intelligenceFilter,
     hierarchy,
   });
+
+  const latestDate = baseLatest[0]?.date
+    ? new Date(baseLatest[0].date).toLocaleDateString(undefined, {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+      })
+    : null;
 
   if (loading) {
     return (
@@ -61,14 +69,14 @@ const Dashboard: React.FC = () => {
         baseLatestLength={baseLatest.length}
         avgScore={avgScore}
         selectedDept={selectedDept}
-        defaultDept={departments[0]}
+        deptName={hierarchy?.[selectedDept]?.name}
         inactiveCount={inactiveCount}
       />
 
       {viewMode === 'intelligence' ? (
         <div className="space-y-6 sm:space-y-8">
            {/* Stitch Hero Banner */}
-           <HeroBannerSection selectedDept={selectedDept} />
+           <HeroBannerSection selectedDept={selectedDept} latestDate={latestDate} />
 
            {/* Insights Risk Cards */}
            <RiskCardsSection

@@ -6,7 +6,7 @@ interface StatsRowSectionProps {
   baseLatestLength: number;
   avgScore: number;
   selectedDept: string;
-  defaultDept: string;
+  deptName?: string;
   inactiveCount: number;
 }
 
@@ -15,10 +15,11 @@ export const StatsRowSection: React.FC<StatsRowSectionProps> = ({
   baseLatestLength,
   avgScore,
   selectedDept,
-  defaultDept,
+  deptName,
   inactiveCount,
 }) => {
   const activePct = Math.round((activeCount / (baseLatestLength || 1)) * 100);
+  const displayDept = selectedDept ? (deptName || selectedDept) : 'System wide';
 
   return (
     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
@@ -34,13 +35,11 @@ export const StatsRowSection: React.FC<StatsRowSectionProps> = ({
       />
       <StatCard 
         title="Department in view" 
-        value={selectedDept || defaultDept || 'All'} 
+        value={displayDept} 
       />
       <StatCard 
         title="Inactive students" 
         value={inactiveCount} 
-        trend={inactiveCount}
-        trendLabel="attn req"
       />
     </div>
   );

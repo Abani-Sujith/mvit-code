@@ -29,7 +29,7 @@ export const TabSwitcherSection: React.FC<TabSwitcherSectionProps> = ({
           <button 
              onClick={() => { setViewMode('intelligence'); setIntelligenceFilter(null); }} 
              className={cn(
-               'flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-1.5 rounded-full font-label-lg text-xs uppercase tracking-wider transition-none',
+               'flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-1.5 rounded-full font-label-lg text-xs transition-none',
                viewMode === 'intelligence' 
                  ? 'bg-ink-black text-pure-white border border-ink-black' 
                  : 'text-secondary hover:text-ink-black border border-transparent'
@@ -40,7 +40,7 @@ export const TabSwitcherSection: React.FC<TabSwitcherSectionProps> = ({
           <button 
              onClick={() => setViewMode('data')} 
              className={cn(
-               'flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-1.5 rounded-full font-label-lg text-xs uppercase tracking-wider transition-none',
+               'flex-1 md:flex-none flex items-center justify-center gap-2 px-5 py-1.5 rounded-full font-label-lg text-xs transition-none',
                viewMode === 'data' 
                  ? 'bg-ink-black text-pure-white border border-ink-black' 
                  : 'text-secondary hover:text-ink-black border border-transparent'
@@ -57,9 +57,9 @@ export const TabSwitcherSection: React.FC<TabSwitcherSectionProps> = ({
              <select 
                value={selectedDept} 
                onChange={(e) => setSelectedDept(e.target.value)} 
-               className="appearance-none bg-transparent font-label-lg text-xs uppercase tracking-wider text-ink-black pr-6 focus:outline-none cursor-pointer w-full"
+               className="appearance-none bg-transparent font-label-lg text-xs text-ink-black pr-6 focus:outline-none cursor-pointer w-full"
              >
-               <option value="">System Wide</option>
+               <option value="">System wide</option>
                {departments.map((id) => (
                  <option key={id} value={id}>{hierarchy?.[id]?.name || id}</option>
                ))}

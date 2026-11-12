@@ -8,7 +8,7 @@
 @layer base {
   :root {
     --color-primary: #a73400;
-    --color-primary-container: #d14300;
+    --color-primary-container: #FF5500;
     --color-primary-fixed: #ffdbcf;
     --color-primary-fixed-dim: #ffb59c;
     --color-on-primary: #ffffff;
@@ -39,7 +39,7 @@
     --color-surface-bright: #fff8f6;
     --color-surface-dim: #e4d7d4;
     --color-surface-variant: #ece0dc;
-    --color-surface-tint: #F9E2E1;
+    --color-surface-tint: #FBE3E3;
     --color-surface-container: #f8ebe7;
     --color-surface-container-low: #fef1ed;
     --color-surface-container-high: #f2e6e2;
@@ -53,6 +53,7 @@
     --color-background: #fff8f6;
     --color-on-background: #201a18;
 
+    --color-yellow: #FFE600;
     --color-ink-black: #000000;
     --color-pure-white: #ffffff;
 
