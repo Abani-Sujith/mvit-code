@@ -40,7 +40,7 @@ function App() {
         <FirebaseProvider>
           <DataProvider>
             <Router>
-              <div className="min-h-screen bg-surface text-on-surface">
+              <div className="min-h-screen bg-surface-tint text-on-surface">
                 <Layout>
                   <ErrorBoundary>
                     <Suspense fallback={<LoadingSpinner />}>

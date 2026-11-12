@@ -67,8 +67,8 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
 
   return (
     <header className="sticky top-0 left-0 w-full z-50 bg-surface border-b border-ink-black select-none">
-      <div className="h-20 w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-2 sm:gap-4">
-        {/* Left: Mobile toggle & 5 Main Nav Pills + More dropdown */}
+      <div className="h-20 w-full px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:gap-4">
+        {/* Left: Mobile toggle and brand */}
         <div className="flex items-center justify-start gap-2 min-w-0">
           <button
             type="button"
@@ -82,77 +82,74 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
             {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
 
-          {/* Desktop Navigation Pills */}
-          <nav className="hidden xl:flex items-center gap-1 bg-pure-white p-1 border border-ink-black rounded-full shadow-sm shrink-0">
-            {mainLinks.map((link) => {
-              const active = isLinkActive(link.path);
-              return (
-                <Link
-                  key={link.path}
-                  to={link.path}
-                  className={cn(
-                    'px-3.5 py-1.5 rounded-full font-label-lg text-xs tracking-wider transition-none whitespace-nowrap',
-                    active
-                      ? 'bg-ink-black text-pure-white border border-ink-black'
-                      : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container border border-transparent'
-                  )}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-
-            {/* More Pill Dropdown */}
-            <div className="relative" ref={moreRef}>
-              <button
-                type="button"
-                onClick={() => setIsMoreOpen(!isMoreOpen)}
-                className={cn(
-                  'px-3.5 py-1.5 rounded-full font-label-lg text-xs tracking-wider transition-none flex items-center gap-1 whitespace-nowrap',
-                  isMoreActive || isMoreOpen
-                    ? 'bg-ink-black text-pure-white border border-ink-black'
-                    : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container border border-transparent'
-                )}
-              >
-                <span>More</span>
-                <ChevronDown className={cn('h-3 w-3 transition-transform', isMoreOpen && 'rotate-180')} />
-              </button>
-
-              {isMoreOpen && (
-                <div className="absolute left-0 mt-2 w-44 bg-pure-white border border-ink-black rounded-2xl shadow-xl py-2 z-50">
-                  {moreLinks.map((link) => {
-                    const active = isLinkActive(link.path);
-                    return (
-                      <Link
-                        key={link.path}
-                        to={link.path}
-                        onClick={() => setIsMoreOpen(false)}
-                        className={cn(
-                          'block px-4 py-2 text-xs font-label-lg tracking-wider transition-none',
-                          active
-                            ? 'bg-surface-tint text-primary-container font-bold'
-                            : 'text-ink-black hover:bg-surface-container'
-                        )}
-                      >
-                        {link.name}
-                      </Link>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </nav>
-        </div>
-
-        {/* Center: Brand Wordmark (Grid column 2, perfectly centered and never overlaps) */}
-        <div className="flex items-center justify-center text-center px-2">
           <Link
             to="/"
-            className="font-headline-md font-normal [font-synthesis:none] text-2xl sm:text-3xl md:text-4xl text-primary-container tracking-tight whitespace-nowrap hover:text-primary transition-none select-none inline-block leading-none"
+            className="font-headline-md font-normal [font-synthesis:none] text-2xl sm:text-3xl md:text-4xl text-primary-container tracking-tight whitespace-nowrap shrink-0 hover:text-primary transition-none select-none inline-block leading-none"
           >
             MVIT CODE
           </Link>
         </div>
+
+        {/* Center: Desktop Navigation Pills */}
+        <nav className="hidden xl:flex min-w-0 max-w-full justify-self-center items-center gap-1 bg-pure-white p-1 border border-ink-black rounded-full shadow-sm">
+          {mainLinks.map((link) => {
+            const active = isLinkActive(link.path);
+            return (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={cn(
+                  'px-3.5 py-1.5 rounded-full font-label-lg text-xs tracking-wider transition-none whitespace-nowrap',
+                  active
+                    ? 'bg-ink-black text-pure-white border border-ink-black'
+                    : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container border border-transparent'
+                )}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+
+          {/* More Pill Dropdown */}
+          <div className="relative" ref={moreRef}>
+            <button
+              type="button"
+              onClick={() => setIsMoreOpen(!isMoreOpen)}
+              className={cn(
+                'px-3.5 py-1.5 rounded-full font-label-lg text-xs tracking-wider transition-none flex items-center gap-1 whitespace-nowrap',
+                isMoreActive || isMoreOpen
+                  ? 'bg-ink-black text-pure-white border border-ink-black'
+                  : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container border border-transparent'
+              )}
+            >
+              <span>More</span>
+              <ChevronDown className={cn('h-3 w-3 transition-transform', isMoreOpen && 'rotate-180')} />
+            </button>
+
+            {isMoreOpen && (
+              <div className="absolute left-0 mt-2 w-44 bg-pure-white border border-ink-black rounded-2xl shadow-xl py-2 z-50">
+                {moreLinks.map((link) => {
+                  const active = isLinkActive(link.path);
+                  return (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={() => setIsMoreOpen(false)}
+                      className={cn(
+                        'block px-4 py-2 text-xs font-label-lg tracking-wider transition-none',
+                        active
+                          ? 'bg-surface-tint text-primary-container font-bold'
+                          : 'text-ink-black hover:bg-surface-container'
+                      )}
+                    >
+                      {link.name}
+                    </Link>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        </nav>
 
         {/* Right: Search, Add Student Action, and Profile */}
         <div className="flex items-center justify-end gap-2 sm:gap-3 min-w-0">
